@@ -76,13 +76,25 @@
             </AppBarButton>
         </Grid>
         <Grid Row="1" Background="Aqua">
-            <Grid.ColumnDefinitions>
+
+            <!--<Grid.ColumnDefinitions>
                 <ColumnDefinition Width="7*"></ColumnDefinition>
                 <ColumnDefinition Width="5*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions> -->
+            
+
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+
+            <!-- 
 
             <TextBlock Grid.Column="0" Text="Optællinger"></TextBlock>
-            <TextBlock Grid.Column="1" Text="Hejsa"></TextBlock>
+            <TextBlock Grid.Column="1" Text="Hejsa"></TextBlock>-->
 
         </Grid>
     </Grid>
