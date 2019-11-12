@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StockItUp
 {
-    class Supplier
+    public class Supplier
     {
         //Hej
         private int _id;
