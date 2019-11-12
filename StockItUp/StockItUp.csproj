@@ -139,6 +139,7 @@
     <Compile Include="View\Varer.xaml.cs">
       <DependentUpon>Varer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Supplier.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
