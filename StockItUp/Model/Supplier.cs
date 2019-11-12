@@ -8,6 +8,7 @@ namespace StockItUp
 {
     class Supplier
     {
+        //Hej
         private int _id;
         private static int _idCounter = 1;
         private string _name;
