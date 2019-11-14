@@ -11,17 +11,15 @@ namespace StockItUp.Model
         private int _id;
         private static int _idCounter = 1;
         private DateTime _dateTime;
-        private Dictionary<Product, int> _counting;
         private Location _location;
 
         #region Constructor
-        public InventoryCount(Location location, Dictionary<Product, int> dictionary)
+        public InventoryCount(Location location)
         {
             _id = _idCounter;
             _idCounter++;
             _dateTime = DateTime.Now;
             _location = location;
-            _counting = dictionary;
         }
         #endregion
 
@@ -40,19 +38,6 @@ namespace StockItUp.Model
         {
             get { return _location; }
             set { _location = value; }
-        }
-        public Dictionary<Product, int> GetDictionary
-        {
-            get { return _counting; }
-            set { _counting = value; }
-        }
-        public List<Product> ListProducts
-        {
-            get { return _counting.Keys.ToList(); }
-        }
-        public List<int> ListAmounts
-        {
-            get { return _counting.Values.ToList(); }
         }
         #endregion
     }

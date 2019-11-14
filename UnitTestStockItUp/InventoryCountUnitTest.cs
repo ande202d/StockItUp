@@ -20,10 +20,14 @@ namespace UnitTestStockItUp
             InventoryCount ic5;
 
             //Act
-            ic1 = new InventoryCount((new Location(new Store("store1", "adress1"), "location1")), new Dictionary<Product, int>());
-        
+            ic1 = new InventoryCount((new Location(new Store("store", "adress"), "location")));
+            ic2 = new InventoryCount((new Location(new Store("store", "adress"), "location")));
+            ic3 = new InventoryCount((new Location(new Store("store", "adress"), "location")));
+            ic4 = new InventoryCount((new Location(new Store("store", "adress"), "location")));
+            ic5 = new InventoryCount((new Location(new Store("store", "adress"), "location")));
+            
             //Assert
-            //Assert.AreEqual(s2.Id+1, s3.Id, "Id dosent add up automaticly");
+            Assert.AreEqual(ic2.Id+1, ic3.Id, "Id dosent add up automaticly");
         }
     }
 }
