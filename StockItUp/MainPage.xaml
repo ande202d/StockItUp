@@ -105,7 +105,8 @@
                     <TextBlock Width="250" TextAlignment="Center" Text ="Varer per kasse" FontSize="20"></TextBlock>
                     <TextBlock Width="250" TextAlignment="Center" Text ="Leverandør" FontSize="20"></TextBlock>
                 </StackPanel>
-                <ListView x:Name ="vareListView">
+                <ListView x:Name ="vareListView"
+                          ItemsSource="{Binding Test}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Width="1000">
@@ -115,8 +116,8 @@
                                     <ColumnDefinition Width="250"></ColumnDefinition>
                                     <ColumnDefinition Width="250"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text=""></TextBlock>
-                                <TextBlock></TextBlock>
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                                <TextBlock Text="{Binding AmountPerBox}"></TextBlock>
                                 <TextBlock></TextBlock>
                                 <TextBlock></TextBlock>
                             </Grid>
