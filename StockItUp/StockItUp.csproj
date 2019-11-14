@@ -127,6 +127,7 @@
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Store.cs" />
+    <Compile Include="Persistency\Catalog.cs" />
     <Compile Include="View\Bestillinger.xaml.cs">
       <DependentUpon>Bestillinger.xaml</DependentUpon>
     </Compile>
@@ -204,8 +205,12 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Persistency\" />
     <Folder Include="ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Users\Jacob\.nuget\packages\newtonsoft.json\9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
