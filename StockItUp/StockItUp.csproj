@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\InventoryCount.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Store.cs" />
