@@ -17,7 +17,6 @@ namespace StockItUp.Persistency
         private string _serverURL = "";                 //INSERT SERVER URL
         private string _apiPrefix = "api";
         private string _apiID;
-        private HttpClientHandler _httpClientHandler;
         private HttpClient _httpClient;
 
         #endregion
@@ -27,8 +26,8 @@ namespace StockItUp.Persistency
         private Catalog(string apiID)
         {
             _apiID = apiID;
-            _httpClientHandler = new HttpClientHandler();
-            _httpClient = new HttpClient(_httpClientHandler);
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            _httpClient = new HttpClient(httpClientHandler);
         }
 
         #endregion
