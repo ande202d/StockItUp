@@ -8,21 +8,21 @@ namespace StockItUp.Connections
 {
     public class OrderProduct
     {
-        private int _storeId;
+        private int _orderId;
         private int _productId;
         private int _orderedAmount;
 
-        public OrderProduct(int storeId, int productId, int orderedAmount)
+        public OrderProduct(int orderId, int productId, int orderedAmount)
         {
-            _storeId = storeId;
+            _orderId = orderId;
             _productId = productId;
             _orderedAmount = orderedAmount;
         }
 
-        public int StoreId
+        public int OrderId
         {
-            get { return _storeId; }
-            set { _storeId = value; }
+            get { return _orderId; }
+            set { _orderId = value; }
         }
         public int ProductId
         {
