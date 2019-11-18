@@ -32,6 +32,7 @@ namespace StockItUp.ViewModel
 
         #region Porperties
 
+        //returns an observable of products collection based on what the catalog pulls from the database
         public ObservableCollection<Product> ProductCatalog
         {
             get
@@ -40,6 +41,7 @@ namespace StockItUp.ViewModel
             }
         }
 
+        //returns an observable of supplies collection based on what the catalog pulls from the database
         public ObservableCollection<Supplier> SupplierCatalog
         {
             get
