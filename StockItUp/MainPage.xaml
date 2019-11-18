@@ -31,6 +31,8 @@
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="5*"></RowDefinition>
         </Grid.RowDefinitions>
+        
+        <!--Top bar-->
         <Grid Row="0" Background="#2d9ed2" BorderBrush="#d0662f" BorderThickness="0,0,0,5" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -39,7 +41,7 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
+            <!--Navigationsknapper-->
             <AppBarButton Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List">
                 <custom:Interaction.Behaviors>
                     <custom1:EventTriggerBehavior EventName="Click">
@@ -76,75 +78,85 @@
                 </custom:Interaction.Behaviors>
             </AppBarButton>
         </Grid>
+        
+        <!--Her starter højre kolonne med adminstration-->
         <Grid Row="1" Background="WhiteSmoke">
     
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"></ColumnDefinition>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
             </Grid.ColumnDefinitions> 
-            <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" BorderThickness="0,0,2,0" >
-                <TextBlock Text="Tilføj vare" TextAlignment="Center" FontSize="30"></TextBlock>
-                <TextBox Text="Navn på vare..." Foreground="DarkGray" Width="200" Margin="20"></TextBox>
-                <TextBox Text="Vare per kasse..." Foreground="DarkGray" Width="200" Margin="20"></TextBox>
-                <ComboBox SelectedIndex="0" HorizontalAlignment="Center" Margin="0,10,0,0">
-                    <ComboBoxItem Visibility="Collapsed">Vælg en leverandør...</ComboBoxItem>
-                    <ComboBoxItem>1</ComboBoxItem>
-                    <ComboBoxItem>2</ComboBoxItem>
-                    <ComboBoxItem>3</ComboBoxItem>
-                    <ComboBoxItem>4</ComboBoxItem>
+            <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top"  BorderThickness="0,0,2,0" >
+                <TextBlock Text="Administer varer" TextAlignment="Center" FontSize="30"></TextBlock>
+                <TextBox PlaceholderText="Navn på vare..." Foreground="DarkGray" Width="200" Margin="20"></TextBox>
+                <TextBox PlaceholderText="Vare per kasse..." Foreground="DarkGray" Width="200" Margin="20"></TextBox>
+                <ComboBox ItemsSource="{Binding Test}"  HorizontalAlignment="Center" Margin="0,10,0,0" PlaceholderText="Vælg leverandør">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding MySupplier.Name}"></TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
               <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
                     <AppBarButton Content="Tilføj vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
-                    
-                </StackPanel> 
-            </StackPanel>
-            <Grid Grid.Column="0">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Width="250" TextAlignment="Center" Text ="Vare ID" FontSize="20"></TextBlock>
-                    <TextBlock Width="250" TextAlignment="Center" Text ="Vare Navn" FontSize="20"></TextBlock>
-                    <TextBlock Width="250" TextAlignment="Center" Text ="Varer per kasse" FontSize="20"></TextBlock>
-                    <TextBlock Width="250" TextAlignment="Center" Text ="Leverandør" FontSize="20"></TextBlock>
+                  <AppBarButton Content="Rediger vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
+                  <AppBarButton Content="Fjern vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
                 </StackPanel>
-                <ListView x:Name ="vareListView"
+                <!--Administrer leverandør-->
+                <StackPanel  Height="400" VerticalAlignment="Bottom" Margin="0,30,0,0" Orientation="Vertical">
+                    <TextBlock Text="Administer leverandøre" TextAlignment="Center" FontSize="30"></TextBlock>
+                    <ComboBox ItemsSource="{Binding Test}"  HorizontalAlignment="Center" Margin="0,10,0,0" PlaceholderText="Vælg leverandør">
+                        
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding MySupplier.Name}"></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBox PlaceholderText="Navn på leverandør.." Foreground="DarkGray" Width="200" Margin="20"></TextBox>
+                    <TextBox PlaceholderText="Adresse på leverandør.." Foreground="DarkGray" Width="200" Margin="20"></TextBox>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
+                        <AppBarButton Content="Tilføj leverandør"  Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
+                        <AppBarButton Content="Rediger leverandør"  Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
+                        <AppBarButton Content="Fjern leverandør"  Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            
+            
+            <!--Listview med data-->
+            <Grid Grid.Column="0" Padding="49,0,0,0">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                    <TextBlock Width="250" Text ="Vare ID" FontSize="20"></TextBlock>
+                    <TextBlock Width="250"  Text ="Vare Navn" FontSize="20"></TextBlock>
+                    <TextBlock Width="250"  Text ="Varer per kasse" FontSize="20"></TextBlock>
+                    <TextBlock Width="250"  Text ="Leverandør" FontSize="20"></TextBlock>
+                </StackPanel>
+                <ListView  Margin="0,30,0,0" Padding="0" x:Name ="vareListView"
                           ItemsSource="{Binding Test}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Width="1000">
+                            <Grid Width="1100">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="250"></ColumnDefinition>
                                     <ColumnDefinition Width="250"></ColumnDefinition>
                                     <ColumnDefinition Width="250"></ColumnDefinition>
                                     <ColumnDefinition Width="250"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="{Binding Name}"></TextBlock>
-                                <TextBlock Text="{Binding AmountPerBox}"></TextBlock>
-                                <TextBlock></TextBlock>
-                                <TextBlock></TextBlock>
+                               
+                                <TextBlock   Grid.Column="0" Text="{Binding Id}"></TextBlock>
+                                <TextBlock   Grid.Column="1" Text="{Binding Name}"></TextBlock>
+                                <TextBlock  Grid.Column="2" Text="{Binding AmountPerBox}"></TextBlock>
+                                <TextBlock Grid.Column="3"  Text="{Binding MySupplier.Website}"></TextBlock>
+                               
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
 
-        <!--<ListView x:Name="vareListView"
-                  Grid.Column="2" BorderBrush="Red" BorderThickness="5">
-                  <ListView.ItemTemplate>
-                      <DataTemplate>
-                        <Grid Height="110" Margin="6">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="1" VerticalAlignment="Top">
-                                <TextBlock Text="Hej" TextWrapping="NoWrap"></TextBlock>
-                                <TextBlock Text="Med" TextWrapping="NoWrap"></TextBlock>
-                                <TextBlock Text="Dig" TextWrapping="NoWrap"></TextBlock>
-                            </StackPanel>
-                        </Grid>
-                      </DataTemplate>
-                  </ListView.ItemTemplate>
-
-        </ListView>-->
+     
 
 
                 
