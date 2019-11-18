@@ -25,7 +25,7 @@ namespace StockItUp.ViewModel
 
         #region Constructor
 
-        ProductViewModel()
+        public ProductViewModel()
         {
             _productCatalog = Catalog<Product>.Instance;
             _supplierCatalog = Catalog<Supplier>.Instance;

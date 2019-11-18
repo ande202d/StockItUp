@@ -14,7 +14,7 @@ namespace StockItUp.Persistency
     {
         #region Instance fields
 
-        private string _serverURL = "";                 //INSERT SERVER URL
+        private string _serverURL = "http://localhost:64064";                 //INSERT SERVER URL
         private string _apiPrefix = "api";
         private string _apiID;
         private HttpClient _httpClient;
