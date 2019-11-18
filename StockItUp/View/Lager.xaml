@@ -112,37 +112,28 @@
             <!--Listview with data-->
             <Grid Grid.Column="0" Padding="49,0,0,0">
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                    <TextBlock Width="200" Text ="Vare navn" FontSize="20"></TextBlock>
-                    <TextBlock Width="125"  Text ="Placering 1" FontSize="20"></TextBlock>
-                    <TextBlock Width="125"  Text ="Placering 2" FontSize="20"></TextBlock>
-                    <TextBlock Width="125"  Text ="Placering 3" FontSize="20"></TextBlock>
-                    <TextBlock Width="125"  Text ="Total" FontSize="20"></TextBlock>
-                    <TextBlock Width="125"  Text ="Ønsket" FontSize="20"></TextBlock>
-                    <TextBlock Width="125"  Text ="Mangler" FontSize="20"></TextBlock>
+                    <TextBlock Width="250" Text ="Vare navn" FontSize="20"></TextBlock>
+                    <TextBlock Width="250"  Text ="Total" FontSize="20"></TextBlock>
+                    <TextBlock Width="250"  Text ="Ønsket" FontSize="20"></TextBlock>
+                    <TextBlock Width="250"  Text ="Mangler" FontSize="20"></TextBlock>
 
-</StackPanel>
+                </StackPanel>
                 <ListView  Margin="0,30,0,0" Padding="0" x:Name ="vareListView">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Width="1100">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="200"></ColumnDefinition>
-                                    <ColumnDefinition Width="125"></ColumnDefinition>
-                                    <ColumnDefinition Width="125"></ColumnDefinition>
-                                    <ColumnDefinition Width="125"></ColumnDefinition>
-                                    <ColumnDefinition Width="125"></ColumnDefinition>
-                                    <ColumnDefinition Width="125"></ColumnDefinition>
-                                    <ColumnDefinition Width="125"></ColumnDefinition>
-                                    <ColumnDefinition Width="125"></ColumnDefinition>
+                                    <ColumnDefinition Width="250"></ColumnDefinition>
+                                    <ColumnDefinition Width="250"></ColumnDefinition>
+                                    <ColumnDefinition Width="250"></ColumnDefinition>
+                                    <ColumnDefinition Width="250"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock   Grid.Column="0" ></TextBlock>
                                 <TextBlock   Grid.Column="1" ></TextBlock>
                                 <TextBlock  Grid.Column="2" ></TextBlock>
                                 <TextBlock Grid.Column="3"  ></TextBlock>
-                                <TextBlock Grid.Column="4"  ></TextBlock>
-                                <TextBlock Grid.Column="5"  ></TextBlock>
-                                <TextBlock Grid.Column="6"  ></TextBlock>
+
 
                             </Grid>
                         </DataTemplate>
