@@ -132,6 +132,7 @@
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Store.cs" />
     <Compile Include="Persistency\Catalog.cs" />
+    <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="View\Bestillinger.xaml.cs">
       <DependentUpon>Bestillinger.xaml</DependentUpon>
     </Compile>
@@ -208,9 +209,7 @@
       <Version>2.0.1</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\..\.nuget\packages\newtonsoft.json\9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>

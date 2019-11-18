@@ -35,13 +35,14 @@ namespace StockItUp.Persistency
         #region Singleton
         private static Catalog<T> _instance;
 
+        //to make sure we don't make multiple instances of the same catalog
         public static Catalog<T> Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new Catalog<T>(nameof(T)+"s");
+                    _instance = new Catalog<T>(nameof(T)+"s"); //the url should end on the class name +s
                     return _instance;
                 }
 
@@ -55,6 +56,7 @@ namespace StockItUp.Persistency
 
         #region Methods
 
+        //takes a key and removes the object in the key position
         public async Task Delete(int key)
         {
             string url = _serverURL + "/" + _apiPrefix + "/" + _apiID + "/" + key;
@@ -62,6 +64,7 @@ namespace StockItUp.Persistency
             
         }
 
+        //returns all the objects as a list
         public async Task<List<T>> ReadAll()
         {
             string url = _serverURL + "/" + _apiPrefix + "/" + _apiID;
@@ -79,6 +82,7 @@ namespace StockItUp.Persistency
             
         }
 
+        //takes a key and returns the object in the key position
         public async Task<T> Read(int key)
         {
             string url = _serverURL + "/" + _apiPrefix + "/" + _apiID + "/" + key;
@@ -95,6 +99,8 @@ namespace StockItUp.Persistency
             return default(T);
         }
 
+        //takes a key and an object
+        //updates the old object from the key position to the new object you assigned
         public async Task update(int key, T obj)
         {
             string url = _serverURL + "/" + _apiPrefix + "/" + _apiID + "/" + key;
