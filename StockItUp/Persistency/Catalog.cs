@@ -42,7 +42,8 @@ namespace StockItUp.Persistency
             {
                 if (_instance == null)
                 {
-                    _instance = new Catalog<T>(nameof(T)+"s"); //the url should end on the class name +s
+                    //nameof(T)
+                    _instance = new Catalog<T>("product"+"s"); //the url should end on the class name +s
                     return _instance;
                 }
 

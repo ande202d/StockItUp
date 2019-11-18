@@ -10,6 +10,7 @@ using Windows.UI.Xaml;
 using StockItUp.Annotations;
 using StockItUp.Connections;
 using StockItUp.Model;
+using StockItUp.Persistency;
 
 namespace StockItUp
 {
@@ -45,6 +46,13 @@ namespace StockItUp
             _selectedProduct = _test[0];
             _selectedInvCount = _invCount[0];
             _showLocation = false;
+
+            Catalog<Product> CP = Catalog<Product>.Instance;
+            List<Product> LP = CP.ReadAll().Result;
+            int hej = LP.Count;
+
+
+
         }
 
         public ObservableCollection<Product> Test
