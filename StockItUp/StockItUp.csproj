@@ -123,8 +123,12 @@
     <Compile Include="Connections\InventoryCountProduct.cs" />
     <Compile Include="Connections\StoreProduct.cs" />
     <Compile Include="Model\InventoryCount.cs" />
+    <Compile Include="Model\InventoryCountHistory.cs" />
+    <Compile Include="Model\InventoryCountHistoryData.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\OrderHistory.cs" />
+    <Compile Include="Model\OrderHistoryData.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Store.cs" />
     <Compile Include="Persistency\Catalog.cs" />
