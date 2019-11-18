@@ -41,7 +41,7 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <!--Navigationsknapper-->
+            <!--Navigation Buttons-->
             <AppBarButton Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List">
                 <custom:Interaction.Behaviors>
                     <custom1:EventTriggerBehavior EventName="Click">
@@ -79,7 +79,7 @@
             </AppBarButton>
         </Grid>
         
-        <!--Her starter højre kolonne med adminstration-->
+        <!--Right column handling-->
         <Grid Row="1" Background="WhiteSmoke">
     
             <Grid.ColumnDefinitions>
@@ -102,7 +102,7 @@
                   <AppBarButton Content="Rediger vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
                   <AppBarButton Content="Fjern vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
                 </StackPanel>
-                <!--Administrer leverandør-->
+                <!--Handling of providers-->
                 <StackPanel  Height="400" VerticalAlignment="Bottom" Margin="0,30,0,0" Orientation="Vertical">
                     <TextBlock Text="Administer leverandøre" TextAlignment="Center" FontSize="30"></TextBlock>
                     <ComboBox ItemsSource="{Binding Test}"  HorizontalAlignment="Center" Margin="0,10,0,0" PlaceholderText="Vælg leverandør">
@@ -125,7 +125,7 @@
             </StackPanel>
             
             
-            <!--Listview med data-->
+            <!--Listview with data-->
             <Grid Grid.Column="0" Padding="49,0,0,0">
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                     <TextBlock Width="250" Text ="Vare ID" FontSize="20"></TextBlock>
