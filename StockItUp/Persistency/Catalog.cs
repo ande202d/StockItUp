@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace StockItUp.Persistency
 {
-    class Catalog<T>
+    public class Catalog<T>
     {
         #region Instance fields
 

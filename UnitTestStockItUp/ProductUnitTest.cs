@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using StockItUp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StockItUp.Model;
+using StockItUp.Persistency;
 
 namespace UnitTestStockItUp
 {
