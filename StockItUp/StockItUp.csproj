@@ -132,6 +132,7 @@
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Store.cs" />
     <Compile Include="Persistency\Catalog.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="View\Bestillinger.xaml.cs">
       <DependentUpon>Bestillinger.xaml</DependentUpon>
@@ -207,6 +208,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
