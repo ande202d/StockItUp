@@ -102,7 +102,7 @@ namespace StockItUp.Persistency
 
         //takes a key and an object
         //updates the old object from the key position to the new object you assigned
-        public async Task update(int key, T obj)
+        public async Task Update(int key, T obj)
         {
             string url = _serverURL + "/" + _apiPrefix + "/" + _apiID + "/" + key;
 

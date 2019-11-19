@@ -93,7 +93,7 @@
                 <TextBlock Text="Administer varer" TextAlignment="Center" FontSize="30"></TextBlock>
                 <TextBox PlaceholderText="Navn på vare..." Foreground="DarkGray" Width="200" Margin="20" Text="{Binding SelectedProduct.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBox PlaceholderText="Vare per kasse..." Foreground="DarkGray" Width="200" Margin="20" Text="{Binding SelectedProduct.AmountPerBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <ComboBox ItemsSource="{Binding SupplierCatalog}"  HorizontalAlignment="Center" Margin="0,10,0,0" PlaceholderText="Vælg leverandør" SelectedItem="{Binding SelectedProduct.MySupplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBox ItemsSource="{Binding SupplierCatalog}"  HorizontalAlignment="Center" Margin="0,10,0,0" PlaceholderText="Vælg leverandør" SelectedItem="{Binding SelectedSupplierForCreationOfProduct, Mode=TwoWay}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"></TextBlock>
@@ -116,13 +116,13 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <TextBox PlaceholderText="Navn på leverandør.." Foreground="DarkGray" Width="200" Margin="20" Text="{Binding SelectedSupplier.Name}"></TextBox>
-                    <TextBox PlaceholderText="Adresse på leverandør.." Foreground="DarkGray" Width="200" Margin="20" Text="{Binding SelectedSupplier.Website}"></TextBox>
+                    <TextBox PlaceholderText="Navn på leverandør.." Foreground="DarkGray" Width="200" Margin="20" Text="{Binding SelectedSupplier.Name, Mode=TwoWay}" Header="Navn:"></TextBox>
+                    <TextBox PlaceholderText="WebAdresse på leverandør.." Foreground="DarkGray" Width="200" Margin="20" Text="{Binding SelectedSupplier.Website, Mode=TwoWay}" Header="WebAdresse:"></TextBox>
 
                     <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
-                        <AppBarButton Content="Tilføj leverandør"  Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
-                        <AppBarButton Content="Rediger leverandør"  Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
-                        <AppBarButton Content="Fjern leverandør"  Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
+                        <AppBarButton Content="Tilføj leverandør"  Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding CreateSupplierCommand}"></AppBarButton>
+                        <AppBarButton Content="Rediger leverandør"  Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding UpdateSupplierCommand}"></AppBarButton>
+                        <AppBarButton Content="Fjern leverandør"  Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding DeleteSupplierCommand}"></AppBarButton>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -136,7 +136,7 @@
                     <TextBlock Width="250"  Text ="Varer per kasse" FontSize="20"></TextBlock>
                     <TextBlock Width="250"  Text ="Leverandør" FontSize="20"></TextBlock>
                 </StackPanel>
-                <ListView  Margin="0,30,0,0" Padding="0" x:Name ="vareListView" ItemsSource="{Binding ProductCatalog}" SelectedValue="{Binding SelectedProduct, Mode=TwoWay}">
+                <ListView  Margin="0,30,0,0" Padding="0" ItemsSource="{Binding ProductCatalog}" SelectedValue="{Binding SelectedProduct, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Width="1100">

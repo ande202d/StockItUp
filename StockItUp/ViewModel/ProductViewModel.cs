@@ -20,8 +20,9 @@ namespace StockItUp.ViewModel
 
         private Catalog<Product> _productCatalog;
         private  Catalog<Supplier> _supplierCatalog;
-        private Product _selectedProduct = new Product();
-        private Supplier _selectedSupplier;
+        private Product _selectedProduct = new Product("",0);
+        private Supplier _selectedSupplier = new Supplier("","www.");
+        private Supplier _selectedSupplierForCreationOfProduct;
 
         #endregion
 
@@ -88,7 +89,11 @@ namespace StockItUp.ViewModel
             get { return _selectedSupplier; }
             set { _selectedSupplier = value;OnPropertyChanged(); }
         }
-
+        public Supplier SelectedSupplierForCreationOfProduct
+        {
+            get { return _selectedSupplierForCreationOfProduct; }
+            set { _selectedSupplierForCreationOfProduct = value; OnPropertyChanged(); }
+        }
 
 
         #endregion
@@ -97,38 +102,79 @@ namespace StockItUp.ViewModel
 
         private void CreateProductMethod()
         {
-            _productCatalog.Create(new Product(SelectedProduct.Name,SelectedProduct.AmountPerBox,SelectedProduct.MySupplier));
-            OnPropertyChanged(nameof(ProductCatalog));
+            if (SelectedProduct!=null)
+            {
+                if (SelectedProduct.Name != default(string))
+                {
+                    if (SelectedSupplierForCreationOfProduct==null)
+                    {
+                        _productCatalog.Create(new Product(SelectedProduct.Name, SelectedProduct.AmountPerBox));
+                        OnPropertyChanged(nameof(ProductCatalog));
+                    }
+                    else
+                    {
+                        _productCatalog.Create(new Product(SelectedProduct.Name,SelectedProduct.AmountPerBox, SelectedSupplierForCreationOfProduct));
+                    OnPropertyChanged(nameof(ProductCatalog));
+                    }
+                    
+                }
+                
+            }
+            
         }
 
         private void CreateSupplierMethod()
         {
-            //_productSupplier.Create(new Supplier())
-
+            if (SelectedSupplier.Name != default(string) && SelectedSupplier.Website != "www.")
+            {
+                _supplierCatalog.Create(new Supplier(SelectedSupplier.Name, SelectedSupplier.Website));
+                OnPropertyChanged(nameof(SupplierCatalog));
+            }
         }
 
         private void DeleteProductMethod()
         {
-            _productCatalog.Delete(SelectedProduct.Id);
-            OnPropertyChanged(nameof(ProductCatalog));
+            if (SelectedProduct != null)
+            {
+                _productCatalog.Delete(SelectedProduct.Id);
+                OnPropertyChanged(nameof(ProductCatalog));
+            }
 
         }
 
         private void DeleteSupplierMethod()
         {
             _supplierCatalog.Delete(SelectedSupplier.Id);
+            OnPropertyChanged(nameof(SupplierCatalog));
+
         }
 
         private void UpdateProductMethod()
         {
-            _productCatalog.update(SelectedProduct.Id, SelectedProduct);
-            OnPropertyChanged(nameof(ProductCatalog));
+            if (SelectedProduct!=null)
+            {
+                if (SelectedSupplierForCreationOfProduct == null)
+                {
+                    _productCatalog.Update(SelectedProduct.Id,new Product(SelectedProduct.Name, SelectedProduct.AmountPerBox));
+                    OnPropertyChanged(nameof(ProductCatalog));
+                }
+                else
+                {
+                    _productCatalog.Update(SelectedProduct.Id,new Product(SelectedProduct.Name, SelectedProduct.AmountPerBox, SelectedSupplierForCreationOfProduct));
+                    OnPropertyChanged(nameof(ProductCatalog));
+                }
+            }
+            
 
         }
 
         private void UpdateSupplierMethod()
         {
-            //_supplierCatalog.update()
+
+            _supplierCatalog.Update(SelectedSupplier.Id, SelectedSupplier);
+            OnPropertyChanged(nameof(SupplierCatalog));
+            OnPropertyChanged(nameof(ProductCatalog));
+
         }
 
 

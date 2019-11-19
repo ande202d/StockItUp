@@ -16,21 +16,21 @@ namespace StockItUp.Model
         private Supplier _mySupplier;
 
         #region Constructors
-        public Product(string name, int amountPerBox, Supplier Supplier)
+        public Product(string name, int amountPerBox, Supplier supplier)
         {
             _id = _idCounter;
             _idCounter++;
-
+            Supplier = supplier.Id;
             _name = name;
             _amountPerBox = amountPerBox;
-            _mySupplier = Supplier;
+            _mySupplier = supplier;
         }
 
         public Product(string name, int amountPerBox)
         {
             _id = _idCounter;
             _idCounter++;
-
+            Supplier = null;
             _name = name;
             _amountPerBox = amountPerBox;
         }
