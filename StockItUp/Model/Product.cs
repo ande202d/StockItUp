@@ -32,7 +32,12 @@ namespace StockItUp.Model
 
             _name = name;
             _amountPerBox = amountPerBox;
-        } 
+        }
+
+        public Product()
+        {
+
+        }
         #endregion
 
         #region Properties

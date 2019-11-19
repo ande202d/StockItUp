@@ -47,11 +47,9 @@ namespace StockItUp
             _selectedInvCount = _invCount[0];
             _showLocation = false;
 
-            Catalog<Product> CP = Catalog<Product>.Instance;
-            List<Product> LP = CP.ReadAll().Result;
-            int hej = LP.Count;
-
-
+            //Catalog<Product> CP = Catalog<Product>.Instance;
+            //List<Product> LP = CP.ReadAll().Result;
+            //int hej = LP.Count;
 
         }
 

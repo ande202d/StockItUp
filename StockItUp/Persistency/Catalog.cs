@@ -42,8 +42,8 @@ namespace StockItUp.Persistency
             {
                 if (_instance == null)
                 {
-                    //nameof(T)
-                    _instance = new Catalog<T>("product"+"s"); //the url should end on the class name +s
+                    string apiIDv2 = typeof(T).Name + "s";
+                    _instance = new Catalog<T>(apiIDv2); //the url should end on the class name +s
                     return _instance;
                 }
 
