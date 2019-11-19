@@ -6,6 +6,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using RVG.Common;
 using StockItUp.Annotations;
 using StockItUp.Model;
 using StockItUp.Persistency;
@@ -16,8 +18,8 @@ namespace StockItUp.ViewModel
     {
         #region Instance fields
 
-        private static Catalog<Product> _productCatalog;
-        private static Catalog<Supplier> _supplierCatalog;
+        private Catalog<Product> _productCatalog;
+        private  Catalog<Supplier> _supplierCatalog;
         private Product _selectedProduct;
         private Supplier _selectedSupplier;
 
@@ -29,8 +31,26 @@ namespace StockItUp.ViewModel
         {
             _productCatalog = Catalog<Product>.Instance;
             _supplierCatalog = Catalog<Supplier>.Instance;
-            
+            CreateProductCommand = new RelayCommand(CreateProductMethod);
+            CreateSupplierCommand = new RelayCommand(CreateSupplierMethod);
+            DeleteProductCommand = new RelayCommand(DeleteProductMethod);
+            DeleteSupplierCommand = new RelayCommand(DeleteSupplierMethod);
+            UpdateProductCommand = new RelayCommand(UpdateProductMethod);
+            UpdateSupplierCommand = new RelayCommand(UpdateSupplierMethod);
+
         }
+
+        #region Commands
+        public ICommand CreateProductCommand { get; set; }
+        public ICommand CreateSupplierCommand { get; set; }
+        public ICommand DeleteProductCommand { get; set; }
+        public ICommand DeleteSupplierCommand { get; set; }
+        public ICommand UpdateProductCommand { get; set; }
+        public ICommand UpdateSupplierCommand { get; set; }
+
+
+
+        #endregion
 
         #endregion
 
@@ -41,7 +61,10 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                return new ObservableCollection<Product>(_productCatalog.ReadAll().Result);
+                ObservableCollection<Product> collection = new ObservableCollection<Product>(_productCatalog.ReadAll().Result);
+                
+
+                return collection;
             }
         }
 
@@ -65,9 +88,46 @@ namespace StockItUp.ViewModel
             get { return _selectedSupplier; }
             set { _selectedSupplier = value;OnPropertyChanged(); }
         }
+
+
+
         #endregion
 
+        #region Methods
 
+        private void CreateProductMethod()
+        {
+            //_productCatalog.Create(new Product())
+        }
+
+        private void CreateSupplierMethod()
+        {
+            //_productSupplier.Create(new Supplier())
+        }
+
+        private void DeleteProductMethod()
+        {
+            _productCatalog.Delete(SelectedProduct.Id);
+        }
+
+        private void DeleteSupplierMethod()
+        {
+            _supplierCatalog.Delete(SelectedSupplier.Id);
+        }
+
+        private void UpdateProductMethod()
+        {
+            //_productCatalog.update()
+        }
+
+        private void UpdateSupplierMethod()
+        {
+            //_supplierCatalog.update()
+        }
+
+
+
+        #endregion
 
         #region OnPropertyChanged
 

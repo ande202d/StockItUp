@@ -111,6 +111,12 @@ namespace StockItUp.Persistency
             HttpResponseMessage responseMessage = await _httpClient.PutAsync(url, content);
         }
 
+        public async Task Create(T obj)
+        {
+            string url = _serverURL + "/" + _apiPrefix + "/" + _apiID;
+            StringContent content = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = _httpClient.PostAsync(url, content).Result;
+        }
         #endregion
 
 
