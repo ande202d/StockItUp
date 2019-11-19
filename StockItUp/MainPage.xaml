@@ -63,7 +63,7 @@
                     </custom1:EventTriggerBehavior>
                 </custom:Interaction.Behaviors>
             </AppBarButton>
-            <AppBarButton Style="{StaticResource Button}" Grid.Column="3" Label="Varer" Icon="Library">
+            <AppBarButton Style="{StaticResource Button}" Grid.Column="3" Label="Varer" Icon="Library" BorderBrush="WhiteSmoke" BorderThickness="0,0,0,3">
                 <custom:Interaction.Behaviors>
                     <custom1:EventTriggerBehavior EventName="Click">
                         <custom1:NavigateToPageAction TargetPage="StockItUp.View.Varer"/>
