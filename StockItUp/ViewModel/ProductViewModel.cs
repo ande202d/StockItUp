@@ -20,8 +20,8 @@ namespace StockItUp.ViewModel
 
         private Catalog<Product> _productCatalog;
         private  Catalog<Supplier> _supplierCatalog;
-        private Product _selectedProduct = new Product("",0);
-        private Supplier _selectedSupplier = new Supplier("","www.");
+        private Product _selectedProduct = new Product(default(string),default(int));
+        private Supplier _selectedSupplier = new Supplier(default(string),"www.");
         private Supplier _selectedSupplierForCreationOfProduct;
 
         #endregion
@@ -92,7 +92,14 @@ namespace StockItUp.ViewModel
         public Supplier SelectedSupplierForCreationOfProduct
         {
             get { return _selectedSupplierForCreationOfProduct; }
-            set { _selectedSupplierForCreationOfProduct = value; OnPropertyChanged(); }
+            set {
+                _selectedSupplierForCreationOfProduct = value;
+                if (SelectedProduct!=null)
+                {
+                    SelectedProduct.Supplier = _selectedSupplierForCreationOfProduct.Id;
+                }
+                OnPropertyChanged();
+            }
         }
 
 
@@ -104,32 +111,19 @@ namespace StockItUp.ViewModel
         {
             if (SelectedProduct!=null)
             {
-                if (SelectedProduct.Name != default(string))
-                {
-                    if (SelectedSupplierForCreationOfProduct==null)
                     {
-                        _productCatalog.Create(new Product(SelectedProduct.Name, SelectedProduct.AmountPerBox));
+                        _productCatalog.Create(SelectedProduct);
                         OnPropertyChanged(nameof(ProductCatalog));
-                    }
-                    else
-                    {
-                        _productCatalog.Create(new Product(SelectedProduct.Name,SelectedProduct.AmountPerBox, SelectedSupplierForCreationOfProduct));
-                    OnPropertyChanged(nameof(ProductCatalog));
-                    }
-                    
-                }
-                
+                    }       
             }
+            
             
         }
 
         private void CreateSupplierMethod()
         {
-            if (SelectedSupplier.Name != default(string) && SelectedSupplier.Website != "www.")
-            {
-                _supplierCatalog.Create(new Supplier(SelectedSupplier.Name, SelectedSupplier.Website));
+                _supplierCatalog.Create(SelectedSupplier);
                 OnPropertyChanged(nameof(SupplierCatalog));
-            }
         }
 
         private void DeleteProductMethod()
@@ -144,25 +138,20 @@ namespace StockItUp.ViewModel
 
         private void DeleteSupplierMethod()
         {
-            _supplierCatalog.Delete(SelectedSupplier.Id);
+            if (SelectedSupplier!=null)
+            {
+                _supplierCatalog.Delete(SelectedSupplier.Id);
             OnPropertyChanged(nameof(SupplierCatalog));
-
+            }
         }
 
         private void UpdateProductMethod()
         {
-            if (SelectedProduct!=null)
+            if (SelectedProduct!=null && SelectedProduct.Name!="" && SelectedProduct.AmountPerBox!=-1)
             {
-                if (SelectedSupplierForCreationOfProduct == null)
-                {
-                    _productCatalog.Update(SelectedProduct.Id,new Product(SelectedProduct.Name, SelectedProduct.AmountPerBox));
+
+                    _productCatalog.Update(SelectedProduct.Id,SelectedProduct);
                     OnPropertyChanged(nameof(ProductCatalog));
-                }
-                else
-                {
-                    _productCatalog.Update(SelectedProduct.Id,new Product(SelectedProduct.Name, SelectedProduct.AmountPerBox, SelectedSupplierForCreationOfProduct));
-                    OnPropertyChanged(nameof(ProductCatalog));
-                }
             }
             
 
