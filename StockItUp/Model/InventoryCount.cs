@@ -21,6 +21,11 @@ namespace StockItUp.Model
             _dateTime = DateTime.Now;
             _location = location;
         }
+
+        public InventoryCount()
+        {
+        }
+
         #endregion
 
         #region Properties

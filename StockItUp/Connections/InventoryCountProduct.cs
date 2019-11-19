@@ -19,6 +19,10 @@ namespace StockItUp.Connections
             _amount = amount;
         }
 
+        public InventoryCountProduct()
+        {
+        }
+
         public int InventoryCountId
         {
             get { return _inventoryCountId; }

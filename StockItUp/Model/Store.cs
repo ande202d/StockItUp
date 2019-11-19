@@ -22,6 +22,11 @@ namespace StockItUp.Model
             _name = name;
             _address = adress;
         }
+
+        public Store()
+        {
+        }
+
         #endregion
 
         #region Properties

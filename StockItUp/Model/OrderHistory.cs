@@ -14,7 +14,7 @@ namespace StockItUp.Model
         //same comment as the one in inventoryCountHistory
         public OrderHistory()
         {
-            //Todo
+            
         }
 
         #region properties
