@@ -20,7 +20,7 @@ namespace StockItUp.ViewModel
 
         private Catalog<Product> _productCatalog;
         private  Catalog<Supplier> _supplierCatalog;
-        private Product _selectedProduct;
+        private Product _selectedProduct = new Product();
         private Supplier _selectedSupplier;
 
         #endregion
@@ -97,17 +97,21 @@ namespace StockItUp.ViewModel
 
         private void CreateProductMethod()
         {
-            //_productCatalog.Create(new Product())
+            _productCatalog.Create(new Product(SelectedProduct.Name,SelectedProduct.AmountPerBox,SelectedProduct.MySupplier));
+            OnPropertyChanged(nameof(ProductCatalog));
         }
 
         private void CreateSupplierMethod()
         {
             //_productSupplier.Create(new Supplier())
+
         }
 
         private void DeleteProductMethod()
         {
             _productCatalog.Delete(SelectedProduct.Id);
+            OnPropertyChanged(nameof(ProductCatalog));
+
         }
 
         private void DeleteSupplierMethod()
@@ -117,7 +121,9 @@ namespace StockItUp.ViewModel
 
         private void UpdateProductMethod()
         {
-            //_productCatalog.update()
+            _productCatalog.update(SelectedProduct.Id, SelectedProduct);
+            OnPropertyChanged(nameof(ProductCatalog));
+
         }
 
         private void UpdateSupplierMethod()
