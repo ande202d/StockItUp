@@ -8,11 +8,12 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:stockItUp="using:StockItUp"
+    xmlns:viewModel="using:StockItUp.ViewModel"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.DataContext>
-        <stockItUp:FirstTestClass></stockItUp:FirstTestClass>
+        <viewModel:StoragePageViewModel></viewModel:StoragePageViewModel>
     </Page.DataContext>
     <Page.Resources>
         <Style  x:Key="Button"  TargetType="AppBarButton">
@@ -138,18 +139,17 @@
             <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Bottom"  BorderThickness="0,0,2,0" >
 
                 <TextBlock Text="Administer placeringer" TextAlignment="Center" FontSize="30"></TextBlock>
-                <TextBox PlaceholderText="Navn på vare..." Foreground="DarkGray" Width="200" Margin="20"></TextBox>
-                <TextBox PlaceholderText="Vare per kasse..." Foreground="DarkGray" Width="200" Margin="20"></TextBox>
-                <ComboBox   HorizontalAlignment="Center" Margin="0,10,0,0" PlaceholderText="Vælg leverandør">
+                <TextBox PlaceholderText="Navn på placering..." Text="{Binding SelectedLocation.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkGray" Width="200" Margin="20"></TextBox>
+                <ComboBox ItemsSource="{Binding LocationCatalog}" SelectedItem="{Binding SelectedLocation, Mode=TwoWay}"  HorizontalAlignment="Center" Margin="0,10,0,0" PlaceholderText="Vælg placering">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock ></TextBlock>
+                            <TextBlock Text="{Binding Name}" ></TextBlock>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
                     <AppBarButton Content="Tilføj vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
-                    <AppBarButton Content="Rediger vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
+                    <AppBarButton Content="Rediger vare" Command="{Binding UpdateLocationCommand}" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
                     <AppBarButton Content="Fjern vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
                 </StackPanel>
                 <!--Handling of providers-->
@@ -170,7 +170,7 @@
 
     
 
-                <ListView ItemsSource="{Binding InvCountProduct}"  Margin="0,30,0,0" Padding="0" x:Name ="vareListView">
+                <ListView Margin="0,30,0,0" Padding="0" x:Name ="vareListView">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -182,9 +182,9 @@
                                 </Grid.ColumnDefinitions>
 
 
-                                <TextBlock   Grid.Column="0" Text="{Binding InventoryCountId}" ></TextBlock>
-                                <TextBlock   Grid.Column="1" Text="{Binding ProductId}" ></TextBlock>
-                                <TextBlock  Grid.Column="2" Text="{Binding Amount}" ></TextBlock>
+                                <TextBlock   Grid.Column="0" Text="{Binding Name}" ></TextBlock>
+                                <TextBlock   Grid.Column="1" Text="{Binding MyStore.Name}" ></TextBlock>
+                                <TextBlock  Grid.Column="2" Text="{Binding Id}" ></TextBlock>
                                 <TextBlock Grid.Column="3"  Text="PIK"></TextBlock>
 
                                 
