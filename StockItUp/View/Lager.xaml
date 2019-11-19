@@ -93,7 +93,7 @@
                 <ColumnDefinition Width="2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackPanel Visibility="{Binding LocationVisibility}" Grid.Column="1" Height="100" Background="Red" Orientation="Vertical" VerticalAlignment="Top">
-                <ListView  ItemsSource="{Binding SelectedInvCount}">
+                <ListView  ItemsSource="">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Location}"></TextBlock>
@@ -136,7 +136,7 @@
                     <TextBlock Width="250"  Text ="Mangler" FontSize="20"></TextBlock>
 
                 </StackPanel>
-                <ListView ItemsSource="{Binding InvCountProduct}" SelectedItem="{Binding SelectedInvCount, Mode=TwoWay}" Margin="0,30,0,0" Padding="0" x:Name ="vareListView">
+                <ListView ItemsSource="{Binding InvCountProduct}"  Margin="0,30,0,0" Padding="0" x:Name ="vareListView">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Width="1100">
