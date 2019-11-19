@@ -106,7 +106,9 @@ namespace StockItUp.ViewModel
 
         private void UpdateLocationMethod()
         {
+            //Store s1 = Catalog<Store>.Instance.Read(SelectedLocation.MyStore.Id).Result;
             _locationCatalog.update(SelectedLocation.Id, SelectedLocation);
+            OnPropertyChanged(nameof(LocationCatalog));
         }
 
 

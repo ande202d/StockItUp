@@ -139,7 +139,7 @@
             <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Bottom"  BorderThickness="0,0,2,0" >
 
                 <TextBlock Text="Administer placeringer" TextAlignment="Center" FontSize="30"></TextBlock>
-                <TextBox PlaceholderText="Navn på placering..." Text="{Binding SelectedLocation.Name}" Foreground="DarkGray" Width="200" Margin="20"></TextBox>
+                <TextBox PlaceholderText="Navn på placering..." Text="{Binding SelectedLocation.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkGray" Width="200" Margin="20"></TextBox>
                 <ComboBox ItemsSource="{Binding LocationCatalog}" SelectedItem="{Binding SelectedLocation, Mode=TwoWay}"  HorizontalAlignment="Center" Margin="0,10,0,0" PlaceholderText="Vælg placering">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -170,7 +170,7 @@
 
     
 
-                <ListView ItemsSource="{Binding LocationCatalog}" SelectedItem="{Binding SelectedLocation, Mode=TwoWay}"  Margin="0,30,0,0" Padding="0" x:Name ="vareListView">
+                <ListView Margin="0,30,0,0" Padding="0" x:Name ="vareListView">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
