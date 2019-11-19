@@ -26,6 +26,10 @@ namespace StockItUp.Model
             _countDate = i.DateTime;
         }
 
+        public InventoryCountHistory()
+        {
+        }
+
         #region Properties
         public int Id
         {

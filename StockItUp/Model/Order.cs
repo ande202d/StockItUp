@@ -21,6 +21,7 @@ namespace StockItUp.Model
             _dateTime = DateTime.Now;
         }
 
+
         public int Id
         {
             get { return _id; }

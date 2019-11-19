@@ -23,6 +23,11 @@ namespace StockItUp
             if (CheckWebsite(website)) _website = website;
             else throw new Exception("Website must contain: www.");
         }
+
+        public Supplier()
+        {
+        }
+
         #endregion
 
         #region Properties

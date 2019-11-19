@@ -36,7 +36,6 @@ namespace StockItUp.Model
 
         public Product()
         {
-
         }
         #endregion
 

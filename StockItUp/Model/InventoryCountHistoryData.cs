@@ -21,6 +21,10 @@ namespace StockItUp.Model
             _amount = amount;
         }
 
+        public InventoryCountHistoryData()
+        {
+        }
+
         #region Properties
         public int Id
         {

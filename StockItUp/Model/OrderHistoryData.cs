@@ -25,6 +25,10 @@ namespace StockItUp.Model
             _amountOrdered = amountOrdered;
         }
 
+        public OrderHistoryData()
+        {
+        }
+
         #region Properties
         public int Id
         {
