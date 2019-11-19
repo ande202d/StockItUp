@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StockItUp.Persistency;
 
 namespace StockItUp.Model
 {
@@ -42,9 +43,21 @@ namespace StockItUp.Model
         #region Properties
         public Supplier MySupplier
         {
-            get { return _mySupplier; }
+            get
+            {
+                if (Supplier==null)
+                {
+                    return null;
+                }
+
+                
+                return Catalog<Supplier>.Instance.Read(Supplier.Value).Result;
+
+            }
             set { _mySupplier = value; }
         }
+
+        public int? Supplier { get; set; }
 
         public int AmountPerBox
         {
