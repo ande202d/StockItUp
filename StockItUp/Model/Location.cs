@@ -23,6 +23,14 @@ namespace StockItUp.Model
             _myStore = store;
         }
 
+        public Location(string name)
+        {
+            _id = _idCounter;
+            _idCounter++;
+            Store = null;
+            _name = name;
+        }
+
         public Location()
         {
         }
@@ -47,6 +55,8 @@ namespace StockItUp.Model
             get { return _myStore; }
             set { _myStore = value; }
         }
+
+        public int? Store { get; set; }
         #endregion
 
     }

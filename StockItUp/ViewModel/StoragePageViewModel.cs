@@ -21,7 +21,7 @@ namespace StockItUp.ViewModel
         private Catalog<Location> _locationCatalog;
         private Catalog<Store> _storeCatalog;
         private Location _selectedLocation;
-        private Store _selectedStore;
+        private Store _selectedLocationStore;
 
         #endregion
 
@@ -81,10 +81,18 @@ namespace StockItUp.ViewModel
             set { _selectedLocation = value; OnPropertyChanged(); }
         }
 
-        public Store SelectedStore
+        public Store SelectedLocationStore
         {
-            get { return _selectedStore; }
-            set { _selectedStore = value; }
+            get { return _selectedLocationStore; }
+            set
+            {
+                _selectedLocationStore = value;
+                if (SelectedLocation!=null)
+                {
+                    SelectedLocation.Store = SelectedLocationStore.Id;
+                }
+                OnPropertyChanged();
+            }
         }
 
         #endregion
@@ -106,7 +114,6 @@ namespace StockItUp.ViewModel
 
         private void UpdateLocationMethod()
         {
-            //Store s1 = Catalog<Store>.Instance.Read(SelectedLocation.MyStore.Id).Result;
             _locationCatalog.Update(SelectedLocation.Id, SelectedLocation);
             OnPropertyChanged(nameof(LocationCatalog));
         }
