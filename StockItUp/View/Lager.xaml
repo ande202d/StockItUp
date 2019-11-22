@@ -170,7 +170,7 @@
 
     
 
-                <ListView Margin="0,30,0,0" Padding="0" x:Name ="vareListView">
+                <ListView Margin="0,30,0,0" Padding="0" x:Name ="vareListView" ItemsSource="{Binding ProductCatalog}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -182,10 +182,14 @@
                                 </Grid.ColumnDefinitions>
 
 
-                                <TextBlock   Grid.Column="0" Text="{Binding Name}" ></TextBlock>
+                                <!--<TextBlock   Grid.Column="0" Text="{Binding Name}" ></TextBlock>
                                 <TextBlock   Grid.Column="1" Text="{Binding MyStore.Name}" ></TextBlock>
                                 <TextBlock  Grid.Column="2" Text="{Binding Id}" ></TextBlock>
-                                <TextBlock Grid.Column="3"  Text="PIK"></TextBlock>
+                                <TextBlock Grid.Column="3"  Text="PIK"></TextBlock>-->
+                                <TextBlock   Grid.Column="0" Text="{Binding Name}" ></TextBlock>
+                                <TextBlock   Grid.Column="1" Text="{Binding Total}" ></TextBlock>
+                                <TextBlock  Grid.Column="2" Text="{Binding Wanted}" ></TextBlock>
+                                <TextBlock Grid.Column="3"  Text="{Binding Missing}"></TextBlock>
 
                                 
             

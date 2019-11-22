@@ -132,6 +132,7 @@
     <Compile Include="Model\OrderHistory.cs" />
     <Compile Include="Model\OrderHistoryData.cs" />
     <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\StoragePageProduct.cs" />
     <Compile Include="Model\Store.cs" />
     <Compile Include="Persistency\Catalog.cs" />
     <Compile Include="Properties\Annotations.cs" />

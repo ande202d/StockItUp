@@ -7,8 +7,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Devices.Lights;
 using RVG.Common;
 using StockItUp.Annotations;
+using StockItUp.Connections;
 using StockItUp.Model;
 using StockItUp.Persistency;
 
@@ -70,6 +72,71 @@ namespace StockItUp.ViewModel
             {
                 ObservableCollection<Store> collection = new ObservableCollection<Store>(_storeCatalog.ReadAll().Result);
 
+                return collection;
+            }
+        }
+
+        public ObservableCollection<StoragePageProduct> ProductCatalog
+        {
+            get
+            {
+                string n;
+                int t = 0;
+                int w;
+                int m;
+                //List<Product> list1 = Catalog<Product>.Instance.ReadAll().Result;
+                List<StoreProduct> list2 = Catalog<StoreProduct>.Instance.ReadAll().Result;
+                list2 = Catalog<StoreProduct>.Instance.ReadAll().Result;
+
+                List<StoragePageProduct> listToReturn = new List<StoragePageProduct>();
+
+                //Storeproducts har "0" i både product og store id, når de bliver læst fra databasen
+                //Dette er grundet den clustered key
+                foreach (StoreProduct sp in list2)
+                {
+                    //Does it match the store
+                    if (sp.StoreId == 0)
+                    {
+                        //Getting the right name from the product
+                        n = "test";
+                        foreach (Product p in Catalog<Product>.Instance.ReadAll().Result)
+                        {
+                            if (p.Id == 1)
+                            {
+                                n = p.Name;
+
+                                //Location loc = Catalog<Location>.Instance.ReadAll().Result[1];
+                                //InventoryCount testIc = new InventoryCount(loc);
+                                //Catalog<InventoryCount>.Instance.Create(testIc);
+
+                                //List<InventoryCount> hahaha = Catalog<InventoryCount>.Instance.ReadAll().Result;
+                                //int icid = hahaha[0].Id;
+                                //Catalog<InventoryCountProduct>.Instance.Create(new InventoryCountProduct(icid,1, 20));
+                                
+                                foreach (InventoryCount ic in Catalog<InventoryCount>.Instance.ReadAll().Result)
+                                {
+                                    InventoryCount icc = new InventoryCount();
+                                    if (icc == null) icc = ic;
+                                    else if (ic.DateTime > icc.DateTime) icc = ic;
+
+                                    foreach (InventoryCountProduct icp in Catalog<InventoryCountProduct>.Instance.ReadAll().Result)
+                                    {
+                                        if (icp.InventoryCountId == icc.Id || icp.ProductId == p.Id)
+                                        {
+                                            t += icp.Amount;
+                                        }
+                                    }
+                                }
+
+                            }
+
+                        }
+                        w = sp.Amount;
+                        m = w - t;
+                        listToReturn.Add(new StoragePageProduct(n,t,w,m));
+                    }
+                }
+                ObservableCollection<StoragePageProduct> collection = new ObservableCollection<StoragePageProduct>(listToReturn);
                 return collection;
             }
         }
