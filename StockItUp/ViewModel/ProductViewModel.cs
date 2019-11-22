@@ -109,15 +109,15 @@ namespace StockItUp.ViewModel
 
         private void CreateProductMethod()
         {
-            if (SelectedProduct!=null)
+            if (SelectedProduct!=null && SelectedProduct.Name != "" && SelectedProduct.AmountPerBox != 0)
             {
-                    {
-                        _productCatalog.Create(SelectedProduct);
-                        OnPropertyChanged(nameof(ProductCatalog));
-                    }       
+                if (SelectedSupplierForCreationOfProduct != null)
+                {
+                   SelectedProduct.Supplier = SelectedSupplierForCreationOfProduct.Id; 
+                }
+                _productCatalog.Create(SelectedProduct);
+                OnPropertyChanged(nameof(ProductCatalog));
             }
-            
-            
         }
 
         private void CreateSupplierMethod()
@@ -147,11 +147,11 @@ namespace StockItUp.ViewModel
 
         private void UpdateProductMethod()
         {
-            if (SelectedProduct!=null && SelectedProduct.Name!="" && SelectedProduct.AmountPerBox!=-1)
+            if (SelectedProduct!=null)
             {
-
                     _productCatalog.Update(SelectedProduct.Id,SelectedProduct);
                     OnPropertyChanged(nameof(ProductCatalog));
+                    SelectedProduct = new Product(default(string), default(int));
             }
             
 
