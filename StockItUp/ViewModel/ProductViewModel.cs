@@ -24,6 +24,7 @@ namespace StockItUp.ViewModel
         private Product _selectedProduct;
         private Supplier _selectedSupplier = new Supplier(default(string),"www.");
         private Supplier _selectedSupplierForCreationOfProduct;
+        private string _filter = "";
 
         #endregion
 
@@ -58,14 +59,33 @@ namespace StockItUp.ViewModel
 
         #region Porperties
 
+        public string Filter
+        {
+            get { return _filter; }
+            set { _filter = value; OnPropertyChanged(nameof(ProductCatalog));}
+        }
+
         //returns an ObservableCollection of products collection based on what the catalog pulls from the database
         public ObservableCollection<Product> ProductCatalog
         {
             get
             {
-                ObservableCollection<Product> collection = new ObservableCollection<Product>(_productCatalog.ReadAll().Result);
-                
-
+                //ObservableCollection<Product> collection = new ObservableCollection<Product>(_productCatalog.ReadAll().Result);
+                ObservableCollection<Product> collection = new ObservableCollection<Product>();
+                if (Filter == "")
+                {
+                    collection = new ObservableCollection<Product>(_productCatalog.ReadAll().Result);
+                }
+                else
+                {
+                    foreach (var v in _productCatalog.ReadAll().Result)
+                    {
+                        if (v.Name.ToLower().Contains(Filter))
+                        {
+                            collection.Add(v);
+                        }
+                    }
+                }
                 return collection;
             }
         }
@@ -107,7 +127,6 @@ namespace StockItUp.ViewModel
                     {
                         SelectedProduct.Supplier = _selectedSupplierForCreationOfProduct.Id;
                     }
-                    
                 }
                 OnPropertyChanged();
             }
