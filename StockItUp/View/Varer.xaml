@@ -136,7 +136,7 @@
                     <TextBlock Width="250"  Text ="Varer per kasse" FontSize="20"></TextBlock>
                     <TextBlock Width="250"  Text ="Leverandør" FontSize="20"></TextBlock>
                 </StackPanel>
-                <ListView  Margin="0,30,0,0" Padding="0" ItemsSource="{Binding ProductCatalog}" SelectedValue="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ListView Margin="0,30,0,0" Padding="0" ItemsSource="{Binding ProductCatalog}" SelectedValue="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Width="1100">
@@ -146,7 +146,6 @@
                                     <ColumnDefinition Width="250"></ColumnDefinition>
                                     <ColumnDefinition Width="250"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-
                                 <TextBlock   Grid.Column="0" Text="{Binding Id}"></TextBlock>
                                 <TextBlock   Grid.Column="1" Text="{Binding Name}"></TextBlock>
                                 <TextBlock  Grid.Column="2" Text="{Binding AmountPerBox}"></TextBlock>
