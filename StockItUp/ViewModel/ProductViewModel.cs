@@ -99,7 +99,15 @@ namespace StockItUp.ViewModel
                 _selectedSupplierForCreationOfProduct = value;
                 if (SelectedProduct!=null)
                 {
-                    SelectedProduct.Supplier = _selectedSupplierForCreationOfProduct.Id;
+                    if (SelectedSupplierForCreationOfProduct==null)
+                    {
+                        SelectedProduct.Supplier = null;
+                    }
+                    else
+                    {
+                        SelectedProduct.Supplier = _selectedSupplierForCreationOfProduct.Id;
+                    }
+                    
                 }
                 OnPropertyChanged();
             }
@@ -122,6 +130,7 @@ namespace StockItUp.ViewModel
                 _productCatalog.Create(SelectedProduct);
                 OnPropertyChanged(nameof(ProductCatalog));
             }
+            SelectedSupplierForCreationOfProduct = null;
         }
 
         //adds a supplier with the values given in the view to the database using the catalog
@@ -140,6 +149,7 @@ namespace StockItUp.ViewModel
                 OnPropertyChanged(nameof(ProductCatalog));
                 MakeDefaultProduct();
             }
+            SelectedSupplierForCreationOfProduct = null;
 
         }
 
@@ -158,10 +168,16 @@ namespace StockItUp.ViewModel
         {
             if (SelectedProduct!=null)
             {
+                if (SelectedSupplierForCreationOfProduct==null)
+                {
+                    SelectedProduct.Supplier = null;
+                }
                     _productCatalog.Update(SelectedProduct.Id,SelectedProduct);
                     OnPropertyChanged(nameof(ProductCatalog));
                     MakeDefaultProduct();                    
             }
+
+            SelectedSupplierForCreationOfProduct = null;
         }
 
         //update a supplier in the database with new values from the view
