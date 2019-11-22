@@ -101,7 +101,10 @@ namespace StockItUp.ViewModel
 
         private void CreateLocationMethod()
         {
-           // _locationCatalog.Create(new Location());
+            /*Store s1 = Catalog<Store>.Instance.Read(1).Result;
+            string s = SelectedLocation.Name;
+           _locationCatalog.Create(new Location(s1, s));
+           OnPropertyChanged(nameof(LocationCatalog));*/
         }
 
  

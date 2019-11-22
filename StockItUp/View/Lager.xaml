@@ -148,7 +148,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
-                    <AppBarButton Content="Tilføj vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
+                    <AppBarButton Content="Tilføj placering" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding CreateLocationCommand}"></AppBarButton>
                     <AppBarButton Content="Rediger vare" Command="{Binding UpdateLocationCommand}" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
                     <AppBarButton Content="Fjern vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
                 </StackPanel>
