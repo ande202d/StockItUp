@@ -51,7 +51,7 @@ namespace StockItUp.Model
                 }
 
 
-                return null;//Catalog<Supplier>.Instance.Read(Supplier.Value).Result;
+                return Catalog<Supplier>.Instance.Read(Supplier.Value).Result;
 
             }
             set { _mySupplier = value; }
