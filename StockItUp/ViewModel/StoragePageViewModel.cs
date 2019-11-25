@@ -168,17 +168,19 @@ namespace StockItUp.ViewModel
 
         private void CreateLocationMethod()
         {
-            /*Store s1 = Catalog<Store>.Instance.Read(1).Result;
-            string s = SelectedLocation.Name;
-           _locationCatalog.Create(new Location(s1, s));
-           OnPropertyChanged(nameof(LocationCatalog));*/
+            //Store s1 = Catalog<Store>.Instance.Read(0).Result;
+            //string s = SelectedLocation.Name;
+           //_locationCatalog.Create(SelectedLocation);
+           //OnPropertyChanged(nameof(LocationCatalog));
         }
-
- 
 
         private void DeleteLocationMethod()
         {
-            _locationCatalog.Delete(SelectedLocation.Id);
+            if(SelectedLocation != null)
+            { 
+                _locationCatalog.Delete(SelectedLocation.Id);
+                OnPropertyChanged(nameof(LocationCatalog));
+            }
         }
 
 
