@@ -59,7 +59,7 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                ObservableCollection<Location> collection = new ObservableCollection<Location>(_locationCatalog.ReadAll().Result);
+                ObservableCollection<Location> collection = new ObservableCollection<Location>(_locationCatalog.GetList);
 
 
                 return collection;
@@ -70,7 +70,7 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                ObservableCollection<Store> collection = new ObservableCollection<Store>(_storeCatalog.ReadAll().Result);
+                ObservableCollection<Store> collection = new ObservableCollection<Store>(_storeCatalog.GetList);
 
                 return collection;
             }
