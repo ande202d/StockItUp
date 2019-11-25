@@ -85,8 +85,8 @@ namespace StockItUp.ViewModel
                 int w;
                 int m;
                 //List<Product> list1 = Catalog<Product>.Instance.ReadAll().Result;
-                List<StoreProduct> list2 = Catalog<StoreProduct>.Instance.ReadAll().Result;
-                list2 = Catalog<StoreProduct>.Instance.ReadAll().Result;
+                List<StoreProduct> list2 = Catalog<StoreProduct>.Instance.GetList;
+                list2 = Catalog<StoreProduct>.Instance.GetList;
 
                 List<StoragePageProduct> listToReturn = new List<StoragePageProduct>();
 
@@ -99,7 +99,7 @@ namespace StockItUp.ViewModel
                     {
                         //Getting the right name from the product
                         n = "test";
-                        foreach (Product p in Catalog<Product>.Instance.ReadAll().Result)
+                        foreach (Product p in Catalog<Product>.Instance.GetList)
                         {
                             if (p.Id == 1)
                             {
@@ -113,13 +113,13 @@ namespace StockItUp.ViewModel
                                 //int icid = hahaha[0].Id;
                                 //Catalog<InventoryCountProduct>.Instance.Create(new InventoryCountProduct(icid,1, 20));
                                 
-                                foreach (InventoryCount ic in Catalog<InventoryCount>.Instance.ReadAll().Result)
+                                foreach (InventoryCount ic in Catalog<InventoryCount>.Instance.GetList)
                                 {
                                     InventoryCount icc = new InventoryCount();
                                     if (icc == null) icc = ic;
                                     else if (ic.DateTime > icc.DateTime) icc = ic;
 
-                                    foreach (InventoryCountProduct icp in Catalog<InventoryCountProduct>.Instance.ReadAll().Result)
+                                    foreach (InventoryCountProduct icp in Catalog<InventoryCountProduct>.Instance.GetList)
                                     {
                                         if (icp.InventoryCountId == icc.Id || icp.ProductId == p.Id)
                                         {

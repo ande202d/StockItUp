@@ -74,11 +74,11 @@ namespace StockItUp.ViewModel
                 ObservableCollection<Product> collection = new ObservableCollection<Product>();
                 if (Filter == "")
                 {
-                    collection = new ObservableCollection<Product>(_productCatalog.ReadAll().Result);
+                    collection = new ObservableCollection<Product>(_productCatalog.GetList);
                 }
                 else
                 {
-                    foreach (var v in _productCatalog.ReadAll().Result)
+                    foreach (var v in _productCatalog.GetList)
                     {
                         if (v.Name.ToLower().Contains(Filter))
                         {
@@ -95,7 +95,7 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                return new ObservableCollection<Supplier>(_supplierCatalog.ReadAll().Result);
+                return new ObservableCollection<Supplier>(_supplierCatalog.GetList);
             }
         }
 
