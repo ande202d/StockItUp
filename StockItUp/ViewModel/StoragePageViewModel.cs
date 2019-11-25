@@ -24,6 +24,7 @@ namespace StockItUp.ViewModel
         private Catalog<Store> _storeCatalog;
         private Location _selectedLocation;
         private Store _selectedLocationStore;
+        private StoragePageProduct _selectedProduct;
 
         #endregion
 
@@ -80,94 +81,70 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                string n; //the name of the product
-                int t = 0; //the latest amount counted 
-
-                //JEG MANGLER AT LIGGE DE FORSKELLIGE LOKATIONERS OPTÆLLINGER SAMMEN.
-                //LIGE NU TAGER DEN BARE DEN SIDSTE NYE OG BRUGER DEN, DEN KIGGER IKKE ENGANG PÅ LOKATIONEN
-                
-                //Gå inventoryCount igennem i forhold til location
-                //og bagefter check om det er den sidste nye på den placering
-                //noget i den stil
-
-                int w; //The amount wanted from the stores perspective of the product
-                int m; //the missing amount (w - t)
-
-
-
-                List<StoreProduct> list2 = Catalog<StoreProduct>.Instance.GetList;
                 List<StoragePageProduct> listToReturn = new List<StoragePageProduct>();
+                
+                #region Magic *puff*
 
-                #region Magic
-                foreach (StoreProduct sp in list2)
+                List<InventoryCount> newestIcOnEachLocation = new List<InventoryCount>();
+                foreach (var s in Catalog<Store>.Instance.GetList)
                 {
-                    //Does it match the store
-                    if (sp.Store == Catalog<Store>.Instance.GetList[0].Id)
+                    if (s.Id == 1)
                     {
-                        //Getting the right name from the product
-                        n = "test";
-                        foreach (Product p in Catalog<Product>.Instance.GetList)
+                        foreach (var l in Catalog<Location>.Instance.GetList)
                         {
-                            //Making sure that the products ID matches the ID from the stores "ProductList"
-                            if (p.Id == sp.Product)
+                            if (l.Store == s.Id)
                             {
-                                n = p.Name;
-                                t = -1;
-                                //Now we go all the data though, if the data got the newest id that we found before
-                                //and it also is the right productID, we simple plus our total amount with it.
-                                InventoryCount icSaved = new InventoryCount();
-                                foreach (InventoryCountProduct icp in Catalog<InventoryCountProduct>.Instance.GetList)
+                                InventoryCount icDummy = new InventoryCount();
+                                foreach (var ic in Catalog<InventoryCount>.Instance.GetList)
                                 {
-                                    if (icp.Product == p.Id)
-                                    {
-                                        //now we are sure that the data is about the right product
-                                        //now we need to take that InventoryCountId and save it, and the next
-                                        //time we find another match, we check witch InventoryCountId that is the newest
-                                        InventoryCount icToCheck = Catalog<InventoryCount>.Instance
-                                            .Read(icp.InventoryCount).Result;
-                                        if (icSaved.DateCounted < icToCheck.DateCounted)
-                                        {
-                                            icSaved = icToCheck;
-                                            t = icp.Amount;
-                                        }
-                                    }
+                                    if (ic.Location == l.Id && ic.DateCounted > icDummy.DateCounted)
+                                        icDummy = ic;
+
+                                }
+                                if (icDummy.DateCounted > (DateTime.MinValue.Add(TimeSpan.FromDays(2))))
+                                {
+                                    newestIcOnEachLocation.Add(icDummy);
                                 }
                             }
                         }
-                        w = sp.Amount;
-                        if (t == -1) m = -1;
-                        else
+                        //This shit returns a list of inventoryCounts, only one on each location,
+                        //and it is only the newest one from that location
+                        //furthermore, it is only locations that is located in the current store
+                        List<int> newestIcId = new List<int>();
+                        foreach (var ic in newestIcOnEachLocation)
                         {
-                            m = w - t;
+                            newestIcId.Add(ic.Id);
                         }
-                        listToReturn.Add(new StoragePageProduct(n, t, w, m));
+
+                        foreach (var sp in Catalog<StoreProduct>.Instance.GetList)
+                        {
+                            Product p;
+                            int t = 0;
+                            int w;
+                            int m;
+
+                            if (sp.Store == s.Id)
+                            {
+                                foreach (var icp in Catalog<InventoryCountProduct>.Instance.GetList)
+                                {
+                                    if (newestIcId.Contains(icp.InventoryCount) && icp.Product == sp.Product)
+                                    {
+                                        t += icp.Amount;
+                                    }
+                                }
+
+                                p = Catalog<Product>.Instance.Read(sp.Product).Result;
+                                w = sp.Amount;
+                                m = w - t;
+                                listToReturn.Add(new StoragePageProduct(p,t,w,m));
+                            }
+                        }
                     }
                 }
-                #endregion
 
-                #region We can break out of a for loop, but we cant from a foreach loop
-
-                //for (int storeIndex = 0; storeIndex < Catalog<Store>.Instance.GetList.Count; storeIndex++)
-                //{
-                //    for (int storeProductIndex = 0; 
-                //        storeProductIndex < Catalog<StoreProduct>.Instance.GetList.Count; 
-                //        storeProductIndex++)
-                //    {
-                //        if (Catalog<StoreProduct>.Instance.GetList[storeProductIndex].Store ==
-                //            Catalog<Store>.Instance.GetList[0].Id)
-                //        {
-                //            //now we are in the first occured condition where the ID matches the store
-                //            StoreProduct sp = Catalog<StoreProduct>.Instance.GetList[storeProductIndex];
-                //            for (int inventoryCountIndex = 0; 
-                //                inventoryCountIndex < Catalog<InventoryCount>.Instance.GetList.Count; 
-                //                inventoryCountIndex++)
-                //            {
-                //                //if (Catalog<InventoryCount>.Instance.GetList[inventoryCountIndex].Id == )
-                //            }
-                //        }
-                //    }
-                //} 
                 #endregion
+                
+                //For improvement, consider for-loops, but this will probably make you bald
 
                 ObservableCollection<StoragePageProduct> collection = new ObservableCollection<StoragePageProduct>(listToReturn);
                 return collection;
@@ -193,6 +170,12 @@ namespace StockItUp.ViewModel
                 }
                 OnPropertyChanged();
             }
+        }
+
+        public StoragePageProduct SelectedProduct
+        {
+            get { return _selectedProduct; }
+            set { _selectedProduct = value; OnPropertyChanged(); }
         }
 
         #endregion
