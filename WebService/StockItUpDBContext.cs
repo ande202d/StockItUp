@@ -8,7 +8,7 @@ namespace WebService
     public partial class StockItUpDBContext : DbContext
     {
         public StockItUpDBContext()
-            : base("name=StockItUpDBContext")
+            : base("name=StockItUpDBContext1")
         {
             base.Configuration.LazyLoadingEnabled = false;
             base.Configuration.ProxyCreationEnabled = false;
@@ -42,7 +42,8 @@ namespace WebService
 
             modelBuilder.Entity<InventoryCountHistory>()
                 .HasMany(e => e.InventoryCountHistoryDatas)
-                .WithRequired(e => e.InventoryCountHistory)
+                .WithRequired(e => e.InventoryCountHistory1)
+                .HasForeignKey(e => e.InventoryCountHistory)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<InventoryCountHistoryData>()
@@ -67,7 +68,8 @@ namespace WebService
 
             modelBuilder.Entity<OrderHistory>()
                 .HasMany(e => e.OrderHistoryDatas)
-                .WithRequired(e => e.OrderHistory)
+                .WithRequired(e => e.OrderHistory1)
+                .HasForeignKey(e => e.OrderHistory)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<OrderHistoryData>()

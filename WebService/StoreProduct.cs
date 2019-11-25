@@ -9,14 +9,10 @@ namespace WebService
     [Table("StoreProduct")]
     public partial class StoreProduct
     {
-        [Key]
-        [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
+
         public int Store { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Product { get; set; }
 
         public int Amount { get; set; }

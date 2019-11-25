@@ -9,19 +9,23 @@ namespace StockItUp.Model
     public class OrderHistoryData
     {
         private int _id;
+        private static int _idCounter = 1;
+        private int _orderHistoryId;
         private string _product;
         private int _missingAmount;
         private int _amountPerBox;
-        private int _recomendedAmount;
+        private int _recommendedAmount;
         private int _amountOrdered;
 
-        public OrderHistoryData(int id, string product, int missingAmount, int amountPerBox, int recomendedAmount, int amountOrdered)
+        public OrderHistoryData(int orderHistoryId, string product, int missingAmount, int amountPerBox, int recommendedAmount, int amountOrdered)
         {
-            _id = id;
+            _id = _idCounter;
+            _idCounter++;
+            _orderHistoryId = orderHistoryId;
             _product = product;
             _missingAmount = missingAmount;
             _amountPerBox = amountPerBox;
-            _recomendedAmount = recomendedAmount;
+            _recommendedAmount = recommendedAmount;
             _amountOrdered = amountOrdered;
         }
 
@@ -36,7 +40,7 @@ namespace StockItUp.Model
             set { _id = value; }
         }
 
-        public string Product1
+        public string Product
         {
             get { return _product; }
             set { _product = value; }
@@ -54,17 +58,24 @@ namespace StockItUp.Model
             set { _amountPerBox = value; }
         }
 
-        public int RecomendedAmount
+        public int RecommendedAmount
         {
-            get { return _recomendedAmount; }
-            set { _recomendedAmount = value; }
+            get { return _recommendedAmount; }
+            set { _recommendedAmount = value; }
         }
 
         public int AmountOrdered
         {
             get { return _amountOrdered; }
             set { _amountOrdered = value; }
-        } 
+        }
+
+        public int OrderHistory
+        {
+            get { return _orderHistoryId; }
+            set { _orderHistoryId = value; }
+        }
+
         #endregion
 
     }

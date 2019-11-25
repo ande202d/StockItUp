@@ -8,17 +8,23 @@ namespace StockItUp.Model
 {
     public class InventoryCountHistoryData
     {
-        private int _id; //the id from the inventoryCountHistory witch is also the same as the InventoryCount
+        private int _id;
+        private static int _idCounter = 1;
         private string _product;
         private int _amount;
+        private int _inventoryCountHistoryId;
+
 
         //Something simular the inventoryCountHistory
         //where it takes a InventoryCount, and then finds the matching inventoryCountProducts
-        public InventoryCountHistoryData(int id, string product, int amount)
+        public InventoryCountHistoryData(int inventoryCountHistoryId, string product, int amount)
         {
-            _id = id;
+            _id = _idCounter;
+            _idCounter++;
+
             _product = product;
             _amount = amount;
+            _inventoryCountHistoryId = inventoryCountHistoryId;
         }
 
         public InventoryCountHistoryData()
@@ -32,7 +38,7 @@ namespace StockItUp.Model
             set { _id = value; }
         }
 
-        public string Product1
+        public string Product
         {
             get { return _product; }
             set { _product = value; }
@@ -42,7 +48,14 @@ namespace StockItUp.Model
         {
             get { return _amount; }
             set { _amount = value; }
-        } 
+        }
+
+        public int InventoryCountHistory
+        {
+            get { return _inventoryCountHistoryId; }
+            set { _inventoryCountHistoryId = value; }
+        }
+
         #endregion
 
     }

@@ -11,24 +11,28 @@ namespace StockItUp.Connections
         private int _inventoryCountId;
         private int _productId;
         private int _amount;
+        private int _id;
+        private static int _idCounter = 1;
 
         public InventoryCountProduct(int inventoryCountId, int productId, int amount)
         {
             _inventoryCountId = inventoryCountId;
             _productId = productId;
             _amount = amount;
+            _id = _idCounter;
+            _idCounter++;
         }
 
         public InventoryCountProduct()
         {
         }
 
-        public int InventoryCountId
+        public int InventoryCount
         {
             get { return _inventoryCountId; }
             set { _inventoryCountId = value; }
         }
-        public int ProductId
+        public int Product
         {
             get { return _productId; }
             set { _productId = value; }
@@ -37,6 +41,12 @@ namespace StockItUp.Connections
         {
             get { return _amount; }
             set { _amount = value; }
+        }
+
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
         }
     }
 }

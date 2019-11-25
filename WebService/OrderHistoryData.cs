@@ -9,13 +9,11 @@ namespace WebService
     [Table("OrderHistoryData")]
     public partial class OrderHistoryData
     {
-        [Key]
-        [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
+        public int OrderHistory { get; set; }
+
+        [Required]
         [StringLength(50)]
         public string Product { get; set; }
 
@@ -27,6 +25,6 @@ namespace WebService
 
         public int AmountOrdered { get; set; }
 
-        public virtual OrderHistory OrderHistory { get; set; }
+        public virtual OrderHistory OrderHistory1 { get; set; }
     }
 }

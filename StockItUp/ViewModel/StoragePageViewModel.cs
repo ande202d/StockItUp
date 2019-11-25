@@ -95,13 +95,13 @@ namespace StockItUp.ViewModel
                 foreach (StoreProduct sp in list2)
                 {
                     //Does it match the store
-                    if (sp.StoreId == 0)
+                    if (sp.Store == Catalog<Store>.Instance.GetList[0].Id)
                     {
                         //Getting the right name from the product
                         n = "test";
                         foreach (Product p in Catalog<Product>.Instance.GetList)
                         {
-                            if (p.Id == 1)
+                            if (p.Id == sp.Product)
                             {
                                 n = p.Name;
 
@@ -121,7 +121,7 @@ namespace StockItUp.ViewModel
 
                                     foreach (InventoryCountProduct icp in Catalog<InventoryCountProduct>.Instance.GetList)
                                     {
-                                        if (icp.InventoryCountId == icc.Id || icp.ProductId == p.Id)
+                                        if (icp.InventoryCount == icc.Id || icp.Product == p.Id)
                                         {
                                             t += icp.Amount;
                                         }

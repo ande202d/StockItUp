@@ -80,22 +80,7 @@ namespace WebService.Controllers
             }
 
             db.OrderHistoryDatas.Add(orderHistoryData);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (OrderHistoryDataExists(orderHistoryData.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = orderHistoryData.Id }, orderHistoryData);
         }

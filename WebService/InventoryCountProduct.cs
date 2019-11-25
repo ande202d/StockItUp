@@ -9,14 +9,10 @@ namespace WebService
     [Table("InventoryCountProduct")]
     public partial class InventoryCountProduct
     {
-        [Key]
-        [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
+
         public int InventoryCount { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Product { get; set; }
 
         public int Amount { get; set; }

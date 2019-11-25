@@ -44,7 +44,7 @@ namespace WebService.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != inventoryCountProduct.InventoryCount)
+            if (id != inventoryCountProduct.Id)
             {
                 return BadRequest();
             }
@@ -80,24 +80,9 @@ namespace WebService.Controllers
             }
 
             db.InventoryCountProducts.Add(inventoryCountProduct);
+            db.SaveChanges();
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (InventoryCountProductExists(inventoryCountProduct.InventoryCount))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = inventoryCountProduct.InventoryCount }, inventoryCountProduct);
+            return CreatedAtRoute("DefaultApi", new { id = inventoryCountProduct.Id }, inventoryCountProduct);
         }
 
         // DELETE: api/InventoryCountProducts/5
@@ -127,7 +112,7 @@ namespace WebService.Controllers
 
         private bool InventoryCountProductExists(int id)
         {
-            return db.InventoryCountProducts.Count(e => e.InventoryCount == id) > 0;
+            return db.InventoryCountProducts.Count(e => e.Id == id) > 0;
         }
     }
 }

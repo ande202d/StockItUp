@@ -44,7 +44,7 @@ namespace WebService.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != storeProduct.Store)
+            if (id != storeProduct.Id)
             {
                 return BadRequest();
             }
@@ -80,24 +80,9 @@ namespace WebService.Controllers
             }
 
             db.StoreProducts.Add(storeProduct);
+            db.SaveChanges();
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (StoreProductExists(storeProduct.Store))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = storeProduct.Store }, storeProduct);
+            return CreatedAtRoute("DefaultApi", new { id = storeProduct.Id }, storeProduct);
         }
 
         // DELETE: api/StoreProducts/5
@@ -127,7 +112,7 @@ namespace WebService.Controllers
 
         private bool StoreProductExists(int id)
         {
-            return db.StoreProducts.Count(e => e.Store == id) > 0;
+            return db.StoreProducts.Count(e => e.Id == id) > 0;
         }
     }
 }

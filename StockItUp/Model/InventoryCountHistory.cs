@@ -37,7 +37,7 @@ namespace StockItUp.Model
             set { _id = value; }
         }
 
-        public string Location1
+        public string Location
         {
             get { return _location; }
             set { _location = value; }
