@@ -80,18 +80,25 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                string n;
-                int t = 0;
-                int w;
-                int m;
-                //List<Product> list1 = Catalog<Product>.Instance.ReadAll().Result;
-                List<StoreProduct> list2 = Catalog<StoreProduct>.Instance.GetList;
-                list2 = Catalog<StoreProduct>.Instance.GetList;
+                string n; //the name of the product
+                int t = 0; //the latest amount counted 
 
+                //JEG MANGLER AT LIGGE DE FORSKELLIGE LOKATIONERS OPTÆLLINGER SAMMEN.
+                //LIGE NU TAGER DEN BARE DEN SIDSTE NYE OG BRUGER DEN, DEN KIGGER IKKE ENGANG PÅ LOKATIONEN
+                
+                //Gå inventoryCount igennem i forhold til location
+                //og bagefter check om det er den sidste nye på den placering
+                //noget i den stil
+
+                int w; //The amount wanted from the stores perspective of the product
+                int m; //the missing amount (w - t)
+
+
+
+                List<StoreProduct> list2 = Catalog<StoreProduct>.Instance.GetList;
                 List<StoragePageProduct> listToReturn = new List<StoragePageProduct>();
 
-                //Storeproducts har "0" i både product og store id, når de bliver læst fra databasen
-                //Dette er grundet den clustered key
+                #region Magic
                 foreach (StoreProduct sp in list2)
                 {
                     //Does it match the store
@@ -101,41 +108,67 @@ namespace StockItUp.ViewModel
                         n = "test";
                         foreach (Product p in Catalog<Product>.Instance.GetList)
                         {
+                            //Making sure that the products ID matches the ID from the stores "ProductList"
                             if (p.Id == sp.Product)
                             {
                                 n = p.Name;
-
-                                //Location loc = Catalog<Location>.Instance.ReadAll().Result[1];
-                                //InventoryCount testIc = new InventoryCount(loc);
-                                //Catalog<InventoryCount>.Instance.Create(testIc);
-
-                                //List<InventoryCount> hahaha = Catalog<InventoryCount>.Instance.ReadAll().Result;
-                                //int icid = hahaha[0].Id;
-                                //Catalog<InventoryCountProduct>.Instance.Create(new InventoryCountProduct(icid,1, 20));
-                                
-                                foreach (InventoryCount ic in Catalog<InventoryCount>.Instance.GetList)
+                                t = -1;
+                                //Now we go all the data though, if the data got the newest id that we found before
+                                //and it also is the right productID, we simple plus our total amount with it.
+                                InventoryCount icSaved = new InventoryCount();
+                                foreach (InventoryCountProduct icp in Catalog<InventoryCountProduct>.Instance.GetList)
                                 {
-                                    InventoryCount icc = new InventoryCount();
-                                    if (icc == null) icc = ic;
-                                    else if (ic.DateTime > icc.DateTime) icc = ic;
-
-                                    foreach (InventoryCountProduct icp in Catalog<InventoryCountProduct>.Instance.GetList)
+                                    if (icp.Product == p.Id)
                                     {
-                                        if (icp.InventoryCount == icc.Id || icp.Product == p.Id)
+                                        //now we are sure that the data is about the right product
+                                        //now we need to take that InventoryCountId and save it, and the next
+                                        //time we find another match, we check witch InventoryCountId that is the newest
+                                        InventoryCount icToCheck = Catalog<InventoryCount>.Instance
+                                            .Read(icp.InventoryCount).Result;
+                                        if (icSaved.DateCounted < icToCheck.DateCounted)
                                         {
-                                            t += icp.Amount;
+                                            icSaved = icToCheck;
+                                            t = icp.Amount;
                                         }
                                     }
                                 }
-
                             }
-
                         }
                         w = sp.Amount;
-                        m = w - t;
-                        listToReturn.Add(new StoragePageProduct(n,t,w,m));
+                        if (t == -1) m = -1;
+                        else
+                        {
+                            m = w - t;
+                        }
+                        listToReturn.Add(new StoragePageProduct(n, t, w, m));
                     }
                 }
+                #endregion
+
+                #region We can break out of a for loop, but we cant from a foreach loop
+
+                //for (int storeIndex = 0; storeIndex < Catalog<Store>.Instance.GetList.Count; storeIndex++)
+                //{
+                //    for (int storeProductIndex = 0; 
+                //        storeProductIndex < Catalog<StoreProduct>.Instance.GetList.Count; 
+                //        storeProductIndex++)
+                //    {
+                //        if (Catalog<StoreProduct>.Instance.GetList[storeProductIndex].Store ==
+                //            Catalog<Store>.Instance.GetList[0].Id)
+                //        {
+                //            //now we are in the first occured condition where the ID matches the store
+                //            StoreProduct sp = Catalog<StoreProduct>.Instance.GetList[storeProductIndex];
+                //            for (int inventoryCountIndex = 0; 
+                //                inventoryCountIndex < Catalog<InventoryCount>.Instance.GetList.Count; 
+                //                inventoryCountIndex++)
+                //            {
+                //                //if (Catalog<InventoryCount>.Instance.GetList[inventoryCountIndex].Id == )
+                //            }
+                //        }
+                //    }
+                //} 
+                #endregion
+
                 ObservableCollection<StoragePageProduct> collection = new ObservableCollection<StoragePageProduct>(listToReturn);
                 return collection;
             }

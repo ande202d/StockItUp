@@ -22,8 +22,8 @@ namespace StockItUp.Model
         public InventoryCountHistory(InventoryCount i)
         {
             _id = i.Id;
-            _location = i.Location.Name;
-            _countDate = i.DateTime;
+            _location = i.MyLocation.Name;
+            _countDate = i.DateCounted;
         }
 
         public InventoryCountHistory()

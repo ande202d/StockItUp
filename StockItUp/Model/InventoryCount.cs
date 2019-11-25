@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StockItUp.Persistency;
 
 namespace StockItUp.Model
 {
@@ -34,12 +35,14 @@ namespace StockItUp.Model
             get { return _id; }
             set { _id = value; }
         }
-        public DateTime DateTime
+        public DateTime DateCounted
         {
             get { return _dateTime; }
             set { _dateTime = value; }
         }
-        public Location Location
+
+        public int Location { get; set; }
+        public Location MyLocation
         {
             get { return _location; }
             set { _location = value; }
