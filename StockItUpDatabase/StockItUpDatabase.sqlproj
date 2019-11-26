@@ -80,4 +80,7 @@
   <ItemGroup>
     <RefactorLog Include="StockItUpDatabase.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="dummyData.sql" />
+  </ItemGroup>
 </Project>
