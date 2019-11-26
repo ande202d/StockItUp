@@ -168,7 +168,9 @@
 
                 </StackPanel>
 
-
+                <StackPanel VerticalAlignment="Bottom" Margin="0,5,0,20">
+                    <TextBox Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="søg efter varer" ></TextBox>
+                </StackPanel>
                 <StackPanel Height="600" VerticalAlignment="Top">
                     <ScrollViewer Height="600">
                         <ListView Margin="0,30,0,0" Padding="0" x:Name ="vareListView" ItemsSource="{Binding ProductCatalog}" SelectedItem="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
