@@ -25,8 +25,10 @@ namespace StockItUp.ViewModel
         private Catalog<InventoryCountProduct> _inventoryCountProductCatalog;
         private Catalog<InventoryCount> _inventoryCountCatalog;
         private Location _selectedLocation;
+        private InventoryCountHistory _selectedInventoryCountHistory;
 
-        private List<InventoryCountPage> _listForProducts;
+        //this one is only so we dont "rerun" the code and make all the values 0 again
+        private List<InventoryCountPage> _listForProducts; 
 
         #endregion
 
@@ -106,6 +108,45 @@ namespace StockItUp.ViewModel
         {
             get { return _selectedLocation; }
             set { _selectedLocation = value; }
+        }
+
+        //to get the list of all previous made inventoryCounts
+        public ObservableCollection<InventoryCountHistory> InventoryCountHistoriesCatalog
+        {
+            get
+            {
+                ObservableCollection<InventoryCountHistory> collection = 
+                    new ObservableCollection<InventoryCountHistory>(Catalog<InventoryCountHistory>.Instance.GetList);
+                return collection;
+            }
+        }
+
+        //To select a different old inventoryCount to show data from
+        public InventoryCountHistory SelectedInventoryCountHistory
+        {
+            get { return _selectedInventoryCountHistory; }
+            set { _selectedInventoryCountHistory = value; }
+        }
+
+        //The list of the data from the old inventoryCount that is selected
+        public ObservableCollection<InventoryCountHistoryData> InventoryCountHistoriesCatalogData
+        {
+            get
+            {
+                List<InventoryCountHistoryData> listToReturn = new List<InventoryCountHistoryData>();
+
+                foreach (var i in Catalog<InventoryCountHistoryData>.Instance.GetList)
+                {
+                    if (i.InventoryCountHistory == SelectedInventoryCountHistory.Id)
+                    {
+                        listToReturn.Add(i);
+                    }
+                }
+
+                ObservableCollection<InventoryCountHistoryData> collection = 
+                    new ObservableCollection<InventoryCountHistoryData>(listToReturn);
+                return collection;
+            }
         }
 
         #endregion
