@@ -96,15 +96,17 @@ namespace StockItUp.ViewModel
                 {
                     if (s.Id == 1)
                     {
-                        List<InventoryCount> newestIcOnEachLocation = GetNewestIc();
-                        List<int> newestIcId = new List<int>();
-                        foreach (var ic in newestIcOnEachLocation)
-                        {
-                            newestIcId.Add(ic.Id);
-                        }
+                        //List<InventoryCount> newestIcOnEachLocation = GetNewestIc();
+                        //List<int> newestIcId = new List<int>();
+                        //foreach (var ic in newestIcOnEachLocation)
+                        //{
+                        //    newestIcId.Add(ic.Id);
+                        //}
 
                         foreach (var sp in Catalog<StoreProduct>.Instance.GetList)
                         {
+                            List<InventoryCount> newestIcOnEachLocation = GetNewestIc(sp.Id);
+                            List<int> newestIcId = getNewstIcIds(sp.Id);
                             Product p;
                             int t = 0;
                             int w;
@@ -142,14 +144,16 @@ namespace StockItUp.ViewModel
             {
                 List<StoragePageProductData> listToReturn = new List<StoragePageProductData>();
 
-                List<InventoryCount> ics = GetNewestIc();
-                List<int> newestIcId = new List<int>();
-                foreach (var ic in ics)
-                {
-                    newestIcId.Add(ic.Id);
-                }
+                //List<InventoryCount> ics = GetNewestIc();
+                //List<int> newestIcId = new List<int>();
+                //foreach (var ic in ics)
+                //{
+                //    newestIcId.Add(ic.Id);
+                //}
                 foreach (var icp in Catalog<InventoryCountProduct>.Instance.GetList)
                 {
+                    List<InventoryCount> ics = GetNewestIc(icp.Product);
+                    List<int> newestIcId = getNewstIcIds(icp.Product);
                     if (newestIcId.Contains(icp.InventoryCount) && icp.Product == SelectedProduct.MyProduct.Id)
                     {
                         InventoryCount ic = ics.Find(x => x.Id == icp.InventoryCount);
@@ -220,7 +224,9 @@ namespace StockItUp.ViewModel
         //This shit returns a list of inventoryCounts, only one on each location,
         //and it is only the newest one from that location
         //furthermore, it is only locations that is located in the current store
-        private List<InventoryCount> GetNewestIc()
+        //and it is only saved if the inventoryCount acturaly counted any instances of that specific product
+        //that way you dont have to count all products at all time in every location
+        private List<InventoryCount> GetNewestIc(int productId)
         {
             List<InventoryCount> newestIcOnEachLocation = new List<InventoryCount>();
             foreach (var s in Catalog<Store>.Instance.GetList)
@@ -234,9 +240,18 @@ namespace StockItUp.ViewModel
                             InventoryCount icDummy = new InventoryCount();
                             foreach (var ic in Catalog<InventoryCount>.Instance.GetList)
                             {
+                                //if (ic.Location == l.Id && ic.DateCounted > icDummy.DateCounted)
+                                //    icDummy = ic;
                                 if (ic.Location == l.Id && ic.DateCounted > icDummy.DateCounted)
-                                    icDummy = ic;
-
+                                {
+                                    foreach (var icp in Catalog<InventoryCountProduct>.Instance.GetList)
+                                    {
+                                        if (icp.Product == productId && icp.InventoryCount == ic.Id)
+                                        {
+                                            icDummy = ic;
+                                        }
+                                    }
+                                }
                             }
 
                             if (icDummy.DateCounted > (DateTime.MinValue.Add(TimeSpan.FromDays(2))))
@@ -251,6 +266,16 @@ namespace StockItUp.ViewModel
             return newestIcOnEachLocation;
         }
 
+        private List<int> getNewstIcIds(int productId)
+        {
+            List<int> listToReturn = new List<int>();
+            foreach (var ic in GetNewestIc(productId))
+            {
+                listToReturn.Add(ic.Id);
+            }
+
+            return listToReturn;
+        }
 
         #endregion
 
