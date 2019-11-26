@@ -137,6 +137,7 @@
     <Compile Include="Model\Store.cs" />
     <Compile Include="Persistency\Catalog.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModel\InventoryCountViewModel.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="ViewModel\StoragePageViewModel.cs" />
     <Compile Include="View\Bestillinger.xaml.cs">

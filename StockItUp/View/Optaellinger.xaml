@@ -7,9 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:viewModel="using:StockItUp.ViewModel"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+
+    <Page.DataContext>
+        <viewModel:InventoryCountViewModel></viewModel:InventoryCountViewModel>
+    </Page.DataContext>
     <Page.Resources>
         <Style  x:Key="Button"  TargetType="AppBarButton">
             <Setter Property="Label" Value=""/>
@@ -89,24 +94,30 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1" VerticalAlignment="Top">
                 <TextBlock Text="Lav optælling" TextAlignment="Center" FontSize="30"></TextBlock>
+                <ComboBox HorizontalAlignment="Center" ItemsSource="{Binding LocationCatalog}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate></ComboBox>
             </StackPanel>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" BorderBrush="Black" BorderThickness="5,0,0,0" Margin="0,50,0,0">
+            <StackPanel Grid.Column="1" Orientation="Horizontal" BorderBrush="Black" BorderThickness="5,0,0,0" Margin="0,80,0,0">
                 <TextBlock Text="Vare navn" Width="210" FontSize="20"></TextBlock>
                 <TextBlock Text="Antal" Width="210" FontSize="20"></TextBlock>
             </StackPanel>
-            <AppBarButton Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Padding="0,0,0,0" Content="Gem" Style="{StaticResource Button}"></AppBarButton>
-            <ListView Grid.Column="1" Margin="0,60,0,0" Padding="0" x:Name ="placeringListView">
+            <AppBarButton Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Padding="0,0,0,0" Content="Gem" Style="{StaticResource Button}" Command="{Binding CreateInventoryCountCommand}" CommandParameter="{Binding listForProducts[Product]}"></AppBarButton>
+            <ListView Grid.Column="1" Margin="0,110,0,0" Padding="0" Height="400" ItemsSource="{Binding listForProducts}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="210"></ColumnDefinition>
-                                <ColumnDefinition Width="210"></ColumnDefinition>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
 
-                            <TextBlock   Grid.Column="0"  ></TextBlock>
-                            <TextBox Grid.Column="1"></TextBox>
+                            <TextBlock  Grid.Column="0" Text="{Binding Name}" ></TextBlock>
+                            <TextBox Grid.Column="1" ></TextBox>
 
 
 
