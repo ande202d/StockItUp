@@ -37,7 +37,8 @@ namespace StockItUp.ViewModel
             CreateLocationCommand = new RelayCommand(CreateLocationMethod);
             DeleteLocationCommand = new RelayCommand(DeleteLocationMethod);
             UpdateLocationCommand = new RelayCommand(UpdateLocationMethod);
-
+            Product TempProduct = new Product();
+            SelectedProduct = new StoragePageProduct(TempProduct,default(int), default(int), default(int));
         }
 
         #endregion
@@ -150,7 +151,7 @@ namespace StockItUp.ViewModel
                         listToReturn.Add(new StoragePageProductData(ic.MyLocation.Name, ic.DateCounted, icp.Amount));
                     }
                 }
-
+                
                 ObservableCollection<StoragePageProductData> collection = new ObservableCollection<StoragePageProductData>(listToReturn);
                 return collection;
             }
@@ -179,7 +180,7 @@ namespace StockItUp.ViewModel
         public StoragePageProduct SelectedProduct
         {
             get { return _selectedProduct; }
-            set { _selectedProduct = value; OnPropertyChanged(); }
+            set { _selectedProduct = value; OnPropertyChanged(); OnPropertyChanged(nameof(ProductCatalogData)); }
         }
 
         #endregion

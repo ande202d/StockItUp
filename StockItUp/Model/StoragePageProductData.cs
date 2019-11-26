@@ -31,6 +31,11 @@ namespace StockItUp.Model
             set { _lastCounted = value; }
         }
 
+        public string DateFormatted
+        {
+            get { return LastCounted.ToString("dd / MM / yyyy"); }
+        }
+
         public int Amount
         {
             get { return _amount; }
