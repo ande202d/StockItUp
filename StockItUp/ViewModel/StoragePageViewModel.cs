@@ -37,7 +37,8 @@ namespace StockItUp.ViewModel
             CreateLocationCommand = new RelayCommand(CreateLocationMethod);
             DeleteLocationCommand = new RelayCommand(DeleteLocationMethod);
             UpdateLocationCommand = new RelayCommand(UpdateLocationMethod);
-
+            Product TempProduct = new Product();
+            SelectedProduct = new StoragePageProduct(TempProduct,default(int), default(int), default(int));
         }
 
         #endregion
@@ -85,31 +86,11 @@ namespace StockItUp.ViewModel
                 
                 #region Magic *puff*
 
-                List<InventoryCount> newestIcOnEachLocation = new List<InventoryCount>();
                 foreach (var s in Catalog<Store>.Instance.GetList)
                 {
                     if (s.Id == 1)
                     {
-                        foreach (var l in Catalog<Location>.Instance.GetList)
-                        {
-                            if (l.Store == s.Id)
-                            {
-                                InventoryCount icDummy = new InventoryCount();
-                                foreach (var ic in Catalog<InventoryCount>.Instance.GetList)
-                                {
-                                    if (ic.Location == l.Id && ic.DateCounted > icDummy.DateCounted)
-                                        icDummy = ic;
-
-                                }
-                                if (icDummy.DateCounted > (DateTime.MinValue.Add(TimeSpan.FromDays(2))))
-                                {
-                                    newestIcOnEachLocation.Add(icDummy);
-                                }
-                            }
-                        }
-                        //This shit returns a list of inventoryCounts, only one on each location,
-                        //and it is only the newest one from that location
-                        //furthermore, it is only locations that is located in the current store
+                        List<InventoryCount> newestIcOnEachLocation = GetNewestIc();
                         List<int> newestIcId = new List<int>();
                         foreach (var ic in newestIcOnEachLocation)
                         {
@@ -144,13 +125,37 @@ namespace StockItUp.ViewModel
 
                 #endregion
                 
-                //For improvement, consider for-loops, but this will probably make you bald
-
                 ObservableCollection<StoragePageProduct> collection = new ObservableCollection<StoragePageProduct>(listToReturn);
                 return collection;
             }
         }
 
+        public ObservableCollection<StoragePageProductData> ProductCatalogData
+        {
+            get
+            {
+                List<StoragePageProductData> listToReturn = new List<StoragePageProductData>();
+
+                List<InventoryCount> ics = GetNewestIc();
+                List<int> newestIcId = new List<int>();
+                foreach (var ic in ics)
+                {
+                    newestIcId.Add(ic.Id);
+                }
+                foreach (var icp in Catalog<InventoryCountProduct>.Instance.GetList)
+                {
+                    if (newestIcId.Contains(icp.InventoryCount) && icp.Product == SelectedProduct.MyProduct.Id)
+                    {
+                        InventoryCount ic = ics.Find(x => x.Id == icp.InventoryCount);
+
+                        listToReturn.Add(new StoragePageProductData(ic.MyLocation.Name, ic.DateCounted, icp.Amount));
+                    }
+                }
+                
+                ObservableCollection<StoragePageProductData> collection = new ObservableCollection<StoragePageProductData>(listToReturn);
+                return collection;
+            }
+        }
 
         public Location SelectedLocation
         {
@@ -175,7 +180,7 @@ namespace StockItUp.ViewModel
         public StoragePageProduct SelectedProduct
         {
             get { return _selectedProduct; }
-            set { _selectedProduct = value; OnPropertyChanged(); }
+            set { _selectedProduct = value; OnPropertyChanged(); OnPropertyChanged(nameof(ProductCatalogData)); }
         }
 
         #endregion
@@ -206,7 +211,39 @@ namespace StockItUp.ViewModel
             OnPropertyChanged(nameof(LocationCatalog));
         }
 
+        //This shit returns a list of inventoryCounts, only one on each location,
+        //and it is only the newest one from that location
+        //furthermore, it is only locations that is located in the current store
+        private List<InventoryCount> GetNewestIc()
+        {
+            List<InventoryCount> newestIcOnEachLocation = new List<InventoryCount>();
+            foreach (var s in Catalog<Store>.Instance.GetList)
+            {
+                if (s.Id == 1)
+                {
+                    foreach (var l in Catalog<Location>.Instance.GetList)
+                    {
+                        if (l.Store == s.Id)
+                        {
+                            InventoryCount icDummy = new InventoryCount();
+                            foreach (var ic in Catalog<InventoryCount>.Instance.GetList)
+                            {
+                                if (ic.Location == l.Id && ic.DateCounted > icDummy.DateCounted)
+                                    icDummy = ic;
 
+                            }
+
+                            if (icDummy.DateCounted > (DateTime.MinValue.Add(TimeSpan.FromDays(2))))
+                            {
+                                newestIcOnEachLocation.Add(icDummy);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return newestIcOnEachLocation;
+        }
 
 
         #endregion

@@ -108,11 +108,11 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,40,0,0" >
                 <TextBlock Text="Lager navn" Margin="10,0,0,0"  Width="140"></TextBlock>
-                <TextBlock Text="Dato"  Width="140"></TextBlock>
+                <TextBlock Text="Sidst Optalt"  Width="140"></TextBlock>
                 <TextBlock Text="Antal"  Width="120"></TextBlock>
             </StackPanel>
 
-            <ListView Grid.Column="1" ItemsSource="{Binding InvCountProduct}"  Margin="0,60,0,0" Padding="0" x:Name ="placeringListView">
+            <ListView Grid.Column="1" ItemsSource="{Binding ProductCatalogData}" Margin="0,60,0,0" Padding="0" x:Name ="placeringListView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -123,9 +123,9 @@
                             </Grid.ColumnDefinitions>
 
 
-                            <TextBlock   Grid.Column="0"  ></TextBlock>
-                            <TextBlock   Grid.Column="1"  ></TextBlock>
-                            <TextBlock  Grid.Column="2" Text="PIK" ></TextBlock>
+                            <TextBlock  Grid.Column="0" Text="{Binding LocationName}" ></TextBlock>
+                            <TextBlock  Grid.Column="1" Text="{Binding DateFormatted}" ></TextBlock>
+                            <TextBlock  Grid.Column="2" Text="{Binding Amount}"></TextBlock>
 
 
 
@@ -168,9 +168,9 @@
 
                 </StackPanel>
 
-    
 
-                <ListView Margin="0,30,0,0" Padding="0" x:Name ="vareListView" ItemsSource="{Binding ProductCatalog}">
+
+                <ListView Margin="0,30,0,0" Padding="0" x:Name ="vareListView" ItemsSource="{Binding ProductCatalog}" SelectedItem="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>

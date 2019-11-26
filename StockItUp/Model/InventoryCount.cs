@@ -44,7 +44,7 @@ namespace StockItUp.Model
         public int Location { get; set; }
         public Location MyLocation
         {
-            get { return _location; }
+            get { return Catalog<Location>.Instance.Read(Location).Result; }
             set { _location = value; }
         }
         #endregion
