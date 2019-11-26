@@ -169,9 +169,10 @@
                 </StackPanel>
 
 
-
-                <ListView Margin="0,30,0,0" Padding="0" x:Name ="vareListView" ItemsSource="{Binding ProductCatalog}" SelectedItem="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    <ListView.ItemTemplate>
+                <StackPanel Height="600" VerticalAlignment="Top">
+                    <ScrollViewer Height="600">
+                        <ListView Margin="0,30,0,0" Padding="0" x:Name ="vareListView" ItemsSource="{Binding ProductCatalog}" SelectedItem="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -199,6 +200,8 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                    </ScrollViewer>
+                </StackPanel>
             </Grid>
 
 
