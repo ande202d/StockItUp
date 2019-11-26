@@ -66,7 +66,7 @@
                     </custom1:EventTriggerBehavior>
                 </custom:Interaction.Behaviors>
             </AppBarButton>
-            <AppBarButton Style="{StaticResource Button}" Grid.Column="3" Label="Varer" Icon="Library">
+            <AppBarButton Style="{StaticResource Button}" Grid.Column="3" Label="Varer" Icon="Library" BorderBrush="WhiteSmoke" BorderThickness="0,0,0,3">
                 <custom:Interaction.Behaviors>
                     <custom1:EventTriggerBehavior EventName="Click">
                         <custom1:NavigateToPageAction TargetPage="StockItUp.View.Varer"/>
@@ -136,21 +136,22 @@
                     <TextBlock Width="250"  Text ="Varer per kasse" FontSize="20"></TextBlock>
                     <TextBlock Width="250"  Text ="Leverandør" FontSize="20"></TextBlock>
                 </StackPanel>
-                <StackPanel VerticalAlignment="Bottom">
+                <StackPanel VerticalAlignment="Bottom" Margin="0,5,0,20">
                     <TextBox Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="søg efter varer" ></TextBox>
                 </StackPanel>
-                <StackPanel>
-                    <ListView Margin="0,30,0,0" Padding="0" ItemsSource="{Binding ProductCatalog}" SelectedValue="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <StackPanel Height="600" VerticalAlignment="Top">
+                    <ScrollViewer Height="600">
+                    <ListView Margin="0,30,0,0" Padding="0" ItemsSource="{Binding ProductCatalog}" SelectedValue="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Width="1100">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="250"></ColumnDefinition>
-                                    <ColumnDefinition Width="250"></ColumnDefinition>
-                                    <ColumnDefinition Width="250"></ColumnDefinition>
-                                    <ColumnDefinition Width="250"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock   Grid.Column="0" Text="{Binding Id}"></TextBlock>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="250" ></ColumnDefinition>
+                                        <ColumnDefinition Width="250"></ColumnDefinition>
+                                        <ColumnDefinition Width="250"></ColumnDefinition>
+                                        <ColumnDefinition Width="250"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock   Grid.Column="0" Text="{Binding Id}"></TextBlock>
                                 <TextBlock   Grid.Column="1" Text="{Binding Name}"></TextBlock>
                                 <TextBlock  Grid.Column="2" Text="{Binding AmountPerBox}"></TextBlock>
                                 <TextBlock Grid.Column="3"  Text="{Binding MySupplier.Website}"></TextBlock>
@@ -159,6 +160,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                    </ScrollViewer>
                 </StackPanel>
                 
             </Grid>
