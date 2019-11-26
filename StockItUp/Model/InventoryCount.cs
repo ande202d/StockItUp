@@ -23,6 +23,8 @@ namespace StockItUp.Model
             _dateTime = DateTime.Now;
             _location = location;
             Location = location.Id;
+
+            MyLocationName = location.Name;
         }
 
         public InventoryCount()
@@ -49,6 +51,9 @@ namespace StockItUp.Model
             get { return Catalog<Location>.Instance.Read(Location).Result; }
             set { _location = value; }
         }
+
+        public string MyLocationName { get; set; }
+
         #endregion
     }
 }

@@ -24,11 +24,19 @@ namespace StockItUp.Model
             _id = i.Id;
             _location = i.MyLocation.Name;
             _countDate = i.DateCounted;
+            //Id = i.Id;
+            //Location = i.MyLocation.Name;
+            //CountDate = i.DateCounted;
         }
 
         public InventoryCountHistory()
         {
         }
+
+        //public int Id { get; set; }
+        //public string Location { get; set; }
+
+        //public DateTime CountDate { get; set; }
 
         #region Properties
         public int Id
@@ -47,7 +55,7 @@ namespace StockItUp.Model
         {
             get { return _countDate; }
             set { _countDate = value; }
-        } 
+        }
         #endregion
 
     }

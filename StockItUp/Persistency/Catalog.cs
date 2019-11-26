@@ -47,6 +47,7 @@ namespace StockItUp.Persistency
                 if (_instance == null)
                 {
                     string apiIDv2 = typeof(T).Name + "s";
+                    if (apiIDv2.EndsWith("ys")) apiIDv2 = typeof(T).Name.Replace("History", "Histories");
                     _instance = new Catalog<T>(apiIDv2); //the url should end on the class name +s
                     return _instance;
                 }
@@ -119,6 +120,7 @@ namespace StockItUp.Persistency
         public async Task Create(T obj)
         {
             string url = _serverURL + "/" + _apiPrefix + "/" + _apiID;
+            string stringToSerialize = JsonConvert.SerializeObject(obj);
             StringContent content = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
             HttpResponseMessage response = _httpClient.PostAsync(url, content).Result;
             listT = ReadAll().Result;
