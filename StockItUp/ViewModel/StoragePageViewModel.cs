@@ -25,6 +25,7 @@ namespace StockItUp.ViewModel
         private Location _selectedLocation;
         private Store _selectedLocationStore;
         private StoragePageProduct _selectedProduct;
+        private string _filter;
 
         #endregion
 
@@ -52,10 +53,15 @@ namespace StockItUp.ViewModel
 
         #endregion
 
-  
+
 
         #region Porperties
 
+        public string Filter
+        {
+            get { return _filter; }
+            set { _filter = value; OnPropertyChanged(nameof(ProductCatalog)); }
+        }
         //returns an observable of products collection based on what the catalog pulls from the database
         public ObservableCollection<Location> LocationCatalog
         {
