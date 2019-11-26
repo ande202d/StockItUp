@@ -51,11 +51,11 @@ INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (4,
 SET IDENTITY_INSERT [dbo].[StoreProduct] OFF
 
 SET IDENTITY_INSERT [dbo].[InventoryCount] ON
-INSERT INTO [dbo].[InventoryCount] ([Id], [Location], [DateCounted]) VALUES (2, 1, N'2019-11-25 00:00:00')
-INSERT INTO [dbo].[InventoryCount] ([Id], [Location], [DateCounted]) VALUES (3, 2, N'2019-11-27 00:00:00')
-INSERT INTO [dbo].[InventoryCount] ([Id], [Location], [DateCounted]) VALUES (4, 1, N'2019-11-28 00:00:00')
-INSERT INTO [dbo].[InventoryCount] ([Id], [Location], [DateCounted]) VALUES (7, 4, N'2019-11-28 00:00:00')
-INSERT INTO [dbo].[InventoryCount] ([Id], [Location], [DateCounted]) VALUES (8, 2, N'2019-11-29 00:00:00')
+INSERT INTO [dbo].[InventoryCount] ([Id], [Location], [DateCounted]) VALUES (2, 1, N'2018-11-25 00:00:00')
+INSERT INTO [dbo].[InventoryCount] ([Id], [Location], [DateCounted]) VALUES (3, 2, N'2018-11-27 00:00:00')
+INSERT INTO [dbo].[InventoryCount] ([Id], [Location], [DateCounted]) VALUES (4, 1, N'2018-11-28 00:00:00')
+INSERT INTO [dbo].[InventoryCount] ([Id], [Location], [DateCounted]) VALUES (7, 4, N'2018-11-28 00:00:00')
+INSERT INTO [dbo].[InventoryCount] ([Id], [Location], [DateCounted]) VALUES (8, 2, N'2018-11-29 00:00:00')
 SET IDENTITY_INSERT [dbo].[InventoryCount] OFF
 
 SET IDENTITY_INSERT [dbo].[InventoryCountProduct] ON
