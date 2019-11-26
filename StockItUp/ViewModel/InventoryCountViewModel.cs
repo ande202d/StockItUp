@@ -24,7 +24,7 @@ namespace StockItUp.ViewModel
         private Catalog<StoreProduct> _storeProductCatalog;
         private Catalog<InventoryCountProduct> _inventoryCountProductCatalog;
         private Catalog<InventoryCount> _inventoryCountCatalog;
-
+        private Location _selectedLocation;
 
         #endregion
 
@@ -78,18 +78,18 @@ namespace StockItUp.ViewModel
             }
         }
 
-        public List<Product> listForProducts
+        public List<InventoryCountPage> listForProducts
         {
             get
             {
-                List<Product> nlist = new List<Product>();
+                List<InventoryCountPage> nlist = new List<InventoryCountPage>();
                 foreach (var sp in StoreProductCatalog)
                 {
                     foreach (var product in ProductCatalog)
                     {
                         if (sp.Product == product.Id)
                         {
-                            nlist.Add(product);
+                            nlist.Add(new InventoryCountPage(product));
                         }
                     }
                 }
@@ -98,14 +98,32 @@ namespace StockItUp.ViewModel
             }
         }
 
+        public Location SelectedLocation
+        {
+            get { return _selectedLocation; }
+            set { _selectedLocation = value; }
+        }
+
         #endregion
 
         #region Methods
 
         public async void CreateInventoryCountMethod()
         {
+            if (SelectedLocation != null)
+            {
+                InventoryCount ic = new InventoryCount(SelectedLocation);
+                ic.Id = 500;
+               await _inventoryCountCatalog.Create(ic);
+               foreach (var i in listForProducts)
+               {
+                   InventoryCountProduct icp = new InventoryCountProduct(ic.Id, i.Product.Id, i.Amount);
+                   await Catalog<InventoryCountProduct>.Instance.Create(icp);
+               }
+               
+            }
             
-            
+
 
         }
 

@@ -127,6 +127,7 @@
     <Compile Include="Model\InventoryCount.cs" />
     <Compile Include="Model\InventoryCountHistory.cs" />
     <Compile Include="Model\InventoryCountHistoryData.cs" />
+    <Compile Include="Model\InventoryCountPage.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\OrderHistory.cs" />

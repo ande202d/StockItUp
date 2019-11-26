@@ -94,7 +94,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1" VerticalAlignment="Top">
                 <TextBlock Text="Lav optælling" TextAlignment="Center" FontSize="30"></TextBlock>
-                <ComboBox HorizontalAlignment="Center" ItemsSource="{Binding LocationCatalog}">
+                <ComboBox HorizontalAlignment="Center" SelectedItem="{Binding SelectedLocation, Mode=TwoWay}" ItemsSource="{Binding LocationCatalog}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                         <TextBlock Text="{Binding Name}"></TextBlock>
@@ -106,7 +106,7 @@
                 <TextBlock Text="Antal" Width="210" FontSize="20"></TextBlock>
             </StackPanel>
             <AppBarButton Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Padding="0,0,0,0" Content="Gem" Style="{StaticResource Button}" Command="{Binding CreateInventoryCountCommand}" CommandParameter="{Binding listForProducts[Product]}"></AppBarButton>
-            <ListView Grid.Column="1" Margin="0,110,0,0" Padding="0" Height="400" ItemsSource="{Binding listForProducts}">
+            <ListView Grid.Column="1" Margin="0,110,0,0" Padding="0" Height="400" ItemsSource="{Binding listForProducts}" SelectionMode="Extended">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -116,8 +116,8 @@
                             </Grid.ColumnDefinitions>
 
 
-                            <TextBlock  Grid.Column="0" Text="{Binding Name}" ></TextBlock>
-                            <TextBox Grid.Column="1" ></TextBox>
+                            <TextBlock  Grid.Column="0" Text="{Binding Product.Name}" ></TextBlock>
+                            <TextBox Grid.Column="1" Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
 
 
 
