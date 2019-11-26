@@ -138,7 +138,7 @@ namespace StockItUp.ViewModel
         #region Methods
 
         //adds a product with the values given in the view to the database using the catalog
-        private void CreateProductMethod()
+        private async void CreateProductMethod()
         {
             if (SelectedProduct!=null && SelectedProduct.Name != "" && SelectedProduct.AmountPerBox != 0)
             {
@@ -146,25 +146,25 @@ namespace StockItUp.ViewModel
                 {
                    SelectedProduct.Supplier = SelectedSupplierForCreationOfProduct.Id; 
                 }
-                _productCatalog.Create(SelectedProduct);
+                await _productCatalog.Create(SelectedProduct);
                 OnPropertyChanged(nameof(ProductCatalog));
             }
             SelectedSupplierForCreationOfProduct = null;
         }
 
         //adds a supplier with the values given in the view to the database using the catalog
-        private void CreateSupplierMethod()
+        private async void CreateSupplierMethod()
         {
-                _supplierCatalog.Create(SelectedSupplier);
+                await _supplierCatalog.Create(SelectedSupplier);
                 OnPropertyChanged(nameof(SupplierCatalog));
         }
 
         //delete the selected product from the database
-        private void DeleteProductMethod()
+        private async void DeleteProductMethod()
         {
             if (SelectedProduct != null)
             {
-                _productCatalog.Delete(SelectedProduct.Id);
+                await _productCatalog.Delete(SelectedProduct.Id);
                 OnPropertyChanged(nameof(ProductCatalog));
                 MakeDefaultProduct();
             }
@@ -173,17 +173,25 @@ namespace StockItUp.ViewModel
         }
 
         //delete the selected supplier from the database
-        private void DeleteSupplierMethod()
+        private async void DeleteSupplierMethod()
         {
             if (SelectedSupplier!=null)
             {
-                _supplierCatalog.Delete(SelectedSupplier.Id);
-            OnPropertyChanged(nameof(SupplierCatalog));
+                foreach (var product in ProductCatalog)
+                {
+                    if (product.Supplier==SelectedSupplier.Id)
+                    {
+                        await _productCatalog.Delete(product.Id);
+                    }
+                }
+                await _supplierCatalog.Delete(SelectedSupplier.Id);
+                OnPropertyChanged(nameof(SupplierCatalog));
+                OnPropertyChanged(nameof(ProductCatalog));
             }
         }
 
         //update a product in the database with new values from the view
-        private void UpdateProductMethod()
+        private async void UpdateProductMethod()
         {
             if (SelectedProduct!=null)
             {
@@ -191,7 +199,7 @@ namespace StockItUp.ViewModel
                 {
                     SelectedProduct.Supplier = null;
                 }
-                    _productCatalog.Update(SelectedProduct.Id,SelectedProduct);
+                    await _productCatalog.Update(SelectedProduct.Id,SelectedProduct);
                     OnPropertyChanged(nameof(ProductCatalog));
                     MakeDefaultProduct();                    
             }
@@ -200,9 +208,9 @@ namespace StockItUp.ViewModel
         }
 
         //update a supplier in the database with new values from the view
-        private void UpdateSupplierMethod()
+        private async void UpdateSupplierMethod()
         {
-            _supplierCatalog.Update(SelectedSupplier.Id, SelectedSupplier);
+            await _supplierCatalog.Update(SelectedSupplier.Id, SelectedSupplier);
             OnPropertyChanged(nameof(SupplierCatalog));
             OnPropertyChanged(nameof(ProductCatalog));
         }
