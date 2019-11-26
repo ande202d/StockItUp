@@ -18,9 +18,11 @@ namespace StockItUp.Model
         public InventoryCount(Location location)
         {
             _id = _idCounter;
+            Id = _idCounter;
             _idCounter++;
             _dateTime = DateTime.Now;
             _location = location;
+            Location = location.Id;
         }
 
         public InventoryCount()

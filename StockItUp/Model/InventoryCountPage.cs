@@ -10,12 +10,11 @@ namespace StockItUp.Model
     {
 
         private Product _product;
-        private int _amount;
+        private int _amount = 0;
 
         public InventoryCountPage(Product product)
         {
             _product = product;
-            _amount = 0;
         }
 
         public Product Product

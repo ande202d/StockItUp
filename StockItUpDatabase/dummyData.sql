@@ -15,9 +15,9 @@ SET IDENTITY_INSERT [dbo].[Store] OFF
 SET IDENTITY_INSERT [dbo].[Location] ON
 INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (1, N'loc1', 1)
 INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (2, N'loc2', 1)
-INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (4, N'loc3', 1)
-INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (5, N'loc4', 1)
-INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (6, N'loc5', 1)
+INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (3, N'loc3', 1)
+INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (4, N'loc4', 1)
+INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (5, N'loc5', 1)
 SET IDENTITY_INSERT [dbo].[Location] OFF
 
 SET IDENTITY_INSERT [dbo].[Supplier] ON

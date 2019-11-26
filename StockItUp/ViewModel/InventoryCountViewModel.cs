@@ -26,6 +26,8 @@ namespace StockItUp.ViewModel
         private Catalog<InventoryCount> _inventoryCountCatalog;
         private Location _selectedLocation;
 
+        private List<InventoryCountPage> _listForProducts;
+
         #endregion
 
         #region Constructor
@@ -94,9 +96,11 @@ namespace StockItUp.ViewModel
                     }
                 }
 
+                _listForProducts = nlist;
                 return nlist;
             }
         }
+
 
         public Location SelectedLocation
         {
@@ -113,13 +117,20 @@ namespace StockItUp.ViewModel
             if (SelectedLocation != null)
             {
                 InventoryCount ic = new InventoryCount(SelectedLocation);
-                ic.Id = 500;
-               await _inventoryCountCatalog.Create(ic);
-               foreach (var i in listForProducts)
-               {
-                   InventoryCountProduct icp = new InventoryCountProduct(ic.Id, i.Product.Id, i.Amount);
-                   await Catalog<InventoryCountProduct>.Instance.Create(icp);
-               }
+                await _inventoryCountCatalog.Create(ic);
+
+                InventoryCount ic2 = Catalog<InventoryCount>.Instance.GetList.FindLast(x =>
+                    x.Location == SelectedLocation.Id &&
+                    x.DateCounted > DateTime.Now.Subtract(TimeSpan.FromSeconds(5)));
+
+                foreach (var i in _listForProducts)
+                {
+                    if (i.Amount > 0)
+                    {
+                        InventoryCountProduct icp = new InventoryCountProduct(ic2.Id, i.Product.Id, i.Amount);
+                        await Catalog<InventoryCountProduct>.Instance.Create(icp);
+                    }
+                }
                
             }
             
