@@ -177,13 +177,13 @@ namespace StockItUp.ViewModel
         {
             if (SelectedSupplier!=null)
             {
-                foreach (var product in ProductCatalog)
-                {
-                    if (product.Supplier==SelectedSupplier.Id)
-                    {
-                        await _productCatalog.Delete(product.Id);
-                    }
-                }
+                //foreach (var product in ProductCatalog)
+                //{
+                //    if (product.Supplier==SelectedSupplier.Id)
+                //    {
+                //        await _productCatalog.Delete(product.Id);
+                //    }
+                //}
                 await _supplierCatalog.Delete(SelectedSupplier.Id);
                 OnPropertyChanged(nameof(SupplierCatalog));
                 OnPropertyChanged(nameof(ProductCatalog));
