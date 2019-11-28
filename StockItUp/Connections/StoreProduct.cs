@@ -19,8 +19,8 @@ namespace StockItUp.Connections
             _storeId = storeId;
             _productId = productId;
             _amount = amount;
-            _id = _idCounter;
-            _idCounter++;
+            //_id = _idCounter;
+            //_idCounter++;
         }
 
         public StoreProduct()

@@ -25,7 +25,7 @@ namespace StockItUp.ViewModel
         private Location _selectedLocation = new Location(Catalog<Store>.Instance.Read(1).Result, default(string));
         private Store _selectedLocationStore;
         private StoragePageProduct _selectedProduct;
-        private string _filter;
+        private string _filter="";
 
         #endregion
 
@@ -134,8 +134,23 @@ namespace StockItUp.ViewModel
                 }
 
                 #endregion
-                
-                ObservableCollection<StoragePageProduct> collection = new ObservableCollection<StoragePageProduct>(listToReturn);
+
+                ObservableCollection<StoragePageProduct> collection= new ObservableCollection<StoragePageProduct>();
+                if (Filter=="")
+                {
+                    collection = new ObservableCollection<StoragePageProduct>(listToReturn);
+                }
+                else
+                {
+                    foreach (var v in listToReturn)
+                    {
+                        if (v.MyProduct.Name.ToLower().Contains(Filter))
+                        {
+                            collection.Add(v);
+                        }
+                    }
+                }
+                 
                 return collection;
             }
         }
@@ -231,17 +246,18 @@ namespace StockItUp.ViewModel
             {
                 int storeId = 1;
                 int id = SelectedProduct.ProductId;
-                StoreProduct tempStoreProduct = new StoreProduct(storeId, id, SelectedProduct.Wanted);
-                int key = Catalog<StoreProduct>.Instance.GetList.Find(x =>
-                    x.Store == storeId && x.Product == id).Id;
-                await Catalog<StoreProduct>.Instance.Update(key, tempStoreProduct);
-
+                    StoreProduct tempStoreProduct = new StoreProduct(storeId, id, SelectedProduct.Wanted);
+                    int key = Catalog<StoreProduct>.Instance.GetList.Find(x =>
+                        x.Store == storeId && x.Product == id).Id;
+                    await Catalog<StoreProduct>.Instance.Update(key, tempStoreProduct);
+               
                 OnPropertyChanged(nameof(ProductCatalog));
             }
+            
         }
 
 
-        //This shit returns a list of inventoryCounts, only one on each location,
+        //returns a list of inventoryCounts, only one on each location,
         //and it is only the newest one from that location
         //furthermore, it is only locations that is located in the current store
         //and it is only saved if the inventoryCount acturaly counted any instances of that specific product
