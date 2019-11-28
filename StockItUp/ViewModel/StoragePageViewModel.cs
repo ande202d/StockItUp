@@ -22,7 +22,7 @@ namespace StockItUp.ViewModel
 
         private Catalog<Location> _locationCatalog;
         private Catalog<Store> _storeCatalog;
-        private Location _selectedLocation;
+        private Location _selectedLocation = new Location(Catalog<Store>.Instance.Read(1).Result, default(string));
         private Store _selectedLocationStore;
         private StoragePageProduct _selectedProduct;
         private string _filter;
@@ -197,27 +197,26 @@ namespace StockItUp.ViewModel
 
         #region Methods
 
-        private void CreateLocationMethod()
+        private async void CreateLocationMethod()
         {
-            //Store s1 = Catalog<Store>.Instance.Read(0).Result;
-            //string s = SelectedLocation.Name;
-           //_locationCatalog.Create(SelectedLocation);
-           //OnPropertyChanged(nameof(LocationCatalog));
+           SelectedLocation.Store = SelectedLocation.MyStore.Id;
+           await _locationCatalog.Create(SelectedLocation);
+           OnPropertyChanged(nameof(LocationCatalog));
         }
 
-        private void DeleteLocationMethod()
+        private async void DeleteLocationMethod()
         {
             if(SelectedLocation != null)
             { 
-                _locationCatalog.Delete(SelectedLocation.Id);
+                await _locationCatalog.Delete(SelectedLocation.Id);
                 OnPropertyChanged(nameof(LocationCatalog));
             }
         }
 
 
-        private void UpdateLocationMethod()
+        private async void UpdateLocationMethod()
         {
-            _locationCatalog.Update(SelectedLocation.Id, SelectedLocation);
+            await _locationCatalog.Update(SelectedLocation.Id, SelectedLocation);
             OnPropertyChanged(nameof(LocationCatalog));
         }
 
