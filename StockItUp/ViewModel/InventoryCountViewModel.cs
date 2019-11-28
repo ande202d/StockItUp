@@ -185,6 +185,8 @@ namespace StockItUp.ViewModel
                 await Catalog<InventoryCountHistory>.Instance.Create(ich);
 
                 //We go though all the data provided by the user and checking its counted to something above 0
+                //this bool is for checking that data is inserted relative to the inventoryCount
+                bool gotData = false;
                 foreach (var i in _listForProducts)
                 {
                     if (i.Amount > 0)
@@ -198,13 +200,19 @@ namespace StockItUp.ViewModel
                         InventoryCountHistoryData ichd = new InventoryCountHistoryData(ich.Id, i.Product.Name, icp.Amount);
                         //InventoryCountHistoryData ichd = new InventoryCountHistoryData(ic2.Id, i.Product.Name, i.Amount);
                         await Catalog<InventoryCountHistoryData>.Instance.Create(ichd);
+
+                        gotData = true;
                     }
+                }
+
+                //if no inventoryCountProduct / inventoryCountHistoryData is provided, both the inventoryCount and the record of it is deleted
+                if (!gotData)
+                {
+                    await Catalog<InventoryCount>.Instance.Delete(ic2.Id);
+                    await Catalog<InventoryCountHistory>.Instance.Delete(ich.Id);
                 }
                
             }
-            
-
-
         }
 
 
