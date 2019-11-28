@@ -42,6 +42,7 @@ namespace StockItUp.ViewModel
             _inventoryCountProductCatalog = Catalog<InventoryCountProduct>.Instance;
             _inventoryCountCatalog = Catalog<InventoryCount>.Instance;
             CreateInventoryCountCommand = new RelayCommand(CreateInventoryCountMethod);
+            SelectedInventoryCountHistory = new InventoryCountHistory(new InventoryCount(new Location(Catalog<Store>.Instance.Read(1).Result, default(string))));
         }
 
         #endregion
@@ -125,7 +126,9 @@ namespace StockItUp.ViewModel
         public InventoryCountHistory SelectedInventoryCountHistory
         {
             get { return _selectedInventoryCountHistory; }
-            set { _selectedInventoryCountHistory = value; }
+            set { _selectedInventoryCountHistory = value; OnPropertyChanged();
+                OnPropertyChanged(nameof(InventoryCountHistoriesCatalogData));
+            }
         }
 
         //The list of the data from the old inventoryCount that is selected
@@ -134,6 +137,7 @@ namespace StockItUp.ViewModel
             get
             {
                 List<InventoryCountHistoryData> listToReturn = new List<InventoryCountHistoryData>();
+                //SelectedInventoryCountHistory.Id = 1002;
 
                 foreach (var i in Catalog<InventoryCountHistoryData>.Instance.GetList)
                 {
@@ -158,25 +162,25 @@ namespace StockItUp.ViewModel
             //we make sure that we have selected a location to count
             if (SelectedLocation != null)
             {
-                //now we make a new inventoryCount from that location and we then put it in the database
+                //now we make a new inventoryCount from that location and we then put it in the database FINT
                 InventoryCount ic = new InventoryCount(SelectedLocation);
                 await _inventoryCountCatalog.Create(ic);
 
-                //now we take that IC out again, to make sure we are working with the right id's
+                //now we take that IC out again, to make sure we are working with the right id's FINT
                 InventoryCount ic2 = Catalog<InventoryCount>.Instance.GetList.FindLast(x =>
                     x.Location == SelectedLocation.Id &&
                     x.DateCounted >= DateTime.Now.Subtract(TimeSpan.FromSeconds(10)));
 
                 #region Test Area
-                //Hvis den crasher her, så sig det lige, ved godt hvad der går galt, ved bare ikke hvorfor :/
-                int q1 = ic2.Id;
-                int q2 = ic2.Location;
-                Location q3 = ic2.MyLocation;
-                DateTime q4 = ic2.DateCounted;
+                ////Hvis den crasher her, så sig det lige, ved godt hvad der går galt, ved bare ikke hvorfor :/
+                //int q1 = ic2.Id;
+                //int q2 = ic2.Location;
+                //Location q3 = ic2.MyLocation;
+                //DateTime q4 = ic2.DateCounted;
 
                 #endregion
 
-                //here we freeze that inventoryCount in our history class
+                //here we freeze that inventoryCount in our history class FINT
                 InventoryCountHistory ich = new InventoryCountHistory(ic2);
                 await Catalog<InventoryCountHistory>.Instance.Create(ich);
 
@@ -192,6 +196,7 @@ namespace StockItUp.ViewModel
 
                         //we then make a frozen copy of that inventoryCount "data" and throw it in the history database
                         InventoryCountHistoryData ichd = new InventoryCountHistoryData(ich.Id, i.Product.Name, icp.Amount);
+                        //InventoryCountHistoryData ichd = new InventoryCountHistoryData(ic2.Id, i.Product.Name, i.Amount);
                         await Catalog<InventoryCountHistoryData>.Instance.Create(ichd);
                     }
                 }

@@ -132,18 +132,20 @@
                 <TextBlock Text="Optællings historik" TextAlignment="Center" Width="525" FontSize="30"></TextBlock>
             </StackPanel>
 
-            <ListView Grid.Column="0" Margin="30,60,0,0" Padding="0" Width="500" HorizontalAlignment="Left" >
+            <ListView Grid.Column="0" Margin="30,60,0,0" Padding="0" Width="500" HorizontalAlignment="Left" ItemsSource="{Binding InventoryCountHistoriesCatalog}" SelectedItem="{Binding SelectedInventoryCountHistory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="210"></ColumnDefinition>
-                                <ColumnDefinition Width="210"></ColumnDefinition>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
+                                <ColumnDefinition Width="110"></ColumnDefinition>
+                                <ColumnDefinition Width="130"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
 
-                            <TextBlock   Grid.Column="0"  ></TextBlock>
-                            <TextBox Grid.Column="1"></TextBox>
+                            <TextBlock   Grid.Column="0" Text="{Binding Id}" ></TextBlock>
+                            <TextBlock Grid.Column="1" Text="{Binding Location}"></TextBlock>
+                            <TextBlock Grid.Column="2" Text="{Binding CountDate}"></TextBlock>
 
 
 
@@ -158,6 +160,29 @@
                 <TextBlock Text="Vare navn" FontSize="20" Width="250"></TextBlock>
                 <TextBlock Text="Antal" FontSize="20" Width="250"></TextBlock>
             </StackPanel>
+
+            <ListView Grid.Column="0" Margin="0,60,0,0" Padding="0" Width="500" HorizontalAlignment="Right" ItemsSource="{Binding InventoryCountHistoriesCatalogData}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="210"></ColumnDefinition>
+                                <ColumnDefinition Width="210"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+
+                            <TextBlock   Grid.Column="0" Text="{Binding Product, UpdateSourceTrigger=PropertyChanged}" ></TextBlock>
+                            <TextBlock Grid.Column="1" Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+
+
+
+                        </Grid>
+
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
         </Grid>
     </Grid>
 </Page>
