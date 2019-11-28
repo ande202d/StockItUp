@@ -38,8 +38,10 @@ namespace StockItUp.ViewModel
             CreateLocationCommand = new RelayCommand(CreateLocationMethod);
             DeleteLocationCommand = new RelayCommand(DeleteLocationMethod);
             UpdateLocationCommand = new RelayCommand(UpdateLocationMethod);
-            Product TempProduct = new Product();
-            SelectedProduct = new StoragePageProduct(TempProduct,default(int), default(int), default(int));
+            ChangeWantedAmountCommand = new RelayCommand(ChangeWantedAmountMethod);
+            //Product tempProduct = new Product();
+            //SelectedProduct = new StoragePageProduct(tempProduct.Id, default(int), default(int), default(int));
+
         }
 
         #endregion
@@ -48,7 +50,7 @@ namespace StockItUp.ViewModel
         public ICommand CreateLocationCommand { get; set; }
         public ICommand DeleteLocationCommand { get; set; }
         public ICommand UpdateLocationCommand { get; set; }
-
+        public ICommand ChangeWantedAmountCommand { get; set; }
 
 
         #endregion
@@ -105,9 +107,9 @@ namespace StockItUp.ViewModel
 
                         foreach (var sp in Catalog<StoreProduct>.Instance.GetList)
                         {
-                            List<InventoryCount> newestIcOnEachLocation = GetNewestIc(sp.Id);
+                            //List<InventoryCount> newestIcOnEachLocation = GetNewestIc(sp.Id);
                             List<int> newestIcId = getNewstIcIds(sp.Id);
-                            Product p;
+                            int p;
                             int t = 0;
                             int w;
                             int m;
@@ -122,7 +124,7 @@ namespace StockItUp.ViewModel
                                     }
                                 }
 
-                                p = Catalog<Product>.Instance.Read(sp.Product).Result;
+                                p = Catalog<Product>.Instance.Read(sp.Product).Result.Id;
                                 w = sp.Amount;
                                 m = w - t;
                                 listToReturn.Add(new StoragePageProduct(p,t,w,m));
@@ -154,12 +156,15 @@ namespace StockItUp.ViewModel
                 {
                     List<InventoryCount> ics = GetNewestIc(icp.Product);
                     List<int> newestIcId = getNewstIcIds(icp.Product);
-                    if (newestIcId.Contains(icp.InventoryCount) && icp.Product == SelectedProduct.MyProduct.Id)
+                    if (SelectedProduct!=null)
                     {
-                        InventoryCount ic = ics.Find(x => x.Id == icp.InventoryCount);
-
-                        listToReturn.Add(new StoragePageProductData(ic.MyLocation.Name, ic.DateCounted, icp.Amount));
+                        if (newestIcId.Contains(icp.InventoryCount) && icp.Product == SelectedProduct.ProductId)
+                            {
+                                InventoryCount ic = ics.Find(x => x.Id == icp.InventoryCount);
+                                listToReturn.Add(new StoragePageProductData(ic.MyLocation.Name, ic.DateCounted, icp.Amount));
+                            }
                     }
+                    
                 }
                 
                 ObservableCollection<StoragePageProductData> collection = new ObservableCollection<StoragePageProductData>(listToReturn);
@@ -219,6 +224,22 @@ namespace StockItUp.ViewModel
             await _locationCatalog.Update(SelectedLocation.Id, SelectedLocation);
             OnPropertyChanged(nameof(LocationCatalog));
         }
+
+        private async void ChangeWantedAmountMethod()
+        {
+            if (SelectedProduct!=null)
+            {
+                int storeId = 1;
+                int id = SelectedProduct.ProductId;
+                StoreProduct tempStoreProduct = new StoreProduct(storeId, id, SelectedProduct.Wanted);
+                int key = Catalog<StoreProduct>.Instance.GetList.Find(x =>
+                    x.Store == storeId && x.Product == id).Id;
+                await Catalog<StoreProduct>.Instance.Update(key, tempStoreProduct);
+
+                OnPropertyChanged(nameof(ProductCatalog));
+            }
+        }
+
 
         //This shit returns a list of inventoryCounts, only one on each location,
         //and it is only the newest one from that location

@@ -104,15 +104,20 @@
             </StackPanel>-->
 
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
-                <TextBlock Text="Navn på vare" FontSize="30"></TextBlock>
+                <TextBlock Text="{Binding SelectedProduct.MyProduct.Name}"  FontSize="30"></TextBlock>
             </StackPanel>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,40,0,0" >
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,40,0,0">
+                <TextBlock Text="Ønsket lager: " Margin="10,0,0,0"></TextBlock>
+                <TextBox Margin="20,0,0,0" Text="{Binding SelectedProduct.Wanted, Mode=TwoWay}"></TextBox>
+                <Button Margin="10,0,0,0" Content="Gem" Background="#d0662f" Foreground="GhostWhite" Command="{Binding ChangeWantedAmountCommand}"></Button>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,80,0,0" >
                 <TextBlock Text="Lager navn" Margin="10,0,0,0"  Width="140"></TextBlock>
                 <TextBlock Text="Sidst Optalt"  Width="140"></TextBlock>
                 <TextBlock Text="Antal"  Width="120"></TextBlock>
             </StackPanel>
 
-            <ListView Grid.Column="1" ItemsSource="{Binding ProductCatalogData}" Margin="0,60,0,0" Padding="0" x:Name ="placeringListView">
+            <ListView Grid.Column="1" ItemsSource="{Binding ProductCatalogData}" Margin="0,100,0,0" Padding="0" x:Name ="placeringListView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -189,7 +194,7 @@
                                 <TextBlock   Grid.Column="1" Text="{Binding MyStore.Name}" ></TextBlock>
                                 <TextBlock  Grid.Column="2" Text="{Binding Id}" ></TextBlock>
                                 <TextBlock Grid.Column="3"  Text="PIK"></TextBlock>-->
-                                <TextBlock   Grid.Column="0" Text="{Binding Name}" ></TextBlock>
+                                <TextBlock   Grid.Column="0" Text="{Binding MyProduct.Name}" ></TextBlock>
                                 <TextBlock   Grid.Column="1" Text="{Binding Total}" ></TextBlock>
                                 <TextBlock  Grid.Column="2" Text="{Binding Wanted}" ></TextBlock>
                                 <TextBlock Grid.Column="3"  Text="{Binding Missing}"></TextBlock>

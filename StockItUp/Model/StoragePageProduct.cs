@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StockItUp.Persistency;
 
 namespace StockItUp.Model
 {
@@ -13,23 +14,34 @@ namespace StockItUp.Model
         private int _wanted;
         private int _missing;
 
-        public StoragePageProduct(Product product, int total, int wanted, int missing)
+        public StoragePageProduct(int product, int total, int wanted, int missing)
         {
-            _Product = product;
+            //_Product = product;
+            ProductId = product;
             _total = total;
             _wanted = wanted;
             _missing = missing;
         }
 
 
-        public string Name
-        {
-            get { return _Product.Name; }
-        }
+        //public string Name
+        //{
+        //    get
+        //    {
+        //        if (ProductId!=0)
+        //        {
+        //            return MyProduct.Name;
+        //        }
+
+        //        return "";
+        //    }
+        //}
+
+        public int ProductId { get; }
 
         public Product MyProduct
         {
-            get { return _Product; }
+            get { return Catalog<Product>.Instance.Read(ProductId).Result; ; }
             set { _Product = value; }
         }
 
