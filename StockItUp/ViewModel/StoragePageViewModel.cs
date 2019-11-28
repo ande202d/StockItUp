@@ -107,8 +107,8 @@ namespace StockItUp.ViewModel
 
                         foreach (var sp in Catalog<StoreProduct>.Instance.GetList)
                         {
-                            //List<InventoryCount> newestIcOnEachLocation = GetNewestIc(sp.Id);
-                            List<int> newestIcId = getNewstIcIds(sp.Id);
+                            //List<InventoryCount> newestIcOnEachLocation = GetNewestIc(sp.Product);
+                            List<int> newestIcId = getNewstIcIds(sp.Product);
                             int p;
                             int t = 0;
                             int w;
