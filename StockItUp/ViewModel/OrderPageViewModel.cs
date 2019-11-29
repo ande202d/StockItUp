@@ -18,6 +18,7 @@ namespace StockItUp.ViewModel
 
         #region Instance field
 
+        private List<OrderPage> _listOfOrders;
         
         #endregion
 
@@ -78,6 +79,8 @@ namespace StockItUp.ViewModel
                         }
                     }  
                 }
+
+                _listOfOrders = listToReturn;
                 ObservableCollection<OrderPage> collection = new ObservableCollection<OrderPage>(listToReturn);
                 return collection;
             }
@@ -87,7 +90,13 @@ namespace StockItUp.ViewModel
 
         #region Methods
 
-        
+        public async void CreateOrderMethod()
+        {
+            // _listOfOrders giver listen af orders og de felter fra CreateOrderCatalog som vi skal bruge for at putte den information
+            // ind i vores database
+            // Selected Order skal laves
+
+        }
 
         #endregion
 
