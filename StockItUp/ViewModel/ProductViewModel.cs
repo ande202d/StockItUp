@@ -10,6 +10,7 @@ using System.Windows.Input;
 using Windows.UI.Xaml.Data;
 using RVG.Common;
 using StockItUp.Annotations;
+using StockItUp.Connections;
 using StockItUp.Model;
 using StockItUp.Persistency;
 
@@ -40,6 +41,7 @@ namespace StockItUp.ViewModel
             DeleteSupplierCommand = new RelayCommand(DeleteSupplierMethod);
             UpdateProductCommand = new RelayCommand(UpdateProductMethod);
             UpdateSupplierCommand = new RelayCommand(UpdateSupplierMethod);
+            AddToWantedListCommand = new RelayCommand(AddToWantedListMethod);
             MakeDefaultProduct();
         }
 
@@ -50,7 +52,7 @@ namespace StockItUp.ViewModel
         public ICommand DeleteSupplierCommand { get; set; }
         public ICommand UpdateProductCommand { get; set; }
         public ICommand UpdateSupplierCommand { get; set; }
-
+        public ICommand AddToWantedListCommand { get; set; }
 
 
         #endregion
@@ -131,6 +133,8 @@ namespace StockItUp.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public int WantedAmount { get; set; }
 
 
         #endregion
@@ -213,6 +217,28 @@ namespace StockItUp.ViewModel
             await _supplierCatalog.Update(SelectedSupplier.Id, SelectedSupplier);
             OnPropertyChanged(nameof(SupplierCatalog));
             OnPropertyChanged(nameof(ProductCatalog));
+        }
+
+        private async void AddToWantedListMethod()
+        {
+            int storeId = 1;
+            bool isOnList = false;
+            foreach (var storeProduct in Catalog<StoreProduct>.Instance.GetList)
+            {
+                if (storeProduct.Product==SelectedProduct.Id&&storeProduct.Store==storeId)
+                {
+                    isOnList = true;
+                }
+            }
+
+            if (!isOnList)
+            {
+                int productId = SelectedProduct.Id;
+                int wantedAmount = WantedAmount;
+                StoreProduct spToAdd = new StoreProduct(storeId,productId,wantedAmount);
+                await Catalog<StoreProduct>.Instance.Create(spToAdd);
+            }
+            
         }
 
         //changes the SelectedProduct to default values

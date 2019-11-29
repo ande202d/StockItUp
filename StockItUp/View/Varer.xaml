@@ -136,11 +136,18 @@
                     <TextBlock Width="250"  Text ="Varer per kasse" FontSize="20"></TextBlock>
                     <TextBlock Width="250"  Text ="Leverandør" FontSize="20"></TextBlock>
                 </StackPanel>
-                <StackPanel VerticalAlignment="Bottom" Margin="0,5,0,20">
+                <StackPanel VerticalAlignment="Bottom" Margin="0,5,0,20" Orientation="Vertical">
                     <TextBox Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="søg efter varer" ></TextBox>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <TextBlock Text="tilføj"></TextBlock>
+                        <TextBlock Text="{Binding SelectedProduct.Name}" Margin="5,0,5,0"></TextBlock>
+                        <TextBlock Text="til ønsket lager"></TextBlock>
+                        <TextBox Text="{Binding WantedAmount, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        <Button Content="tilføj" Background="#d0662f" Foreground="GhostWhite" Command="{Binding AddToWantedListCommand}" Margin="5,0,0,0"></Button>
+                    </StackPanel>
                 </StackPanel>
                 <StackPanel Height="600" VerticalAlignment="Top">
-                    <ScrollViewer Height="600">
+                    <ScrollViewer Height="550">
                     <ListView Margin="0,30,0,0" Padding="0" ItemsSource="{Binding ProductCatalog}" SelectedValue="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
