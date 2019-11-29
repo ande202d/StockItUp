@@ -42,7 +42,6 @@ namespace StockItUp.ViewModel
             _inventoryCountProductCatalog = Catalog<InventoryCountProduct>.Instance;
             _inventoryCountCatalog = Catalog<InventoryCount>.Instance;
             CreateInventoryCountCommand = new RelayCommand(CreateInventoryCountMethod);
-            SelectedInventoryCountHistory = new InventoryCountHistory(new InventoryCount(new Location(Catalog<Store>.Instance.Read(1).Result, default(string))));
         }
 
         #endregion
@@ -125,7 +124,11 @@ namespace StockItUp.ViewModel
         //To select a different old inventoryCount to show data from
         public InventoryCountHistory SelectedInventoryCountHistory
         {
-            get { return _selectedInventoryCountHistory; }
+            get
+            {
+                if (_selectedInventoryCountHistory == null) return new InventoryCountHistory();
+                return _selectedInventoryCountHistory;
+            }
             set { _selectedInventoryCountHistory = value; OnPropertyChanged();
                 OnPropertyChanged(nameof(InventoryCountHistoriesCatalogData));
             }
