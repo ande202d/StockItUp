@@ -132,6 +132,7 @@
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\OrderHistory.cs" />
     <Compile Include="Model\OrderHistoryData.cs" />
+    <Compile Include="Model\OrderPage.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\StoragePageProduct.cs" />
     <Compile Include="Model\StoragePageProductData.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Persistency\Catalog.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\InventoryCountViewModel.cs" />
+    <Compile Include="ViewModel\OrderPageViewModel.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="ViewModel\StoragePageViewModel.cs" />
     <Compile Include="View\Bestillinger.xaml.cs">
