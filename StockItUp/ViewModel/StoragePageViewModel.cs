@@ -256,17 +256,24 @@ namespace StockItUp.ViewModel
             {
                 int storeId = 1;
                 int id = SelectedProduct.ProductId;
-                    StoreProduct tempStoreProduct = new StoreProduct(storeId, id, SelectedProduct.Wanted);
-                    int key = Catalog<StoreProduct>.Instance.GetList.Find(x =>
-                        x.Store == storeId && x.Product == id).Id;
-                    await Catalog<StoreProduct>.Instance.Update(key, tempStoreProduct);
-               
+                int wanted = SelectedProduct.Wanted;
+                StoreProduct tempStoreProduct = new StoreProduct(storeId, id, wanted);
+                //    int key = Catalog<StoreProduct>.Instance.GetList.Find(x =>
+                //        x.Store == storeId && x.Product == id).Id;
+                //    await Catalog<StoreProduct>.Instance.Update(key, tempStoreProduct); 
+                // update doesnt work because of a badrequest(400), i cant fix i so we decided to just delete the old one and create a new one with the values given
+                int key = Catalog<StoreProduct>.Instance.GetList.Find(x =>
+                            x.Store == storeId && x.Product == id).Id;
+                await Catalog<StoreProduct>.Instance.Delete(key);
+                await Catalog<StoreProduct>.Instance.Create(tempStoreProduct);
+
+
                 OnPropertyChanged(nameof(ProductCatalog));
             }
             
         }
 
-        private List<InventoryCount> GetNewestIc(int productId)
+        private static List<InventoryCount> GetNewestIc(int productId)
         {
             //the purpose is tho get the newest inventoryCount from each location, but only if the specific product was actual counted
             List<InventoryCount> newestIcOnEachLocation = new List<InventoryCount>();
@@ -313,7 +320,7 @@ namespace StockItUp.ViewModel
             return newestIcOnEachLocation;
         }
 
-        private List<int> getNewstIcIds(int productId)
+        private static List<int> getNewstIcIds(int productId)
         {
             //this method just uses the GetNewestIc -method, and takes all the id's in a list and return it
             List<int> listToReturn = new List<int>();
