@@ -216,7 +216,7 @@ namespace StockItUp.ViewModel
                     await Catalog<InventoryCount>.Instance.Delete(ic2.Id);
                     await Catalog<InventoryCountHistory>.Instance.Delete(ich.Id);
                 }
-               
+               OnPropertyChanged(nameof(InventoryCountHistoriesCatalog));
             }
         }
 

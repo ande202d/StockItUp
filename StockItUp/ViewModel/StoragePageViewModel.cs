@@ -273,7 +273,7 @@ namespace StockItUp.ViewModel
             
         }
 
-        private static List<InventoryCount> GetNewestIc(int productId)
+        public static List<InventoryCount> GetNewestIc(int productId)
         {
             //the purpose is tho get the newest inventoryCount from each location, but only if the specific product was actual counted
             List<InventoryCount> newestIcOnEachLocation = new List<InventoryCount>();
@@ -320,7 +320,7 @@ namespace StockItUp.ViewModel
             return newestIcOnEachLocation;
         }
 
-        private static List<int> getNewstIcIds(int productId)
+        public static List<int> getNewstIcIds(int productId)
         {
             //this method just uses the GetNewestIc -method, and takes all the id's in a list and return it
             List<int> listToReturn = new List<int>();
