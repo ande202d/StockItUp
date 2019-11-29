@@ -198,6 +198,8 @@ namespace StockItUp.ViewModel
 
                         //we then make a frozen copy of that inventoryCount "data" and throw it in the history database
                         InventoryCountHistoryData ichd = new InventoryCountHistoryData(ich.Id, i.Product.Name, icp.Amount);
+                        ichd.Id = Catalog<InventoryCountProduct>.Instance.GetList.
+                            Find(x=> x.InventoryCount==ic2.Id && x.Product == icp.Product).Id;
                         //InventoryCountHistoryData ichd = new InventoryCountHistoryData(ic2.Id, i.Product.Name, i.Amount);
                         await Catalog<InventoryCountHistoryData>.Instance.Create(ichd);
 
