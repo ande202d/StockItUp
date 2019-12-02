@@ -1,5 +1,7 @@
 ﻿USE [StockItUpDB]
 GO
+delete from [dbo].[InventoryCountHistoryData];
+delete from [dbo].[InventoryCountHistory];
 delete from [dbo].[InventoryCountProduct];
 delete from [dbo].[InventoryCount];
 delete from [dbo].[StoreProduct];
