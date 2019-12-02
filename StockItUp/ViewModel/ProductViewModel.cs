@@ -82,7 +82,7 @@ namespace StockItUp.ViewModel
                 {
                     foreach (var v in _productCatalog.GetList)
                     {
-                        if (v.Name.ToLower().Contains(Filter))
+                        if (v.Name.ToLower().Contains(Filter.ToLower()))
                         {
                             collection.Add(v);
                         }
