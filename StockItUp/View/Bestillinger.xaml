@@ -91,26 +91,78 @@
                 <ColumnDefinition Width="2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" Orientation="Horizontal" BorderBrush="Black" BorderThickness="2,2,2,2">
-                <TextBlock Text="Bestillings Historik" FontSize="10" Width="200"></TextBlock>
+            <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+            <!--XXXXXXXXXX HERE WE MAKE THE ORDER HISTORY LISTVIEW + HEADER XXXXXXXXXX-->
+            <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" BorderBrush="Black" BorderThickness="2,2,2,2" 
+                        HorizontalAlignment="Center" VerticalAlignment="Top" Height="50" Margin="0,20,0,0">
+                <TextBlock Text="Bestillings Historik" FontSize="25" TextAlignment="Center"  Width="300"></TextBlock>
             </StackPanel>
-            <StackPanel>
-                <ListView Grid.Column="0" ItemsSource="{Binding OrderHistoryCatalog}">
+
+            <StackPanel Grid.Column="0">
+                <ListView ItemsSource="{Binding OrderHistoryCatalog}" Margin="0,90,0,0">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="{Binding Id}"></TextBlock>
                                 <TextBlock Grid.Column="0" Text="{Binding OrderedDate}"></TextBlock>
                             </Grid>
-
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
+
+            <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+            <!--XXXXXXXXXX HERE WE MAKE THE CREATE ORDER GUI XXXXXXXXXX-->
+            <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" BorderBrush="Black" BorderThickness="0,0,0,0"
+                        VerticalAlignment="Top" Height="50" Margin="0,20,0,0">
+
+                <TextBlock Text="Produkt" FontSize="15" TextAlignment="Left"           Width="200"></TextBlock>
+                <TextBlock Text="Leverandør" FontSize="15" TextAlignment="Left"        Width="200"></TextBlock>
+                <TextBlock Text="Whats in stock?" FontSize="15" TextAlignment="Center"   Width="150"></TextBlock>
+                <TextBlock Text="Mangler" FontSize="15" TextAlignment="Center"           Width="100"></TextBlock>
+                <TextBlock Text="Anbefalede kasser" FontSize="15" TextAlignment="Center" Width="150"></TextBlock>
+                <TextBlock Text="Bestilte kasser" FontSize="15" TextAlignment="Center"   Width="150"></TextBlock>
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <ListView ItemsSource="{Binding CreateOrderCatalog}" Margin="0,50,0,0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="{Binding Product.Name}"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding Supplier.Name}"></TextBlock>
+                                <TextBlock Grid.Column="2" TextAlignment="Center" Text="{Binding AmountInStorage}"></TextBlock>
+                                <TextBlock Grid.Column="3" TextAlignment="Center" Text="{Binding Missing}"></TextBlock>
+                                <TextBlock Grid.Column="4" TextAlignment="Center" Text="{Binding SuggestedAmount}"></TextBlock>
+                                <TextBox Grid.Column="5" TextAlignment="Center" Text="{Binding ActualAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+
+            <AppBarButton Grid.Column="1" Style="{StaticResource Button}" Content="Lav bestilling" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                          Margin="0,0,25,25"></AppBarButton>
 
         </Grid>
 
