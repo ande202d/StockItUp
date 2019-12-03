@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Xaml;
 using RVG.Common;
 using StockItUp.Annotations;
 using StockItUp.Connections;
@@ -22,7 +23,8 @@ namespace StockItUp.ViewModel
 
         private List<OrderPage> _listOfOrders;
         private OrderHistory _selectedOrderHistory;
-        
+        private Visibility _createVisibility = Visibility.Visible;
+        private Visibility _dataVisibility = Visibility.Collapsed;
         
         #endregion
 
@@ -112,7 +114,11 @@ namespace StockItUp.ViewModel
             set
             {
                 _selectedOrderHistory = value; OnPropertyChanged();
-                    OnPropertyChanged(nameof(OrderHistoryDataCatalog));
+                CreateVisibility = Visibility.Collapsed;
+                DataVisibility = Visibility.Visible;
+                OnPropertyChanged(nameof(CreateVisibility));
+                OnPropertyChanged(nameof(DataVisibility));
+                OnPropertyChanged(nameof(OrderHistoryDataCatalog));
             }
         }
 
@@ -134,17 +140,29 @@ namespace StockItUp.ViewModel
             }
         }
 
+        public Visibility CreateVisibility
+        {
+            get { return _createVisibility;}
+            set { _createVisibility = value; }
+        }
+
+        public Visibility DataVisibility
+        {
+            get { return _dataVisibility; }
+            set { _dataVisibility = value; }
+        }
+
         #endregion
 
         #region Methods
 
         public async void CreateOrderMethod()
         {
-            Order order = new Order();
+            Order order = new Order("hahahaha");
             await Catalog<Order>.Instance.Create(order);
 
             Order latestOrder =
-                Catalog<Order>.Instance.GetList.Find(x => x.Time > DateTime.Now.Subtract(TimeSpan.FromSeconds(5)));
+                Catalog<Order>.Instance.GetList.Find(x => x.OrderDate >= DateTime.Now.Subtract(TimeSpan.FromSeconds(5)));
 
             OrderHistory orderHistory = new OrderHistory(latestOrder);
             await Catalog<OrderHistory>.Instance.Create(orderHistory);
@@ -153,15 +171,17 @@ namespace StockItUp.ViewModel
 
             foreach (var i in _listOfOrders)
             {
-                OrderProduct op = new OrderProduct(order.Id, i.Product.Id, i.ActualAmount);
-                await Catalog<OrderProduct>.Instance.Create(op);
+                if (i.ActualAmount > 0)
+                {
+                    OrderProduct op = new OrderProduct(latestOrder.Id, i.Product.Id, i.ActualAmount);
+                    await Catalog<OrderProduct>.Instance.Create(op);
 
-                OrderHistoryData ohd = new OrderHistoryData(orderHistory.Id, i.Product.Name, 
-                    i.Missing, i.Product.AmountPerBox, i.SuggestedAmount, i.ActualAmount);
-                await Catalog<OrderHistoryData>.Instance.Create(ohd);
+                    OrderHistoryData ohd = new OrderHistoryData(orderHistory.Id, i.Product.Name, i.SupplierName,
+                        i.Missing, i.Product.AmountPerBox, i.SuggestedAmount, i.ActualAmount);
+                    await Catalog<OrderHistoryData>.Instance.Create(ohd);
 
-                gotData = true;
-
+                    gotData = true;
+                }
             }
 
             if (gotData == false)

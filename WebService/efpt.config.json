@@ -1,0 +1,78 @@
+﻿{
+   "ContextClassName": "StockitupdbContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "DoNotCombineNamespace": false,
+   "IdReplace": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": null,
+   "ProjectRootNamespace": "WebService",
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[__RefactorLog]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[InventoryCount]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[InventoryCountHistory]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[InventoryCountHistoryData]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[InventoryCountProduct]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Location]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Order]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[OrderHistory]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[OrderHistoryData]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[OrderProduct]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Product]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Store]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[StoreProduct]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Supplier]"
+      }
+   ],
+   "UseDatabaseNames": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseSpatial": false
+}

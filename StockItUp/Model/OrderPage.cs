@@ -70,8 +70,21 @@ namespace StockItUp.Model
 
         public Supplier Supplier
         {
-            get { return _supplier; }
+            get
+            {
+                if (_supplier == null) return null;
+                return _supplier;
+            }
             set { _supplier = value; }
+        }
+
+        public string SupplierName
+        {
+            get
+            {
+                if (Supplier == null) return null;
+                return Supplier.Name;
+            }
         }
 
         #endregion

@@ -101,7 +101,7 @@
             </StackPanel>
 
             <StackPanel Grid.Column="0">
-                <ListView ItemsSource="{Binding OrderHistoryCatalog}" Margin="0,90,0,0">
+                <ListView ItemsSource="{Binding OrderHistoryCatalog}" SelectedItem="{Binding SelectedOrderHistory, Mode=TwoWay}" Margin="0,90,0,0">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -110,7 +110,7 @@
                                     <ColumnDefinition Width="200"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="{Binding Id}"></TextBlock>
-                                <TextBlock Grid.Column="0" Text="{Binding OrderedDate}"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding OrderedDate}"></TextBlock>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -133,8 +133,8 @@
 
             </StackPanel>
 
-            <StackPanel Grid.Column="1">
-                <ListView ItemsSource="{Binding CreateOrderCatalog}" Margin="0,50,0,0">
+            <StackPanel Grid.Column="1" BorderThickness="2" BorderBrush="Black">
+                <ListView ItemsSource="{Binding CreateOrderCatalog}" Visibility="{Binding CreateVisibility}" Margin="0,50,0,0" BorderThickness="2" BorderBrush="Black">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -159,10 +159,38 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+
+                <ListView ItemsSource="{Binding OrderHistoryDataCatalog}" Visibility="{Binding DataVisibility}" Margin="0,50,0,0" BorderThickness="2" BorderBrush="Black">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="{Binding Product}"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding Supplier}"></TextBlock>
+                                <TextBlock Grid.Column="2" TextAlignment="Center" Text="{Binding AmountPerBox}"></TextBlock>
+                                <TextBlock Grid.Column="3" TextAlignment="Center" Text="{Binding MissingAmount}"></TextBlock>
+                                <TextBlock Grid.Column="4" TextAlignment="Center" Text="{Binding RecommendedAmount}"></TextBlock>
+                                <TextBlock Grid.Column="5" TextAlignment="Center" Text="{Binding AmountOrdered}"></TextBlock>
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+
             </StackPanel>
 
             <AppBarButton Grid.Column="1" Style="{StaticResource Button}" Content="Lav bestilling" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                          Margin="0,0,25,25"></AppBarButton>
+                          Margin="0,0,25,25" Command="{Binding CreateOrderCommand}"></AppBarButton>
 
         </Grid>
 

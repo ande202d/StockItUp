@@ -20,7 +20,7 @@ namespace StockItUp.Model
         public OrderHistory(Order o)
         {
             _id = o.Id;
-            _orderedDate = o.Time;
+            _orderedDate = o.OrderDate;
         }
 
         #region properties

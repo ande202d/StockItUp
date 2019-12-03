@@ -12,17 +12,19 @@ namespace StockItUp.Model
         private static int _idCounter = 1;
         private int _orderHistoryId;
         private string _product;
+        private string _supplier;
         private int _missingAmount;
         private int _amountPerBox;
         private int _recommendedAmount;
         private int _amountOrdered;
 
-        public OrderHistoryData(int orderHistoryId, string product, int missingAmount, int amountPerBox, int recommendedAmount, int amountOrdered)
+        public OrderHistoryData(int orderHistoryId, string product, string supplier, int missingAmount, int amountPerBox, int recommendedAmount, int amountOrdered)
         {
             _id = _idCounter;
             _idCounter++;
             _orderHistoryId = orderHistoryId;
             _product = product;
+            _supplier = supplier;
             _missingAmount = missingAmount;
             _amountPerBox = amountPerBox;
             _recommendedAmount = recommendedAmount;
@@ -74,6 +76,12 @@ namespace StockItUp.Model
         {
             get { return _orderHistoryId; }
             set { _orderHistoryId = value; }
+        }
+
+        public string Supplier
+        {
+            get { return _supplier; }
+            set { _supplier = value; }
         }
 
         #endregion

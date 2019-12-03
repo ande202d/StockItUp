@@ -13,7 +13,7 @@ namespace StockItUp.Model
 
         private DateTime _dateTime;
 
-        public Order()
+        public Order(string IsItDefault)
         {
             _id = _idCounter;
             _idCounter++;
@@ -21,13 +21,19 @@ namespace StockItUp.Model
             _dateTime = DateTime.Now;
         }
 
+        public Order()
+        {
+            
+        }
+
 
         public int Id
         {
             get { return _id; }
+            set { _id = value; }
         }
 
-        public DateTime Time
+        public DateTime OrderDate
         {
             get { return _dateTime; }
             set { _dateTime = value; }

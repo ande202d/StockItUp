@@ -6,6 +6,7 @@
     [AmountPerBox]      INT          NOT NULL,
     [RecommendedAmount] INT          NOT NULL,
     [AmountOrdered]     INT          NOT NULL,
+    [Supplier] VARCHAR(50) NULL, 
     PRIMARY KEY CLUSTERED ([Id]),
     CONSTRAINT [FK_OrderHistoryData_ToTable] FOREIGN KEY ([OrderHistory]) REFERENCES [dbo].[OrderHistory] ([Id])
 );
