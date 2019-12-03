@@ -144,6 +144,7 @@
                         <TextBlock Text="til ønsket lager"></TextBlock>
                         <TextBox Text="{Binding WantedAmount, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
                         <Button Content="tilføj" Background="#d0662f" Foreground="GhostWhite" Command="{Binding AddToWantedListCommand}" Margin="5,0,0,0"></Button>
+                        <TextBlock Text="{Binding AddToWantedResponse}" Margin="5,0,0,0" VerticalAlignment="Bottom" FontSize="10"></TextBlock>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Height="600" VerticalAlignment="Top">

@@ -136,6 +136,8 @@ namespace StockItUp.ViewModel
 
         public int WantedAmount { get; set; }
 
+        public string AddToWantedResponse { get; set; }
+
 
         #endregion
 
@@ -228,17 +230,20 @@ namespace StockItUp.ViewModel
                 if (storeProduct.Product==SelectedProduct.Id&&storeProduct.Store==storeId)
                 {
                     isOnList = true;
+                    AddToWantedResponse = $"{SelectedProduct.Name} er allerede på listen"; 
                 }
             }
 
-            if (!isOnList)
+            if (!isOnList&&WantedAmount>=-1)
             {
                 int productId = SelectedProduct.Id;
                 int wantedAmount = WantedAmount;
                 StoreProduct spToAdd = new StoreProduct(storeId,productId,wantedAmount);
                 await Catalog<StoreProduct>.Instance.Create(spToAdd);
+                AddToWantedResponse = $"{SelectedProduct.Name} er nu tilføjet til listen"; 
+
             }
-            
+            OnPropertyChanged(nameof(AddToWantedResponse));
         }
 
         //changes the SelectedProduct to default values

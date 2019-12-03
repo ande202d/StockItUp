@@ -101,12 +101,14 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate></ComboBox>
             </StackPanel>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" BorderBrush="Black" BorderThickness="5,0,0,0" Margin="0,80,0,0">
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,80,0,0">
                 <TextBlock Text="Vare navn" Width="210" FontSize="20"></TextBlock>
                 <TextBlock Text="Antal" Width="210" FontSize="20"></TextBlock>
             </StackPanel>
             <AppBarButton Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Padding="0,0,0,0" Content="Gem" Style="{StaticResource Button}" Command="{Binding CreateInventoryCountCommand}" CommandParameter="{Binding listForProducts[Product]}"></AppBarButton>
-            <ListView Grid.Column="1" Margin="0,110,0,0" Padding="0" Height="400" ItemsSource="{Binding listForProducts}" SelectionMode="Extended">
+            <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="0,110,0,0" Height="490">
+                <ScrollViewer Height="490">
+                <ListView ItemsSource="{Binding listForProducts}" SelectionMode="Extended">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -127,11 +129,12 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
+                </ScrollViewer>
+            </StackPanel>
             <StackPanel Grid.Column="0" Width="500" HorizontalAlignment="Left"  Orientation="Horizontal">
                 <TextBlock Text="Optællings historik" TextAlignment="Center" Width="525" FontSize="30"></TextBlock>
             </StackPanel>
-
+            <ScrollViewer>
             <ListView Grid.Column="0" Margin="30,60,0,0" Padding="0" Width="500" HorizontalAlignment="Left" ItemsSource="{Binding InventoryCountHistoriesCatalog}" SelectedItem="{Binding SelectedInventoryCountHistory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -145,7 +148,7 @@
 
                             <TextBlock   Grid.Column="0" Text="{Binding Id}" ></TextBlock>
                             <TextBlock Grid.Column="1" Text="{Binding Location}"></TextBlock>
-                            <TextBlock Grid.Column="2" Text="{Binding CountDate}"></TextBlock>
+                            <TextBlock Grid.Column="2" Text="{Binding DateFormatted}"></TextBlock>
 
 
 
@@ -155,12 +158,12 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-            <StackPanel Grid.Column="0" Width="525" HorizontalAlignment="Right"  Orientation="Horizontal">
+             </ScrollViewer>
+                    <StackPanel Grid.Column="0" Width="525" HorizontalAlignment="Right"  Orientation="Horizontal">
                 <TextBlock Text="Vare navn" FontSize="20" Width="250"></TextBlock>
                 <TextBlock Text="Antal" FontSize="20" Width="250"></TextBlock>
             </StackPanel>
-
+            <ScrollViewer Grid.Column="0">
             <ListView Grid.Column="0" Margin="0,60,0,0" Padding="0" Width="500" HorizontalAlignment="Right" ItemsSource="{Binding InventoryCountHistoriesCatalogData}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -182,7 +185,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Page>
