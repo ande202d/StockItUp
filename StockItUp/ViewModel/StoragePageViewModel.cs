@@ -223,6 +223,8 @@ namespace StockItUp.ViewModel
             set { _selectedProduct = value; OnPropertyChanged(); OnPropertyChanged(nameof(ProductCatalogData)); }
         }
 
+        public string ChangeWantedAmountResponse { get; set; }
+
         #endregion
 
         #region Methods
@@ -268,10 +270,16 @@ namespace StockItUp.ViewModel
                 if (wanted>=1)
                 {
                     await Catalog<StoreProduct>.Instance.Create(tempStoreProduct);
+                    ChangeWantedAmountResponse = $"det ønskede antal for {SelectedProduct.MyProduct.Name} er blevet ændret";
                 }
+                if (wanted<=0)
+                {
+                    ChangeWantedAmountResponse = $"Da du har ønsket {wanted} er produkt blevet fjernet";
+                }
+
                 
 
-
+                OnPropertyChanged(nameof(ChangeWantedAmountResponse));
                 OnPropertyChanged(nameof(ProductCatalog));
             }
             

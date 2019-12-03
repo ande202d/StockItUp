@@ -110,7 +110,8 @@
                 <TextBlock Text="Ønsket lager: " Margin="10,0,0,0"></TextBlock>
                 <TextBox Margin="20,0,0,0" Text="{Binding SelectedProduct.Wanted, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <Button Margin="10,0,0,0" Content="Gem" Background="#d0662f" Foreground="GhostWhite" Command="{Binding ChangeWantedAmountCommand}"></Button>
-            </StackPanel>
+                <TextBlock Text="{Binding ChangeWantedAmountResponse}" VerticalAlignment="Bottom" FontSize="10" Margin="5,0,0,0" TextWrapping="Wrap" Width="180"></TextBlock>
+            </StackPanel> 
             <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,80,0,0" >
                 <TextBlock Text="Lager navn" Margin="10,0,0,0"  Width="140"></TextBlock>
                 <TextBlock Text="Sidst Optalt"  Width="140"></TextBlock>
