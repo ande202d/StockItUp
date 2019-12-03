@@ -116,8 +116,9 @@
                 <TextBlock Text="Sidst Optalt"  Width="140"></TextBlock>
                 <TextBlock Text="Antal"  Width="120"></TextBlock>
             </StackPanel>
-
-            <ListView Grid.Column="1" ItemsSource="{Binding ProductCatalogData}" Margin="0,100,0,0" Padding="0" x:Name ="placeringListView">
+            <StackPanel Grid.Column="1" Height="335" VerticalAlignment="Top" Margin="0,100,0,0">
+            <ScrollViewer Height="335">
+            <ListView ItemsSource="{Binding ProductCatalogData}" Padding="0" x:Name ="placeringListView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -140,7 +141,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
+            </ScrollViewer>
+            </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Bottom"  BorderThickness="0,0,2,0" >
 
                 <TextBlock Text="Administer placeringer" TextAlignment="Center" FontSize="30"></TextBlock>

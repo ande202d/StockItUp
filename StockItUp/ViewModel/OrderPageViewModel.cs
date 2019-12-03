@@ -6,6 +6,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using RVG.Common;
 using StockItUp.Annotations;
 using StockItUp.Connections;
 using StockItUp.Model;
@@ -28,13 +30,15 @@ namespace StockItUp.ViewModel
 
         public OrderPageViewModel()
         {
-            
+            CreateOrderCommand = new RelayCommand(CreateOrderMethod);
         }
 
 
         #endregion
 
         #region Properties
+
+        public ICommand CreateOrderCommand { get; set; }
 
         public ObservableCollection<OrderPage> CreateOrderCatalog
         {
@@ -108,6 +112,25 @@ namespace StockItUp.ViewModel
             set
             {
                 _selectedOrderHistory = value; OnPropertyChanged();
+                    OnPropertyChanged(nameof(OrderHistoryDataCatalog));
+            }
+        }
+
+        public ObservableCollection<OrderHistoryData> OrderHistoryDataCatalog
+        {
+            get
+            {
+                List<OrderHistoryData> listToReturn = new List<OrderHistoryData>();
+
+                foreach (var i in Catalog<OrderHistoryData>.Instance.GetList)
+                {
+                    if (i.OrderHistory == SelectedOrderHistory.Id)
+                    {
+                        listToReturn.Add(i);
+                    }
+                }
+                ObservableCollection<OrderHistoryData> collection = new ObservableCollection<OrderHistoryData>(listToReturn);
+                return collection;
             }
         }
 
@@ -117,10 +140,6 @@ namespace StockItUp.ViewModel
 
         public async void CreateOrderMethod()
         {
-            // _listOfOrders giver listen af orders og de felter fra CreateOrderCatalog som vi skal bruge for at putte den information
-            // ind i vores database
-            // Selected Order skal laves
-
             Order order = new Order();
             await Catalog<Order>.Instance.Create(order);
 
@@ -151,7 +170,7 @@ namespace StockItUp.ViewModel
 
                 await Catalog<OrderHistory>.Instance.Delete(orderHistory.Id);
             }
-
+            OnPropertyChanged(nameof(OrderHistoryCatalog));
 
         }
 

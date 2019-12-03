@@ -265,7 +265,11 @@ namespace StockItUp.ViewModel
                 int key = Catalog<StoreProduct>.Instance.GetList.Find(x =>
                             x.Store == storeId && x.Product == id).Id;
                 await Catalog<StoreProduct>.Instance.Delete(key);
-                await Catalog<StoreProduct>.Instance.Create(tempStoreProduct);
+                if (wanted>=1)
+                {
+                    await Catalog<StoreProduct>.Instance.Create(tempStoreProduct);
+                }
+                
 
 
                 OnPropertyChanged(nameof(ProductCatalog));
