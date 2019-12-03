@@ -119,7 +119,7 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Height="335" VerticalAlignment="Top" Margin="0,100,0,0">
             <ScrollViewer Height="335">
-            <ListView ItemsSource="{Binding ProductCatalogData}" Padding="0" x:Name ="placeringListView">
+            <ListView ItemsSource="{Binding ProductCatalogData}" Padding="0" x:Name ="placeringListView" SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
