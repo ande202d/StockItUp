@@ -44,21 +44,21 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <!--Navigation Buttons-->
-            <AppBarButton Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List">
+            <AppBarButton Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List" >
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
                         <core:NavigateToPageAction TargetPage="StockItUp.View.Optaellinger"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
-            <AppBarButton Style="{StaticResource Button}" Grid.Column="1" Label="Lager" Icon="Home" BorderBrush="WhiteSmoke" BorderThickness="0,0,0,3">
+            <AppBarButton Style="{StaticResource Button}" Grid.Column="1" Label="Lager" Icon="Home">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
                         <core:NavigateToPageAction TargetPage="StockItUp.View.Lager"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
-            <AppBarButton Style="{StaticResource Button}" Grid.Column="2" Label="Bestillinger" Icon="Bullets">
+            <AppBarButton Style="{StaticResource Button}" Grid.Column="2" Label="Bestillinger" Icon="Bullets" BorderBrush="WhiteSmoke" BorderThickness="0,0,0,3">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
                         <core:NavigateToPageAction TargetPage="StockItUp.View.Bestillinger"/>
