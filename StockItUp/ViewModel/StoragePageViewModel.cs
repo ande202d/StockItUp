@@ -155,7 +155,7 @@ namespace StockItUp.ViewModel
                     foreach (var v in listToReturn)
                     {
                         //if not, we go though the name of each product, and if the name contains the string from the filter, we add it to the visible list
-                        if (v.MyProduct.Name.ToLower().Contains(Filter))
+                        if (v.MyProduct.Name.ToLower().Contains(Filter.ToLower()))
                         {
                             collection.Add(v);
                         }
@@ -291,7 +291,7 @@ namespace StockItUp.ViewModel
                             InventoryCount icDummy = new InventoryCount();
                             foreach (var ic in Catalog<InventoryCount>.Instance.GetList)
                             {
-                                //in all the IC's, if ones location, is the one we are checking, and also the date it was counted
+                                //in all the inventoryCounts(IC's), if ones location, is the one we are checking, and also the date it was counted
                                 //is newer than the dummies, we come further in (dummy date when created is day 1, in year 1)
                                 if (ic.Location == l.Id && ic.DateCounted > icDummy.DateCounted)
                                 {
