@@ -158,40 +158,52 @@ namespace StockItUp.ViewModel
 
         public async void CreateOrderMethod()
         {
-            Order order = new Order("hahahaha");
-            await Catalog<Order>.Instance.Create(order);
-
-            Order latestOrder =
-                Catalog<Order>.Instance.GetList.Find(x => x.OrderDate >= DateTime.Now.Subtract(TimeSpan.FromSeconds(5)));
-
-            OrderHistory orderHistory = new OrderHistory(latestOrder);
-            await Catalog<OrderHistory>.Instance.Create(orderHistory);
-
-            bool gotData = false;
-
-            foreach (var i in _listOfOrders)
+            if (CreateVisibility == Visibility.Visible)
             {
-                if (i.ActualAmount > 0)
+                Order order = new Order("hahahaha");
+                await Catalog<Order>.Instance.Create(order);
+
+                Order latestOrder =
+                    Catalog<Order>.Instance.GetList.Find(x => x.OrderDate >= DateTime.Now.Subtract(TimeSpan.FromSeconds(5)));
+
+                OrderHistory orderHistory = new OrderHistory(latestOrder);
+                await Catalog<OrderHistory>.Instance.Create(orderHistory);
+
+                bool gotData = false;
+
+                foreach (var i in _listOfOrders)
                 {
-                    OrderProduct op = new OrderProduct(latestOrder.Id, i.Product.Id, i.ActualAmount);
-                    await Catalog<OrderProduct>.Instance.Create(op);
+                    if (i.ActualAmount > 0)
+                    {
+                        OrderProduct op = new OrderProduct(latestOrder.Id, i.Product.Id, i.ActualAmount);
+                        await Catalog<OrderProduct>.Instance.Create(op);
 
-                    OrderHistoryData ohd = new OrderHistoryData(orderHistory.Id, i.Product.Name, i.SupplierName,
-                        i.Missing, i.Product.AmountPerBox, i.SuggestedAmount, i.ActualAmount);
-                    await Catalog<OrderHistoryData>.Instance.Create(ohd);
+                        OrderHistoryData ohd = new OrderHistoryData(orderHistory.Id, i.Product.Name, i.SupplierName,
+                            i.Missing, i.Product.AmountPerBox, i.SuggestedAmount, i.ActualAmount);
+                        await Catalog<OrderHistoryData>.Instance.Create(ohd);
 
-                    gotData = true;
+                        gotData = true;
+                    }
                 }
-            }
 
-            if (gotData == false)
+                if (gotData == false)
+                {
+                    await Catalog<Order>.Instance.Delete(order.Id);
+
+                    await Catalog<OrderHistory>.Instance.Delete(orderHistory.Id);
+                }
+                OnPropertyChanged(nameof(OrderHistoryCatalog));
+            }
+            else
             {
-                await Catalog<Order>.Instance.Delete(order.Id);
+                OnPropertyChanged(nameof(OrderHistoryCatalog));
 
-                await Catalog<OrderHistory>.Instance.Delete(orderHistory.Id);
+                DataVisibility = Visibility.Collapsed;
+                CreateVisibility = Visibility.Visible;
+
+                OnPropertyChanged(nameof(DataVisibility));
+                OnPropertyChanged(nameof(CreateVisibility));
             }
-            OnPropertyChanged(nameof(OrderHistoryCatalog));
-
         }
 
         #endregion

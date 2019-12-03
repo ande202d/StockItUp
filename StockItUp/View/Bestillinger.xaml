@@ -133,8 +133,8 @@
 
             </StackPanel>
 
-            <StackPanel Grid.Column="1" BorderThickness="2" BorderBrush="Black">
-                <ListView ItemsSource="{Binding CreateOrderCatalog}" Visibility="{Binding CreateVisibility}" Margin="0,50,0,0" BorderThickness="2" BorderBrush="Black">
+            <StackPanel Grid.Column="1">
+                <ListView ItemsSource="{Binding CreateOrderCatalog}" Visibility="{Binding CreateVisibility}" Margin="0,50,0,0"  SelectionMode="None">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -160,7 +160,11 @@
                     </ListView.ItemTemplate>
                 </ListView>
 
-                <ListView ItemsSource="{Binding OrderHistoryDataCatalog}" Visibility="{Binding DataVisibility}" Margin="0,50,0,0" BorderThickness="2" BorderBrush="Black">
+                <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+                <!--XXXXXXXXXX HERE WE MAKE THE LISTVIEW FOR DATA XXXXXXXXXX-->
+                <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+
+                <ListView ItemsSource="{Binding OrderHistoryDataCatalog}" Visibility="{Binding DataVisibility}" Margin="0,50,0,0" SelectionMode="None">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
