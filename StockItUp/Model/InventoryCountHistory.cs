@@ -51,6 +51,11 @@ namespace StockItUp.Model
             set { _location = value; }
         }
 
+        public string DateFormatted
+        {
+            get { return CountDate.ToString("dd / MM / yyyy"); }
+        }
+
         public DateTime CountDate
         {
             get { return _countDate; }
