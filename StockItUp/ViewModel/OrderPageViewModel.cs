@@ -19,6 +19,8 @@ namespace StockItUp.ViewModel
         #region Instance field
 
         private List<OrderPage> _listOfOrders;
+        private OrderHistory _selectedOrderHistory;
+        
         
         #endregion
 
@@ -86,6 +88,29 @@ namespace StockItUp.ViewModel
             }
         }
 
+        public ObservableCollection<OrderHistory> OrderHistoryCatalog
+        {
+            get
+            {
+                ObservableCollection<OrderHistory> collection = 
+                    new ObservableCollection<OrderHistory>(Catalog<OrderHistory>.Instance.GetList);
+                return collection;
+            }
+        }
+
+        public OrderHistory SelectedOrderHistory
+        {
+            get
+            {
+                if (_selectedOrderHistory == null) return new OrderHistory();
+                return _selectedOrderHistory;
+            }
+            set
+            {
+                _selectedOrderHistory = value; OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -95,6 +120,38 @@ namespace StockItUp.ViewModel
             // _listOfOrders giver listen af orders og de felter fra CreateOrderCatalog som vi skal bruge for at putte den information
             // ind i vores database
             // Selected Order skal laves
+
+            Order order = new Order();
+            await Catalog<Order>.Instance.Create(order);
+
+            Order latestOrder =
+                Catalog<Order>.Instance.GetList.Find(x => x.Time > DateTime.Now.Subtract(TimeSpan.FromSeconds(5)));
+
+            OrderHistory orderHistory = new OrderHistory(latestOrder);
+            await Catalog<OrderHistory>.Instance.Create(orderHistory);
+
+            bool gotData = false;
+
+            foreach (var i in _listOfOrders)
+            {
+                OrderProduct op = new OrderProduct(order.Id, i.Product.Id, i.ActualAmount);
+                await Catalog<OrderProduct>.Instance.Create(op);
+
+                OrderHistoryData ohd = new OrderHistoryData(orderHistory.Id, i.Product.Name, 
+                    i.Missing, i.Product.AmountPerBox, i.SuggestedAmount, i.ActualAmount);
+                await Catalog<OrderHistoryData>.Instance.Create(ohd);
+
+                gotData = true;
+
+            }
+
+            if (gotData == false)
+            {
+                await Catalog<Order>.Instance.Delete(order.Id);
+
+                await Catalog<OrderHistory>.Instance.Delete(orderHistory.Id);
+            }
+
 
         }
 

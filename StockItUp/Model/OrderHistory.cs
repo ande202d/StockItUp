@@ -17,6 +17,12 @@ namespace StockItUp.Model
             
         }
 
+        public OrderHistory(Order o)
+        {
+            _id = o.Id;
+            _orderedDate = o.Time;
+        }
+
         #region properties
         public int Id
         {
