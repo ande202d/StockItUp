@@ -53,7 +53,7 @@ namespace StockItUp.Model
 
         public string DateFormatted
         {
-            get { return CountDate.ToString("dd / MM / yyyy"); }
+            get { return CountDate.ToString("dd / MM / yyyy HH:mm"); }
         }
 
         public DateTime CountDate
