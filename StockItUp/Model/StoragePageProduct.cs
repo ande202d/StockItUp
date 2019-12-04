@@ -11,16 +11,18 @@ namespace StockItUp.Model
     {
         private Product _Product;
         private int _total;
+        private string _totalv2;
         private int _wanted;
         private int _missing;
 
-        public StoragePageProduct(int product, int total, int wanted, int missing)
+        public StoragePageProduct(int product, int total, int wanted, int missing, string totalv2)
         {
             //_Product = product;
             ProductId = product;
             _total = total;
             _wanted = wanted;
             _missing = missing;
+            _totalv2 = totalv2;
         }
 
 
@@ -61,6 +63,12 @@ namespace StockItUp.Model
         {
             get { return _missing; }
             set { _missing = value; }
+        }
+
+        public string Totalv2
+        {
+            get { return _totalv2; }
+            set { _totalv2 = value; }
         }
     }
 }

@@ -112,7 +112,8 @@ namespace StockItUp.ViewModel
                             int p;
                             int t = 0;
                             int w;
-                            int m; 
+                            int m;
+                            string t2 = "";
                             #endregion
 
                             //if the product is on the wanted list:
@@ -131,10 +132,16 @@ namespace StockItUp.ViewModel
                                 }
 
                                 //here we are getting ready to create our "dummy" class for showing the right information, getting name, and other data
-                                p = Catalog<Product>.Instance.Read(sp.Product).Result.Id;
+                                Product pro = Catalog<Product>.Instance.Read(sp.Product).Result;
+                                p = pro.Id;
                                 w = sp.Amount;
                                 m = w - t;
-                                listToReturn.Add(new StoragePageProduct(p,t,w,m));
+                                if (m < 0) m = 0;
+                                //(int) Math.Ceiling((double) m / p.AmountPerBox);
+                                int placeholder1 = (int) Math.Floor((double) t / pro.AmountPerBox);
+                                int placeholder2 = t - (placeholder1 * pro.AmountPerBox);
+                                t2 = $"{placeholder1} kasser og {placeholder2} løse";
+                                listToReturn.Add(new StoragePageProduct(p,t,w,m, t2));
                             }
                         }
                     }

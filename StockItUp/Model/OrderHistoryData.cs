@@ -24,7 +24,10 @@ namespace StockItUp.Model
             _idCounter++;
             _orderHistoryId = orderHistoryId;
             _product = product;
-            _supplier = supplier;
+
+            if (supplier == null) _supplier = "";
+            else _supplier = supplier;
+
             _missingAmount = missingAmount;
             _amountPerBox = amountPerBox;
             _recommendedAmount = recommendedAmount;

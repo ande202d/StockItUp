@@ -171,6 +171,7 @@
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                     <TextBlock Width="250" Text ="Vare navn" FontSize="20"></TextBlock>
                     <TextBlock Width="250"  Text ="Total" FontSize="20"></TextBlock>
+                    <TextBlock Width="250"  Text ="Antal kasser" FontSize="20"></TextBlock>
                     <TextBlock Width="250"  Text ="Ønsket" FontSize="20"></TextBlock>
                     <TextBlock Width="250"  Text ="Mangler" FontSize="20"></TextBlock>
 
@@ -190,6 +191,7 @@
                                     <ColumnDefinition Width="250"></ColumnDefinition>
                                     <ColumnDefinition Width="250"></ColumnDefinition>
                                     <ColumnDefinition Width="250"></ColumnDefinition>
+                                    <ColumnDefinition Width="250"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
 
@@ -199,8 +201,9 @@
                                 <TextBlock Grid.Column="3"  Text="PIK"></TextBlock>-->
                                 <TextBlock   Grid.Column="0" Text="{Binding MyProduct.Name}" ></TextBlock>
                                 <TextBlock   Grid.Column="1" Text="{Binding Total}" ></TextBlock>
-                                <TextBlock  Grid.Column="2" Text="{Binding Wanted}" ></TextBlock>
-                                <TextBlock Grid.Column="3"  Text="{Binding Missing}"></TextBlock>
+                                <TextBlock   Grid.Column="2" Text="{Binding Totalv2}" ></TextBlock>
+                                <TextBlock  Grid.Column="3" Text="{Binding Wanted}" ></TextBlock>
+                                <TextBlock Grid.Column="4"  Text="{Binding Missing}"></TextBlock>
 
                                 
             

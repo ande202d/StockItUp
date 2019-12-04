@@ -79,6 +79,7 @@ namespace StockItUp.ViewModel
                                 }
 
                                 m = sp.Amount - t;
+                                if (m < 0) m = 0;
                                 sa = (int) Math.Ceiling((double) m / p.AmountPerBox);
 
 
