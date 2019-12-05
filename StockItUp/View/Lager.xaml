@@ -170,10 +170,10 @@
             <Grid Grid.Column="0" Padding="49,0,0,0">
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                     <TextBlock Width="250" Text ="Vare navn" FontSize="20"></TextBlock>
-                    <TextBlock Width="250"  Text ="Total" FontSize="20"></TextBlock>
+                    <TextBlock Width="150"  Text ="Total" FontSize="20"></TextBlock>
                     <TextBlock Width="250"  Text ="Antal kasser" FontSize="20"></TextBlock>
-                    <TextBlock Width="250"  Text ="Ønsket" FontSize="20"></TextBlock>
-                    <TextBlock Width="250"  Text ="Mangler" FontSize="20"></TextBlock>
+                    <TextBlock Width="150"  Text ="Ønsket" FontSize="20"></TextBlock>
+                    <TextBlock Width="150"  Text ="Mangler" FontSize="20"></TextBlock>
 
                 </StackPanel>
 
@@ -188,10 +188,10 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="250"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
                                     <ColumnDefinition Width="250"></ColumnDefinition>
-                                    <ColumnDefinition Width="250"></ColumnDefinition>
-                                    <ColumnDefinition Width="250"></ColumnDefinition>
-                                    <ColumnDefinition Width="250"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
 
