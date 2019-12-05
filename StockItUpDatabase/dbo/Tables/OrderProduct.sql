@@ -4,7 +4,7 @@
     [Product]       INT NOT NULL,
     [OrderedAmount] INT NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_OrderProduct_Order] FOREIGN KEY ([Order]) REFERENCES [dbo].[Order] ([Id]),
-    CONSTRAINT [FK_OrderProduct_Product] FOREIGN KEY ([Product]) REFERENCES [dbo].[Product] ([Id])
+    CONSTRAINT [FK_OrderProduct_Order] FOREIGN KEY ([Order]) REFERENCES [dbo].[Order] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_OrderProduct_Product] FOREIGN KEY ([Product]) REFERENCES [dbo].[Product] ([Id]) ON DELETE CASCADE
 );
 

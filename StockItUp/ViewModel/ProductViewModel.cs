@@ -23,7 +23,7 @@ namespace StockItUp.ViewModel
         private Catalog<Product> _productCatalog;
         private  Catalog<Supplier> _supplierCatalog;
         private Product _selectedProduct;
-        private Supplier _selectedSupplier = new Supplier(default(string),"www.");
+        private Supplier _selectedSupplier = new Supplier(default(string),"");
         private Supplier _selectedSupplierForCreationOfProduct;
         private string _filter = "";
 
@@ -171,6 +171,7 @@ namespace StockItUp.ViewModel
             if (SelectedProduct != null)
             {
                 await _productCatalog.Delete(SelectedProduct.Id);
+                await Catalog<StoreProduct>.Instance.ReadAll();
                 OnPropertyChanged(nameof(ProductCatalog));
                 MakeDefaultProduct();
             }
@@ -183,13 +184,6 @@ namespace StockItUp.ViewModel
         {
             if (SelectedSupplier!=null)
             {
-                //foreach (var product in ProductCatalog)
-                //{
-                //    if (product.Supplier==SelectedSupplier.Id)
-                //    {
-                //        await _productCatalog.Delete(product.Id);
-                //    }
-                //}
                 await _supplierCatalog.Delete(SelectedSupplier.Id);
                 OnPropertyChanged(nameof(SupplierCatalog));
                 OnPropertyChanged(nameof(ProductCatalog));

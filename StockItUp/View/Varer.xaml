@@ -117,7 +117,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <TextBox PlaceholderText="Navn på leverandør.." Foreground="DarkGray" Width="200" Margin="10" Text="{Binding SelectedSupplier.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Navn:"></TextBox>
-                    <TextBox PlaceholderText="WebAdresse på leverandør.." Foreground="DarkGray" Width="200" Margin="10" Text="{Binding SelectedSupplier.Website, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="WebAdresse:"></TextBox>
+                    <TextBox PlaceholderText="Email på leverandør.." Foreground="DarkGray" Width="200" Margin="10" Text="{Binding SelectedSupplier.Website, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Email:"></TextBox>
 
                     <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
                         <AppBarButton Content="Tilføj leverandør"  Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding CreateSupplierCommand}"></AppBarButton>

@@ -249,6 +249,8 @@ namespace StockItUp.ViewModel
             { 
                 await _locationCatalog.Delete(SelectedLocation.Id);
                 OnPropertyChanged(nameof(LocationCatalog));
+                OnPropertyChanged(nameof(ProductCatalog));
+                OnPropertyChanged(nameof(ProductCatalogData));
             }
         }
 

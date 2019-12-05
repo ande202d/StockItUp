@@ -4,6 +4,6 @@
     [AmountPerBox] INT          NOT NULL,
     [Supplier]     INT          NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_Product_ToTable] FOREIGN KEY ([Supplier]) REFERENCES [dbo].[Supplier] ([Id])
+    CONSTRAINT [FK_Product_ToTable] FOREIGN KEY ([Supplier]) REFERENCES [dbo].[Supplier] ([Id]) ON DELETE SET NULL
 );
 

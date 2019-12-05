@@ -20,8 +20,9 @@ namespace StockItUp
             _idCounter++;
             _name = name;
 
-            if (CheckWebsite(website)) _website = website;
-            else throw new Exception("Website must contain: www.");
+            //if (CheckWebsite(website)) _website = website;
+            //else throw new Exception("Email must contain: @");
+            _website = website;
         }
 
         public Supplier()
@@ -51,7 +52,7 @@ namespace StockItUp
         #region Methods
         public bool CheckWebsite(string s)
         {
-            return s.Contains("www.");
+            return s.Contains("@");
         } 
         #endregion
 

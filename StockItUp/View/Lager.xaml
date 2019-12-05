@@ -157,8 +157,8 @@
                 </ComboBox>
                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
                     <AppBarButton Content="Tilføj placering" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding CreateLocationCommand}"></AppBarButton>
-                    <AppBarButton Content="Rediger vare" Command="{Binding UpdateLocationCommand}" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
-                    <AppBarButton Content="Fjern vare" Command="{Binding DeleteLocationCommand}" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
+                    <AppBarButton Content="Rediger placering" Command="{Binding UpdateLocationCommand}" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
+                    <AppBarButton Content="Fjern placering" Command="{Binding DeleteLocationCommand}" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
                 </StackPanel>
                 <!--Handling of providers-->
                 

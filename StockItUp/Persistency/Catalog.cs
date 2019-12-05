@@ -80,6 +80,7 @@ namespace StockItUp.Persistency
             {
                 var objAsString = content.Content.ReadAsStringAsync().Result;
                 var list = JsonConvert.DeserializeObject<List<T>>(objAsString);
+                listT = list;
                 return list;
 
             }
