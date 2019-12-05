@@ -18,6 +18,9 @@ namespace UnitTestStockItUp
 
             //Assert
             Assert.AreEqual(s1.Website.Contains("www."), true, "Supplier website dosent have www.");
+
+
+            ////////////////////////////www no longer necessary//////////////////////
         }
 
         [TestMethod]
