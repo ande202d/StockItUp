@@ -85,7 +85,7 @@
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  HERE WE START THE CODE THAT IS UNIQUE FOR THIS PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Background="WhiteSmoke">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
@@ -100,8 +100,9 @@
                 <TextBlock Text="Bestillings Historik" FontSize="25" TextAlignment="Center"  Width="300"></TextBlock>
             </StackPanel>
 
-            <StackPanel Grid.Column="0">
-                <ListView ItemsSource="{Binding OrderHistoryCatalog}" SelectedItem="{Binding SelectedOrderHistory, Mode=TwoWay}" Margin="0,90,0,0">
+            <StackPanel Grid.Column="0" Height="550" Margin="0,90,0,0">
+                <ScrollViewer Height="550">
+                <ListView ItemsSource="{Binding OrderHistoryCatalog}" SelectedItem="{Binding SelectedOrderHistory, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -115,6 +116,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                </ScrollViewer>
             </StackPanel>
 
             <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
@@ -122,7 +124,7 @@
             <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
             <StackPanel Grid.Column="1" Orientation="Horizontal" BorderBrush="Black" BorderThickness="0,0,0,0"
-                        VerticalAlignment="Top" Height="50" Margin="0,20,0,0">
+                        VerticalAlignment="Top" Height="50" Margin="0,80,0,0">
 
                 <TextBlock Text="Produkt" FontSize="15" TextAlignment="Left"           Width="200"></TextBlock>
                 <TextBlock Text="Leverandør" FontSize="15" TextAlignment="Left"        Width="200"></TextBlock>
@@ -134,7 +136,12 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <ListView ItemsSource="{Binding CreateOrderCatalog}" Visibility="{Binding CreateVisibility}" Margin="0,50,0,0"  SelectionMode="None">
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
+                    <TextBlock Text="Lav bestilling" FontSize="50" Visibility="{Binding CreateVisibility}"></TextBlock>
+                </StackPanel>
+                <StackPanel Margin="0,50,0,0" Height="450" Visibility="{Binding CreateVisibility}">
+                <ScrollViewer Height="450">
+                <ListView ItemsSource="{Binding CreateOrderCatalog}"   SelectionMode="None">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -159,12 +166,18 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                </ScrollViewer>
+                </StackPanel>
 
                 <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
                 <!--XXXXXXXXXX HERE WE MAKE THE LISTVIEW FOR DATA XXXXXXXXXX-->
                 <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-
-                <ListView ItemsSource="{Binding OrderHistoryDataCatalog}" Visibility="{Binding DataVisibility}" Margin="0,50,0,0" SelectionMode="None">
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
+                    <TextBlock Text="Bestillings historik" FontSize="50" Visibility="{Binding DataVisibility}"></TextBlock>
+                </StackPanel>
+                <StackPanel Margin="0,50,0,0" Height="450" Visibility="{Binding DataVisibility}">
+                    <ScrollViewer Height="450">
+                        <ListView ItemsSource="{Binding OrderHistoryDataCatalog}"  SelectionMode="None">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -189,7 +202,8 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
+                </ScrollViewer>
+                </StackPanel>
 
             </StackPanel>
 
