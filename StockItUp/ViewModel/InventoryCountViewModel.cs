@@ -140,7 +140,6 @@ namespace StockItUp.ViewModel
             get
             {
                 List<InventoryCountHistoryData> listToReturn = new List<InventoryCountHistoryData>();
-                //SelectedInventoryCountHistory.Id = 1002;
 
                 foreach (var i in Catalog<InventoryCountHistoryData>.Instance.GetList)
                 {
@@ -192,15 +191,16 @@ namespace StockItUp.ViewModel
                 bool gotData = false;
                 foreach (var i in _listForProducts)
                 {
-                    if (i.Amount > 0)
+                    int totalAmount = (i.BoxAmount * i.Product.AmountPerBox) + i.Amount;
+                    if (totalAmount > 0)
                     {
                         //here we then create a "data" row for that specific product and inventoryCount
                         //and store it in the database
-                        InventoryCountProduct icp = new InventoryCountProduct(ic2.Id, i.Product.Id, i.Amount);
+                        InventoryCountProduct icp = new InventoryCountProduct(ic2.Id, i.Product.Id, totalAmount);
                         await Catalog<InventoryCountProduct>.Instance.Create(icp);
 
                         //we then make a frozen copy of that inventoryCount "data" and throw it in the history database
-                        InventoryCountHistoryData ichd = new InventoryCountHistoryData(ich.Id, i.Product.Name, icp.Amount);
+                        InventoryCountHistoryData ichd = new InventoryCountHistoryData(ich.Id, i.Product.Name, icp.Amount, i.Product.AmountPerBox);
                         ichd.Id = Catalog<InventoryCountProduct>.Instance.GetList.
                             Find(x=> x.InventoryCount==ic2.Id && x.Product == icp.Product).Id;
                         //InventoryCountHistoryData ichd = new InventoryCountHistoryData(ic2.Id, i.Product.Name, i.Amount);

@@ -11,6 +11,7 @@ namespace StockItUp.Model
 
         private Product _product;
         private int _amount = 0;
+        private int _boxAmount = 0;
 
         public InventoryCountPage(Product product)
         {
@@ -27,6 +28,12 @@ namespace StockItUp.Model
         {
             get { return _amount; }
             set { _amount = value; }
+        }
+
+        public int BoxAmount
+        {
+            get { return _boxAmount; }
+            set { _boxAmount = value; }
         }
     }
 }

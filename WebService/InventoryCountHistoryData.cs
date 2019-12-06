@@ -18,6 +18,8 @@ namespace WebService
 
         public int Amount { get; set; }
 
+        public int AmountPerBox { get; set; }
+
         public int InventoryCountHistory { get; set; }
 
         public virtual InventoryCountHistory InventoryCountHistory1 { get; set; }

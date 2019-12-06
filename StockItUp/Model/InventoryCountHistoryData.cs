@@ -13,11 +13,12 @@ namespace StockItUp.Model
         private string _product;
         private int _amount;
         private int _inventoryCountHistoryId;
+        private int _amountPerBox;
 
 
         //Something simular the inventoryCountHistory
         //where it takes a InventoryCount, and then finds the matching inventoryCountProducts
-        public InventoryCountHistoryData(int inventoryCountHistoryId, string product, int amount)
+        public InventoryCountHistoryData(int inventoryCountHistoryId, string product, int amount, int amountPerBox)
         {
             _id = _idCounter;
             _idCounter++;
@@ -25,6 +26,7 @@ namespace StockItUp.Model
             _product = product;
             _amount = amount;
             _inventoryCountHistoryId = inventoryCountHistoryId;
+            _amountPerBox = amountPerBox;
         }
 
         public InventoryCountHistoryData()
@@ -54,6 +56,22 @@ namespace StockItUp.Model
         {
             get { return _inventoryCountHistoryId; }
             set { _inventoryCountHistoryId = value; }
+        }
+
+        public int AmountPerBox
+        {
+            get { return _amountPerBox; }
+            set { _amountPerBox = value; }
+        }
+
+        public int NumberOfBoxes
+        {
+            get { return (int)Math.Floor((double)Amount / AmountPerBox); }
+        }
+
+        public int NumberOfLoose
+        {
+            get { return Amount - (NumberOfBoxes*AmountPerBox);}
         }
 
         #endregion
