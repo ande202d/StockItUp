@@ -82,7 +82,7 @@ namespace StockItUp.ViewModel
             }
         }
 
-        public List<InventoryCountPage> listForProducts
+        public List<InventoryCountPage> ListForProducts
         {
             get
             {

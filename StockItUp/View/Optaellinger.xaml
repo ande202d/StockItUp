@@ -109,7 +109,7 @@
             <AppBarButton Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Padding="0,0,0,0" Content="Lav optælling" Style="{StaticResource Button}" Command="{Binding CreateInventoryCountCommand}" CommandParameter="{Binding listForProducts[Product]}"></AppBarButton>
             <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="0,110,0,0" Height="490">
                 <ScrollViewer Height="490">
-                <ListView ItemsSource="{Binding listForProducts}" SelectionMode="None">
+                <ListView ItemsSource="{Binding ListForProducts}" SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
