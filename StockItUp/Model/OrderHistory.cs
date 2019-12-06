@@ -34,7 +34,12 @@ namespace StockItUp.Model
         {
             get { return _orderedDate; }
             set { _orderedDate = value; }
-        } 
+        }
+
+        public string DateFormatted
+        {
+            get { return OrderedDate.ToString("dd / MM / yyyy HH:mm"); }
+        }
         #endregion
 
     }

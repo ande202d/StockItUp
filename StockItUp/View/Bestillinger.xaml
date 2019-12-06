@@ -111,7 +111,7 @@
                                     <ColumnDefinition Width="200"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="{Binding Id}"></TextBlock>
-                                <TextBlock Grid.Column="1" Text="{Binding OrderedDate}"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding DateFormatted}"></TextBlock>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
