@@ -56,17 +56,11 @@ namespace StockItUp.ViewModel
                         {
                             List<int> newestIcId = StoragePageViewModel.getNewstIcIds(sp.Product);
 
-                            #region Test Area
-
                             Product p = Catalog<Product>.Instance.Read(sp.Product).Result;
                             int t = 0;
                             int m;
                             int sa;
-                            int a;
                             Supplier sup = p.MySupplier;
-
-                            #endregion
-
 
                             if (sp.Store == s.Id)
                             {

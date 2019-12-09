@@ -126,8 +126,9 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal" BorderBrush="Black" BorderThickness="0,0,0,0"
                         VerticalAlignment="Top" Height="50" Margin="0,80,0,0">
 
-                <TextBlock Text="Produkt" FontSize="15" TextAlignment="Left"           Width="200"></TextBlock>
-                <TextBlock Text="Leverandør" FontSize="15" TextAlignment="Left"        Width="200"></TextBlock>
+                <TextBlock Text="Produkt" FontSize="15" TextAlignment="Left"           Width="150"></TextBlock>
+                <TextBlock Text="Leverandør" FontSize="15" TextAlignment="Left"        Width="150"></TextBlock>
+                <TextBlock Text="Email" FontSize="15" TextAlignment="Left"             Width="150"></TextBlock>
                 <TextBlock Text="Whats in stock?" FontSize="15" TextAlignment="Center"   Width="150"></TextBlock>
                 <TextBlock Text="Mangler" FontSize="15" TextAlignment="Center"           Width="100"></TextBlock>
                 <TextBlock Text="Anbefalede kasser" FontSize="15" TextAlignment="Center" Width="150"></TextBlock>
@@ -147,20 +148,22 @@
                             <Grid>
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="200"></ColumnDefinition>
-                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                     <ColumnDefinition Width="100"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Column="0" Text="{Binding Product.Name}"></TextBlock>
-                                <TextBlock Grid.Column="1" Text="{Binding Supplier.Name}"></TextBlock>
-                                <TextBlock Grid.Column="2" TextAlignment="Center" Text="{Binding AmountInStorage}"></TextBlock>
-                                <TextBlock Grid.Column="3" TextAlignment="Center" Text="{Binding Missing}"></TextBlock>
-                                <TextBlock Grid.Column="4" TextAlignment="Center" Text="{Binding SuggestedAmount}"></TextBlock>
-                                <TextBox Grid.Column="5" TextAlignment="Center" Text="{Binding ActualAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                <TextBlock Grid.Column="0" Text="{Binding Product.Name}" TextAlignment="Left"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding Supplier.Name}" TextAlignment="Left"></TextBlock>
+                                <TextBlock Grid.Column="2" Text="{Binding Supplier.Website}" TextAlignment="Left"></TextBlock>
+                                <TextBlock Grid.Column="3" TextAlignment="Center" Text="{Binding AmountInStorage}"></TextBlock>
+                                <TextBlock Grid.Column="4" TextAlignment="Center" Text="{Binding Missing}"></TextBlock>
+                                <TextBlock Grid.Column="5" TextAlignment="Center" Text="{Binding SuggestedAmount}"></TextBlock>
+                                <TextBox Grid.Column="6" TextAlignment="Center" Text="{Binding ActualAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                             </Grid>
                         </DataTemplate>
