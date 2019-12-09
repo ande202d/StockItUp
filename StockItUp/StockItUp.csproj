@@ -130,6 +130,7 @@
     <Compile Include="Connections\OrderProduct.cs" />
     <Compile Include="Connections\InventoryCountProduct.cs" />
     <Compile Include="Connections\StoreProduct.cs" />
+    <Compile Include="Connections\UserStore.cs" />
     <Compile Include="Model\InventoryCount.cs" />
     <Compile Include="Model\InventoryCountHistory.cs" />
     <Compile Include="Model\InventoryCountHistoryData.cs" />
@@ -143,7 +144,9 @@
     <Compile Include="Model\StoragePageProduct.cs" />
     <Compile Include="Model\StoragePageProductData.cs" />
     <Compile Include="Model\Store.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Persistency\Catalog.cs" />
+    <Compile Include="Persistency\Controller.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\InventoryCountViewModel.cs" />
     <Compile Include="ViewModel\OrderPageViewModel.cs" />
