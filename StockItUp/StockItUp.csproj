@@ -144,6 +144,7 @@
     <Compile Include="Model\OrderHistory.cs" />
     <Compile Include="Model\OrderHistoryData.cs" />
     <Compile Include="Model\OrderPage.cs" />
+    <Compile Include="Model\PermissionGroup.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\StoragePageProduct.cs" />
     <Compile Include="Model\StoragePageProductData.cs" />
@@ -153,9 +154,11 @@
     <Compile Include="Persistency\Controller.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\InventoryCountViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\OrderPageViewModel.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="ViewModel\StoragePageViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="View\Bestillinger.xaml.cs">
       <DependentUpon>Bestillinger.xaml</DependentUpon>
     </Compile>
@@ -167,6 +170,9 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Optaellinger.xaml.cs">
       <DependentUpon>Optaellinger.xaml</DependentUpon>
     </Compile>
@@ -210,6 +216,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Optaellinger.xaml">
       <SubType>Designer</SubType>

@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="StockItUp.View.Login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StockItUp.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:StockItUp.ViewModel"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+   <Page.DataContext>
+       <viewModel:LoginViewModel></viewModel:LoginViewModel>
+   </Page.DataContext>
+    <Grid Background="WhiteSmoke">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Height="500" Width="500" Orientation="Vertical" Background="#2d9ed2" BorderBrush="#d0662f" BorderThickness="3">
+            <TextBlock Text="Stock It Up!" HorizontalAlignment="Center" FontSize="50" Margin="0,40,0,0" Foreground="#d0662f" FontWeight="Bold"></TextBlock>
+            <TextBlock Text="Login" HorizontalAlignment="Center" FontSize="30" Margin="0,40,0,0" Foreground="#d0662f"></TextBlock>
+            <TextBox PlaceholderText="Username.." Width="200" Margin="0,50,0,0" Background="White" ></TextBox>
+            <TextBox PlaceholderText="Password.." Width="200" Margin="0,30,0,0" Background="White"></TextBox>
+            <AppBarButton Content="Login" HorizontalAlignment="Center" Margin="0,50,0,0" Width="125" Background="#d0662f"></AppBarButton>
+        </StackPanel>
+    </Grid>
+</Page>

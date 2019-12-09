@@ -5,10 +5,115 @@
     xmlns:local="using:StockItUp.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:StockItUp.ViewModel"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.DataContext>
+        <viewModel:UserViewModel></viewModel:UserViewModel>
+    </Page.DataContext>
+    <Page.Resources>
+        <Style  x:Key="Button"  TargetType="AppBarButton">
+            <Setter Property="Label" Value=""/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Foreground" Value="GhostWhite"/>
+            <Setter Property="Background" Value="#d0662f"/>
+        </Style>
+    </Page.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Top bar-->
+        <Grid Row="0" Background="#2d9ed2" BorderBrush="#d0662f" BorderThickness="0,0,0,5" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--Navigation Buttons-->
+            <AppBarButton Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List" BorderBrush="WhiteSmoke" BorderThickness="0,0,0,3">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:NavigateToPageAction TargetPage="StockItUp.View.Optaellinger"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
+            <AppBarButton Style="{StaticResource Button}" Grid.Column="1" Label="Lager" Icon="Home">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:NavigateToPageAction TargetPage="StockItUp.View.Lager"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
+            <AppBarButton Style="{StaticResource Button}" Grid.Column="2" Label="Bestillinger" Icon="Bullets">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:NavigateToPageAction TargetPage="StockItUp.View.Bestillinger"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
+            <AppBarButton Style="{StaticResource Button}" Grid.Column="3" Label="Varer" Icon="Library">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:NavigateToPageAction TargetPage="StockItUp.View.Varer"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
+            <AppBarButton Style="{StaticResource Button}" Grid.Column="4" Label="Personale" Icon="People">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:NavigateToPageAction TargetPage="StockItUp.View.Personale"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Navn:" FontSize="25" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Initialer:" FontSize="25" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Telefon Nummer:" FontSize="25" VerticalAlignment="Center"></TextBlock>
+
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding GetController.GetUser.Name}" FontSize="25" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding GetController.GetUser.Initials}" FontSize="25" VerticalAlignment="Center"></TextBlock>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding GetController.GetUser.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="25" VerticalAlignment="Center"></TextBox>
+
+
+                <TextBlock Grid.Column="0" Grid.Row="4" Text="Brugernavn:" FontSize="25" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="5" Text="Gamle Password:" FontSize="25" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="6" Text="Nye Password:" FontSize="25" VerticalAlignment="Center"></TextBlock>
+
+                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding GetController.GetUser.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="25" VerticalAlignment="Center"></TextBox>
+                <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding OldPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="25" VerticalAlignment="Center"></TextBox>
+                <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding NewPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="25" VerticalAlignment="Center"></TextBox>
+                <AppBarButton Grid.Column="1" Grid.Row="7" Content="Ændre Password" FontSize="15" Height="50" Width="200"></AppBarButton>
+
+            </Grid>
+        </Grid>
+
 
     </Grid>
 </Page>
