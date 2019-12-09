@@ -67,11 +67,13 @@ namespace StockItUp.Model
         public int NumberOfBoxes
         {
             get { return (int)Math.Floor((double)Amount / AmountPerBox); }
+            // get { return Amount / AmountPerBox; }        Jacobs version
         }
 
         public int NumberOfLoose
         {
             get { return Amount - (NumberOfBoxes*AmountPerBox);}
+            // get { return Amount % AmountPerBox; }        Jacobs version
         }
 
         #endregion
