@@ -11,6 +11,7 @@ using Windows.UI.Xaml;
 using RVG.Common;
 using StockItUp.Annotations;
 using StockItUp.Connections;
+using StockItUp.Filter;
 using StockItUp.Model;
 using StockItUp.Persistency;
 
@@ -25,7 +26,8 @@ namespace StockItUp.ViewModel
         private OrderHistory _selectedOrderHistory;
         private Visibility _createVisibility = Visibility.Visible;
         private Visibility _dataVisibility = Visibility.Collapsed;
-        
+        private string _selectedSort;
+
         #endregion
 
         #region Constructor
@@ -83,6 +85,15 @@ namespace StockItUp.ViewModel
                     }  
                 }
 
+                if (SelectedSort == "Leverandør")
+                {
+                    listToReturn.Sort(new OrderPageFilterBySupplier());
+                }
+
+                if (SelectedSort == "Varer")
+                {
+                    listToReturn.Sort(new OrderPageFilterByVarer());
+                }
                 _listOfOrders = listToReturn;
                 ObservableCollection<OrderPage> collection = new ObservableCollection<OrderPage>(listToReturn);
                 return collection;
@@ -130,6 +141,16 @@ namespace StockItUp.ViewModel
                         listToReturn.Add(i);
                     }
                 }
+
+                if (SelectedSort == "Leverandør")
+                {
+                    listToReturn.Sort(new OrderHistoryDataFilterBySupplier());
+                }
+
+                if (SelectedSort == "Varer")
+                {
+                    listToReturn.Sort(new OrderHistoryDataFilterByVarer());
+                }                
                 ObservableCollection<OrderHistoryData> collection = new ObservableCollection<OrderHistoryData>(listToReturn);
                 return collection;
             }
@@ -147,6 +168,20 @@ namespace StockItUp.ViewModel
             set { _dataVisibility = value; }
         }
 
+        public ObservableCollection<string> SortingCollection
+        {
+            get
+            {
+                List<string> sortList = new List<string>(){"Leverandør", "Varer"};
+                return new ObservableCollection<string>(sortList);
+            }
+        }
+
+        public string SelectedSort
+        {
+            get { return _selectedSort; }
+            set { _selectedSort = value; OnPropertyChanged();OnPropertyChanged(nameof(CreateOrderCatalog));OnPropertyChanged(nameof(OrderHistoryDataCatalog)); }
+        }
         #endregion
 
         #region Methods

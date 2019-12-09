@@ -137,8 +137,9 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
-                    <TextBlock Text="Lav bestilling" FontSize="50" Visibility="{Binding CreateVisibility}"></TextBlock>
+                <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Visibility="{Binding CreateVisibility}">
+                    <ComboBox VerticalAlignment="Bottom" HorizontalAlignment="Left" ItemsSource="{Binding SortingCollection}" SelectedItem="{Binding SelectedSort, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                    <TextBlock Text="Lav bestilling" FontSize="50" Margin="250,0,0,0" ></TextBlock>
                 </StackPanel>
                 <StackPanel Margin="0,50,0,0" Height="450" Visibility="{Binding CreateVisibility}">
                 <ScrollViewer Height="450">
@@ -175,8 +176,9 @@
                 <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
                 <!--XXXXXXXXXX HERE WE MAKE THE LISTVIEW FOR DATA XXXXXXXXXX-->
                 <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
-                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
-                    <TextBlock Text="Bestillings historik" FontSize="50" Visibility="{Binding DataVisibility}"></TextBlock>
+                <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Visibility="{Binding DataVisibility}">
+                    <ComboBox VerticalAlignment="Bottom" HorizontalAlignment="Left" ItemsSource="{Binding SortingCollection}" SelectedItem="{Binding SelectedSort, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                    <TextBlock Text="Bestillings historik" FontSize="50" Margin="250,0,0,0"></TextBlock>
                 </StackPanel>
                 <StackPanel Margin="0,50,0,0" Height="450" Visibility="{Binding DataVisibility}">
                     <ScrollViewer Height="450">
