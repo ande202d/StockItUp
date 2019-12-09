@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StockItUp.Model;
 
 namespace StockItUp.Persistency
 {
     public class Controller
     {
-        private int _userId;
+        private int? _userId;
         private int _storeId;
 
         #region Singleton
@@ -27,23 +28,30 @@ namespace StockItUp.Persistency
         }
         #endregion
 
-        public int UserId
+        public int? UserId
         {
             get { return _userId; }
             set { _userId = value; }
         }
 
-        /*
         public User GetUser
         {
-            get {return Catalog<User>.Instance.read(UserId).Result;}
+            get
+            {
+                if (UserId != null) return Catalog<User>.Instance.Read((int)UserId).Result;
+                return null;
+            }
         }
-        */
 
         public int StoreId
         {
             get { return _storeId; }
             set { _storeId = value; }
+        }
+
+        public Store GetStore
+        {
+            get { return Catalog<Store>.Instance.Read(StoreId).Result; }
         }
 
     }

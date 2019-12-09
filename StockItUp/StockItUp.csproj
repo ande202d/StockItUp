@@ -140,6 +140,7 @@
     <Compile Include="Model\OrderHistory.cs" />
     <Compile Include="Model\OrderHistoryData.cs" />
     <Compile Include="Model\OrderPage.cs" />
+    <Compile Include="Model\PermissionGroup.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\StoragePageProduct.cs" />
     <Compile Include="Model\StoragePageProductData.cs" />
