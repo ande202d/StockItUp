@@ -228,14 +228,18 @@ namespace StockItUp.ViewModel
                 }
             }
 
-            if (!isOnList&&WantedAmount>=-1)
+            if (!isOnList&&WantedAmount>0)
             {
                 int productId = SelectedProduct.Id;
                 int wantedAmount = WantedAmount;
                 StoreProduct spToAdd = new StoreProduct(storeId,productId,wantedAmount);
                 await Catalog<StoreProduct>.Instance.Create(spToAdd);
                 AddToWantedResponse = $"{SelectedProduct.Name} er nu tilføjet til listen"; 
+            }
 
+            if (WantedAmount<=0)
+            {
+                AddToWantedResponse = "det ønskede antal skal være over 0";
             }
             OnPropertyChanged(nameof(AddToWantedResponse));
         }
