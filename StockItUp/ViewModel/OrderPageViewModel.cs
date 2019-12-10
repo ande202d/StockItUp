@@ -224,7 +224,19 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                return new ObservableCollection<Supplier>(Catalog<Supplier>.Instance.GetList);
+                List<Supplier> sl = new List<Supplier>();
+                foreach (var supplier in Catalog<Supplier>.Instance.GetList)
+                {
+                    foreach (var orderPage in CreateOrderCatalog)
+                    {
+                        if (orderPage.SupplierName==supplier.Name)
+                        {
+                            sl.Add(supplier);
+                        }
+                    }
+                }
+                
+                return new ObservableCollection<Supplier>(sl);
             }
         }
         #endregion
