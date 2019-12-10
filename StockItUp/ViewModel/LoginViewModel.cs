@@ -91,7 +91,7 @@ namespace StockItUp.ViewModel
                 }
             }
 
-            return true;
+            return false;
         }
 
         #endregion
