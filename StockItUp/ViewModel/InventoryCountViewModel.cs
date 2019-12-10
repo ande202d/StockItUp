@@ -10,6 +10,7 @@ using System.Windows.Input;
 using RVG.Common;
 using StockItUp.Annotations;
 using StockItUp.Connections;
+using StockItUp.Filter;
 using StockItUp.Model;
 using StockItUp.Persistency;
 
@@ -59,7 +60,10 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                ObservableCollection<Location> collection = new ObservableCollection<Location>(_locationCatalog.GetList);
+                List<Location> ll = _locationCatalog.GetList;
+                ll.Sort(new LocationFilter());
+
+                ObservableCollection<Location> collection = new ObservableCollection<Location>(ll);
                 return collection;
             }
         }
@@ -97,6 +101,8 @@ namespace StockItUp.ViewModel
                         }
                     }
                 }
+
+                nlist.Sort(new InventoryCountPageFilter());
 
                 _listForProducts = nlist;
                 return nlist;

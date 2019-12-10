@@ -27,6 +27,7 @@ namespace StockItUp.ViewModel
         private Visibility _createVisibility = Visibility.Visible;
         private Visibility _dataVisibility = Visibility.Collapsed;
         private string _selectedSort;
+        private Supplier _selectedSupplier;
 
         #endregion
 
@@ -35,14 +36,18 @@ namespace StockItUp.ViewModel
         public OrderPageViewModel()
         {
             CreateOrderCommand = new RelayCommand(CreateOrderMethod);
+            ResetSelectedSupplierCommand = new RelayCommand(ResetSelectedSupplierMethod);
         }
 
 
         #endregion
 
-        #region Properties
+        
 
+        #region Properties
+        
         public ICommand CreateOrderCommand { get; set; }
+        public ICommand ResetSelectedSupplierCommand { get; set; }
 
         public ObservableCollection<OrderPage> CreateOrderCatalog
         {
@@ -93,6 +98,18 @@ namespace StockItUp.ViewModel
                 if (SelectedSort == "Varer")
                 {
                     listToReturn.Sort(new OrderPageFilterByVarer());
+                }
+                if (SelectedSupplier != null)
+                {
+                    List<OrderPage> templist = new List<OrderPage>();
+                    foreach (var data in listToReturn)
+                    {
+                        if (data.SupplierName == SelectedSupplier.Name)
+                        {
+                            templist.Add(data);
+                        }
+                    }
+                    listToReturn = templist;
                 }
                 _listOfOrders = listToReturn;
                 ObservableCollection<OrderPage> collection = new ObservableCollection<OrderPage>(listToReturn);
@@ -150,7 +167,20 @@ namespace StockItUp.ViewModel
                 if (SelectedSort == "Varer")
                 {
                     listToReturn.Sort(new OrderHistoryDataFilterByVarer());
-                }                
+                }
+
+                if (SelectedSupplier != null)
+                {
+                    List<OrderHistoryData> templist = new List<OrderHistoryData>();
+                    foreach (var data in listToReturn)
+                    {
+                        if (data.Supplier==SelectedSupplier.Name)
+                        {
+                            templist.Add(data);
+                        }
+                    }
+                    listToReturn = templist;
+                }
                 ObservableCollection<OrderHistoryData> collection = new ObservableCollection<OrderHistoryData>(listToReturn);
                 return collection;
             }
@@ -181,6 +211,21 @@ namespace StockItUp.ViewModel
         {
             get { return _selectedSort; }
             set { _selectedSort = value; OnPropertyChanged();OnPropertyChanged(nameof(CreateOrderCatalog));OnPropertyChanged(nameof(OrderHistoryDataCatalog)); }
+        }
+
+        public Supplier SelectedSupplier
+        {
+            get { return _selectedSupplier; }
+            set { _selectedSupplier = value; OnPropertyChanged(); OnPropertyChanged(nameof(CreateOrderCatalog)); OnPropertyChanged(nameof(OrderHistoryDataCatalog)); }
+        }
+
+        //returns an ObservableCollection of supplies collection based on what the catalog pulls from the database
+        public ObservableCollection<Supplier> SupplierCatalog
+        {
+            get
+            {
+                return new ObservableCollection<Supplier>(Catalog<Supplier>.Instance.GetList);
+            }
         }
         #endregion
 
@@ -234,6 +279,11 @@ namespace StockItUp.ViewModel
                 OnPropertyChanged(nameof(DataVisibility));
                 OnPropertyChanged(nameof(CreateVisibility));
             }
+        }
+
+        private void ResetSelectedSupplierMethod()
+        {
+            SelectedSupplier = null;OnPropertyChanged(nameof(SelectedSupplier));
         }
 
         #endregion
