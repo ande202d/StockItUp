@@ -25,6 +25,8 @@ namespace WebService
 
         public int AmountOrdered { get; set; }
 
+        [Required]
+        [StringLength(50)]
         public string Supplier { get; set; }
 
         public virtual OrderHistory OrderHistory1 { get; set; }

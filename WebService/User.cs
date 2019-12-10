@@ -6,14 +6,12 @@ namespace WebService
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Store")]
-    public partial class Store
+    [Table("User")]
+    public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Store()
+        public User()
         {
-            Locations = new HashSet<Location>();
-            StoreProducts = new HashSet<StoreProduct>();
             UserStores = new HashSet<UserStore>();
         }
 
@@ -23,14 +21,19 @@ namespace WebService
         [StringLength(50)]
         public string Name { get; set; }
 
+        [Required]
         [StringLength(50)]
-        public string Address { get; set; }
+        public string Username { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Location> Locations { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string Password { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StoreProduct> StoreProducts { get; set; }
+        public int PhoneNumber { get; set; }
+
+        public int GroupId { get; set; }
+
+        public virtual PermissionGroup PermissionGroup { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserStore> UserStores { get; set; }

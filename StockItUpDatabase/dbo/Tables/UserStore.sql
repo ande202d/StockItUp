@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[UserStore]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [UserId] INT NOT NULL, 
+    [StoreId] INT NOT NULL, 
+    CONSTRAINT [FK_UserStore_User] FOREIGN KEY ([UserId]) REFERENCES [User]([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_UserStore_Store] FOREIGN KEY ([StoreId]) REFERENCES [Store]([Id]) ON DELETE CASCADE
+)
