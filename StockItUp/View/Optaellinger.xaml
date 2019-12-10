@@ -106,7 +106,7 @@
                 <TextBlock Text="kasser" Width="100" FontSize="20"></TextBlock>
                 <TextBlock Text="løse" Width="100" FontSize="20"></TextBlock>
             </StackPanel>
-            <AppBarButton Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Padding="0,0,0,0" Content="Lav optælling" Style="{StaticResource Button}" Command="{Binding CreateInventoryCountCommand}" CommandParameter="{Binding listForProducts[Product]}"></AppBarButton>
+            <AppBarButton Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Padding="0,0,0,0" Content="Lav optælling" Style="{StaticResource Button}" Command="{Binding CreateInventoryCountCommand}"></AppBarButton>
             <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="0,110,0,0" Height="490">
                 <ScrollViewer Height="490">
                 <ListView ItemsSource="{Binding ListForProducts}" SelectionMode="None">
@@ -196,6 +196,7 @@
             </ListView>
             </ScrollViewer>
             </StackPanel>
+            <AppBarButton Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0,0,0,0" Content="Fjern optælling" Style="{StaticResource Button}" Command="{Binding DeleteInventoryCountCommand}"></AppBarButton>
         </Grid>
     </Grid>
 </Page>
