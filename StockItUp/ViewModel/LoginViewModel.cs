@@ -6,6 +6,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using RVG.Common;
 using StockItUp.Annotations;
 using StockItUp.Model;
 using StockItUp.Persistency;
@@ -18,29 +20,44 @@ namespace StockItUp.ViewModel
         #region Instance field
 
         private Store _selectedStore;
-
+        private string _username;
+        private string _password;
         #endregion
 
         #region Constructor
 
         public LoginViewModel()
         {
-            
+            //LoginCommand = new RelayCommand(LoginMethod);
         }
 
 
         #endregion
 
+        #region Commands
+
+        //public ICommand LoginCommand { get; set; }
+
+        #endregion
+
         #region Properties
 
-        public string Username { get; set; }
-        
-        public string Password { get; set; }
+        public string Username
+        {
+            get { return _username; }
+            set { _username = value; OnPropertyChanged(); }
+        }
+
+        public string Password
+        {
+            get { return _password; }
+            set { _password = value; OnPropertyChanged(); }
+        }
 
         public Store SelectedStore
         {
             get { return _selectedStore; }
-            set { _selectedStore = value; }
+            set { _selectedStore = value; OnPropertyChanged();}
         }
 
         public ObservableCollection<Store> StoreCatalog
@@ -55,21 +72,26 @@ namespace StockItUp.ViewModel
 
         #region Methods
 
-        public void LoginMethod()
+        public bool LoginMethod()
         {
-            foreach (User u in Catalog<User>.Instance.GetList)
+            if (SelectedStore != null)
             {
-                if (u.Username == Username)
+                foreach (User u in Catalog<User>.Instance.GetList)
                 {
-                    if (u.Password == Password)
+                    if (u.Username == Username)
                     {
-                        Controller.Instance.UserId = u.Id;
+                        if (u.Password == Password)
+                        {
+                            Controller.Instance.UserId = u.Id;
 
-                        Controller.Instance.StoreId = SelectedStore.Id;
-                        break;
+                            Controller.Instance.StoreId = SelectedStore.Id;
+                            return true;
+                        }
                     }
                 }
             }
+
+            return true;
         }
 
         #endregion

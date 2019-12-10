@@ -15,9 +15,16 @@
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Height="500" Width="500" Orientation="Vertical" Background="#2d9ed2" BorderBrush="#d0662f" BorderThickness="3">
             <TextBlock Text="Stock It Up!" HorizontalAlignment="Center" FontSize="50" Margin="0,40,0,0" Foreground="#d0662f" FontWeight="Bold"></TextBlock>
             <TextBlock Text="Login" HorizontalAlignment="Center" FontSize="30" Margin="0,40,0,0" Foreground="#d0662f"></TextBlock>
-            <TextBox PlaceholderText="Username.." Width="200" Margin="0,50,0,0" Background="White" ></TextBox>
-            <TextBox PlaceholderText="Password.." Width="200" Margin="0,30,0,0" Background="White"></TextBox>
-            <AppBarButton Content="Login" HorizontalAlignment="Center" Margin="0,50,0,0" Width="125" Background="#d0662f"></AppBarButton>
+            <ComboBox Margin="0,20,0,0" HorizontalAlignment="Center" SelectedItem="{Binding SelectedStore, Mode=TwoWay}" ItemsSource="{Binding StoreCatalog}" Background="White" PlaceholderText="Vælg Butik">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBox PlaceholderText="Username.." Text="{Binding Username, Mode=TwoWay}" Width="200" Margin="0,30,0,0" Background="White" ></TextBox>
+            <TextBox PlaceholderText="Password.." Text="{Binding Password, Mode=TwoWay}" Width="200" Margin="0,30,0,0" Background="White"></TextBox>
+            <AppBarButton Content="Login" HorizontalAlignment="Center" Margin="0,30,0,0" Width="125" Background="#d0662f" Command="{Binding LoginCommand}" Click="AppBarButton_Click"></AppBarButton>
         </StackPanel>
     </Grid>
 </Page>
