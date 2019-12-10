@@ -79,7 +79,13 @@
 
         <Grid Grid.Row="1">
             <StackPanel>
-                <AppBarButton Content="ADMIN" Style="{StaticResource Button}" FontWeight="ExtraBold" FontSize="18" Width="150" Margin="50" HorizontalAlignment="Right"></AppBarButton>
+                <AppBarButton Content="ADMIN" Style="{StaticResource Button}" FontWeight="ExtraBold" FontSize="18" Width="150" Margin="50" HorizontalAlignment="Right">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Click">
+                            <core:NavigateToPageAction TargetPage="StockItUp.View.AdminPersonale"/>
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </AppBarButton>
             </StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -101,19 +107,19 @@
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Initialer:" FontSize="25" VerticalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Telefon Nummer:" FontSize="25" VerticalAlignment="Center"></TextBlock>
 
-                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding GetController.GetUser.Name}" FontSize="25" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding UserName}" FontSize="25" VerticalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding GetController.GetUser.Initials}" FontSize="25" VerticalAlignment="Center"></TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding GetController.GetUser.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="25" VerticalAlignment="Center"></TextBox>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding UserPhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="25" VerticalAlignment="Center"></TextBox>
 
 
                 <TextBlock Grid.Column="0" Grid.Row="4" Text="Brugernavn:" FontSize="25" VerticalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="5" Text="Gamle Password:" FontSize="25" VerticalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="6" Text="Nye Password:" FontSize="25" VerticalAlignment="Center"></TextBlock>
 
-                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding GetController.GetUser.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="25" VerticalAlignment="Center"></TextBox>
+                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding UserUsername, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="25" VerticalAlignment="Center"></TextBox>
                 <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding OldPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="25" VerticalAlignment="Center"></TextBox>
                 <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding NewPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="25" VerticalAlignment="Center"></TextBox>
-                <AppBarButton Grid.Column="1" Grid.Row="7" Content="Ændre Password" FontSize="15" Height="50" Width="200" Style="{StaticResource Button}"></AppBarButton>
+                <AppBarButton Grid.Column="1" Grid.Row="7" Content="Ændre Password" FontSize="15" Height="50" Width="200" Style="{StaticResource Button}" Command="{Binding UpdateUserCommand}"></AppBarButton>
                 <AppBarButton Grid.Column="1" Grid.Row="8" Style="{StaticResource Button}" Content="Log ud">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Click">
