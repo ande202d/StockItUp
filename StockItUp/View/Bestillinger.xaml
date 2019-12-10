@@ -138,8 +138,23 @@
 
             <StackPanel Grid.Column="1">
                 <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Visibility="{Binding CreateVisibility}">
-                    <ComboBox VerticalAlignment="Bottom" HorizontalAlignment="Left" ItemsSource="{Binding SortingCollection}" SelectedItem="{Binding SelectedSort, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
-                    <TextBlock Text="Lav bestilling" FontSize="50" Margin="250,0,0,0" ></TextBlock>
+                    <StackPanel Width="150"  HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <ComboBox Header="sorter: " VerticalAlignment="Bottom" ItemsSource="{Binding SortingCollection}" SelectedItem="{Binding SelectedSort, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                    </StackPanel>
+                    <StackPanel Width="400" HorizontalAlignment="Center">
+                        <TextBlock Text="Lav bestilling" FontSize="50" ></TextBlock>
+                    </StackPanel>
+                    <StackPanel Margin="5,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <TextBlock Text="vis kun varer fra denne leverandør: " HorizontalAlignment="Right"></TextBlock>
+                        <ComboBox ItemsSource="{Binding SupplierCatalog}"  HorizontalAlignment="Center" PlaceholderText="Vælg leverandør" SelectedItem="{Binding SelectedSupplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Content="Nulstil" Background="#d0662f" Foreground="GhostWhite" Command="{Binding ResetSelectedSupplierCommand}" Margin="5,0,0,0"></Button>
+                    </StackPanel>
                 </StackPanel>
                 <StackPanel Margin="0,50,0,0" Height="450" Visibility="{Binding CreateVisibility}">
                 <ScrollViewer Height="450">
@@ -177,8 +192,23 @@
                 <!--XXXXXXXXXX HERE WE MAKE THE LISTVIEW FOR DATA XXXXXXXXXX-->
                 <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
                 <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Visibility="{Binding DataVisibility}">
-                    <ComboBox VerticalAlignment="Bottom" HorizontalAlignment="Left" ItemsSource="{Binding SortingCollection}" SelectedItem="{Binding SelectedSort, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
-                    <TextBlock Text="Bestillings historik" FontSize="50" Margin="250,0,0,0"></TextBlock>
+                    <StackPanel Width="150"  HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <ComboBox VerticalAlignment="Bottom" Header="sorter:" HorizontalAlignment="Left" ItemsSource="{Binding SortingCollection}" SelectedItem="{Binding SelectedSort, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                    </StackPanel>
+                    <StackPanel Width="400" HorizontalAlignment="Center">
+                        <TextBlock Text="Bestillings historik" FontSize="50"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Margin="5,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <TextBlock Text="vis kun varer fra denne leverandør: " HorizontalAlignment="Right"></TextBlock>
+                        <ComboBox ItemsSource="{Binding SupplierCatalog}"  HorizontalAlignment="Center" PlaceholderText="Vælg leverandør" SelectedItem="{Binding SelectedSupplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Content="Nulstil" Background="#d0662f" Foreground="GhostWhite" Command="{Binding ResetSelectedSupplierCommand}" Margin="5,0,0,0"></Button>
+                    </StackPanel>
                 </StackPanel>
                 <StackPanel Margin="0,50,0,0" Height="450" Visibility="{Binding DataVisibility}">
                     <ScrollViewer Height="450">

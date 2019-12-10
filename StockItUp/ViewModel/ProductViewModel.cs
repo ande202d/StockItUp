@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Data;
 using RVG.Common;
 using StockItUp.Annotations;
 using StockItUp.Connections;
+using StockItUp.Filter;
 using StockItUp.Model;
 using StockItUp.Persistency;
 
@@ -72,15 +73,17 @@ namespace StockItUp.ViewModel
         {
             get
             {
+                List<Product> pl = _productCatalog.GetList;
+                pl.Sort(new ProductFilter());
                 //ObservableCollection<Product> collection = new ObservableCollection<Product>(_productCatalog.ReadAll().Result);
                 ObservableCollection<Product> collection = new ObservableCollection<Product>();
                 if (Filter == "")
                 {
-                    collection = new ObservableCollection<Product>(_productCatalog.GetList);
+                    collection = new ObservableCollection<Product>(pl);
                 }
                 else
                 {
-                    foreach (var v in _productCatalog.GetList)
+                    foreach (var v in pl)
                     {
                         if (v.Name.ToLower().Contains(Filter.ToLower()))
                         {
@@ -97,7 +100,9 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                return new ObservableCollection<Supplier>(_supplierCatalog.GetList);
+                List<Supplier> sl = _supplierCatalog.GetList;
+                sl.Sort();
+                return new ObservableCollection<Supplier>(sl);
             }
         }
 

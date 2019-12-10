@@ -1,5 +1,8 @@
 ﻿USE [StockItUpDB]
 GO
+delete from [dbo].[UserStore];
+delete from [dbo].[User];
+delete from [dbo].[PermissionGroup];
 delete from [dbo].[OrderHistoryData];
 delete from [dbo].[OrderHistory];
 delete from [dbo].[OrderProduct];
@@ -78,5 +81,20 @@ INSERT INTO [dbo].[OrderHistoryData] ([Id], [OrderHistory], [Product], [MissingA
 INSERT INTO [dbo].[OrderHistoryData] ([Id], [OrderHistory], [Product], [MissingAmount], [AmountPerBox], [RecommendedAmount], [AmountOrdered], [Supplier]) VALUES (1010, 1003, N'Royal Export', 38, 12, 4, 6, N'Royal')
 INSERT INTO [dbo].[OrderHistoryData] ([Id], [OrderHistory], [Product], [MissingAmount], [AmountPerBox], [RecommendedAmount], [AmountOrdered], [Supplier]) VALUES (1011, 1003, N'Jack Daniels', 0, 8, 0, 2, N'')
 SET IDENTITY_INSERT [dbo].[OrderHistoryData] OFF
+
+SET IDENTITY_INSERT [dbo].[PermissionGroup] ON
+INSERT INTO [dbo].[PermissionGroup] ([Id], [Name], [CanCreateProduct], [CanDeleteProduct], [CanUpdateProduct], [CanCreateSupplier], [CanDeleteSupplier], [CanUpdateSupplier], [CanCreateLocation], [CanDeleteLocation], [CanUpdateLocation], [CanCreateInventoryCount], [CanDeleteInventoryCount], [CanViewInventoryCount], [CanCreateOrder], [CanDeleteOrder], [CanViewOrder], [CanChangeStoreProduct], [CanCreateUser], [CanDeleteUser], [CanUpdateUser], [CanCreatePermissionGroup], [CanDeletePermissionGroup], [CanUpdatePermissionGroup], [CanCreateStore], [CanDeleteStore], [CanUpdateStore]) VALUES (1, N'Default', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+INSERT INTO [dbo].[PermissionGroup] ([Id], [Name], [CanCreateProduct], [CanDeleteProduct], [CanUpdateProduct], [CanCreateSupplier], [CanDeleteSupplier], [CanUpdateSupplier], [CanCreateLocation], [CanDeleteLocation], [CanUpdateLocation], [CanCreateInventoryCount], [CanDeleteInventoryCount], [CanViewInventoryCount], [CanCreateOrder], [CanDeleteOrder], [CanViewOrder], [CanChangeStoreProduct], [CanCreateUser], [CanDeleteUser], [CanUpdateUser], [CanCreatePermissionGroup], [CanDeletePermissionGroup], [CanUpdatePermissionGroup], [CanCreateStore], [CanDeleteStore], [CanUpdateStore]) VALUES (2, N'Admin', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+SET IDENTITY_INSERT [dbo].[PermissionGroup] OFF
+
+SET IDENTITY_INSERT [dbo].[User] ON
+INSERT INTO [dbo].[User] ([Id], [Name], [Username], [Password], [PhoneNumber], [GroupId]) VALUES (1, N'Timm', N'timm', N'timm', 252525, 1)
+INSERT INTO [dbo].[User] ([Id], [Name], [Username], [Password], [PhoneNumber], [GroupId]) VALUES (2, N'Anders Garbacz Hansen', N'anders1', N'anders1', 66666666, 2)
+SET IDENTITY_INSERT [dbo].[User] OFF
+
+SET IDENTITY_INSERT [dbo].[UserStore] ON
+INSERT INTO [dbo].[UserStore] ([Id], [UserId], [StoreId]) VALUES (1, 1, 1)
+INSERT INTO [dbo].[UserStore] ([Id], [UserId], [StoreId]) VALUES (2, 2, 1)
+SET IDENTITY_INSERT [dbo].[UserStore] OFF
 
 

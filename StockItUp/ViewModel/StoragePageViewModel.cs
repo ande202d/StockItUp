@@ -12,6 +12,7 @@ using Windows.Devices.Lights;
 using RVG.Common;
 using StockItUp.Annotations;
 using StockItUp.Connections;
+using StockItUp.Filter;
 using StockItUp.Model;
 using StockItUp.Persistency;
 
@@ -70,7 +71,9 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                ObservableCollection<Location> collection = new ObservableCollection<Location>(_locationCatalog.GetList);
+                List<Location> ll = _locationCatalog.GetList;
+                ll.Sort(new LocationFilter());
+                ObservableCollection<Location> collection = new ObservableCollection<Location>(ll);
 
 
                 return collection;
@@ -149,6 +152,8 @@ namespace StockItUp.ViewModel
 
                 #endregion
 
+
+                listToReturn.Sort(new StoragePageProductFilter());
                 //then we make the observable collection...
                 ObservableCollection<StoragePageProduct> collection= new ObservableCollection<StoragePageProduct>();
 
@@ -169,6 +174,7 @@ namespace StockItUp.ViewModel
                     }
                 }
                  
+                
                 return collection;
             }
         }
@@ -199,6 +205,7 @@ namespace StockItUp.ViewModel
                     
                 }
                 
+                listToReturn.Sort(new StoragePageProductDataFilter());
                 ObservableCollection<StoragePageProductData> collection = new ObservableCollection<StoragePageProductData>(listToReturn);
                 return collection;
             }
