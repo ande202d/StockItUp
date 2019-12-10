@@ -168,6 +168,12 @@
     <Compile Include="View\AdminPersonale.xaml.cs">
       <DependentUpon>AdminPersonale.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AdminStorePage.xaml.cs">
+      <DependentUpon>AdminStorePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdminUserRolePage.xaml.cs">
+      <DependentUpon>AdminUserRolePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Bestillinger.xaml.cs">
       <DependentUpon>Bestillinger.xaml</DependentUpon>
     </Compile>
@@ -215,6 +221,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="View\AdminPersonale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminStorePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminUserRolePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
