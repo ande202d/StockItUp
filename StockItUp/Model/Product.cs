@@ -7,7 +7,7 @@ using StockItUp.Persistency;
 
 namespace StockItUp.Model
 {
-    public class Product
+    public class Product:IComparable<Product>
     {
         private int _id;
         private static int _idCounter = 1;
@@ -76,7 +76,16 @@ namespace StockItUp.Model
             get { return _id; }
             set { _id = value; }
         } 
+
+
         #endregion
 
+        public int CompareTo(Product other)
+        {
+                if (other == null) return 1;
+
+
+                return Name.CompareTo(other.Name);
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StockItUp
 {
-    public class Supplier
+    public class Supplier: IComparable<Supplier>
     {
         private int _id;
         private static int _idCounter = 1;
@@ -56,5 +56,10 @@ namespace StockItUp
         } 
         #endregion
 
+        public int CompareTo(Supplier other)
+        {
+            if (other == null) return 1;
+            return string.Compare(Name, other.Name, StringComparison.Ordinal);
+        }
     }
 }
