@@ -27,9 +27,11 @@ SET IDENTITY_INSERT [dbo].[Location] ON
 INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (1, N'Baren', 1)
 INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (2, N'Lageret', 1)
 INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (3, N'Baglokalet', 1)
+
 INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (4, N'Hylderne', 2)
 INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (5, N'Under disken', 2)
 INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (6, N'Kælderen', 2)
+
 INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (7, N'Bilen', 3)
 INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (8, N'På ladet', 3)
 SET IDENTITY_INSERT [dbo].[Location] OFF
@@ -60,57 +62,80 @@ SET IDENTITY_INSERT [dbo].[Product] OFF
 
 SET IDENTITY_INSERT [dbo].[StoreProduct] ON
 INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (1, 1, 1, 240)
-INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (2, 1, 3, 60)
-INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (3, 1, 5, 36)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (2, 1, 2, 120)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (3, 1, 3, 72)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (4, 1, 6, 36)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (5, 1, 9, 30)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (6, 1, 12, 60)
+
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (7, 2, 2, 96)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (8, 2, 4, 12)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (9, 2, 7, 10)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (10, 2, 10, 20)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (11, 2, 11, 48)
+
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (12, 3, 4, 33)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (13, 3, 6, 48)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (14, 3, 8, 36)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (15, 3, 10, 80)
 SET IDENTITY_INSERT [dbo].[StoreProduct] OFF
 
-SET IDENTITY_INSERT [dbo].[InventoryCount] ON
-INSERT INTO [dbo].[InventoryCount] ([Id], [Location], [DateCounted]) VALUES (3005, 1001, N'2019-12-08 20:17:27')
-SET IDENTITY_INSERT [dbo].[InventoryCount] OFF
+--SET IDENTITY_INSERT [dbo].[InventoryCount] ON
+--INSERT INTO [dbo].[InventoryCount] ([Id], [Location], [DateCounted]) VALUES (3005, 1001, N'2019-12-08 20:17:27')
+--SET IDENTITY_INSERT [dbo].[InventoryCount] OFF
 
-SET IDENTITY_INSERT [dbo].[InventoryCountProduct] ON
-INSERT INTO [dbo].[InventoryCountProduct] ([Id], [InventoryCount], [Product], [Amount]) VALUES (3016, 3005, 2001, 53)
-INSERT INTO [dbo].[InventoryCountProduct] ([Id], [InventoryCount], [Product], [Amount]) VALUES (3017, 3005, 2003, 22)
-INSERT INTO [dbo].[InventoryCountProduct] ([Id], [InventoryCount], [Product], [Amount]) VALUES (3018, 3005, 2005, 40)
-SET IDENTITY_INSERT [dbo].[InventoryCountProduct] OFF
+--SET IDENTITY_INSERT [dbo].[InventoryCountProduct] ON
+--INSERT INTO [dbo].[InventoryCountProduct] ([Id], [InventoryCount], [Product], [Amount]) VALUES (3016, 3005, 2001, 53)
+--INSERT INTO [dbo].[InventoryCountProduct] ([Id], [InventoryCount], [Product], [Amount]) VALUES (3017, 3005, 2003, 22)
+--INSERT INTO [dbo].[InventoryCountProduct] ([Id], [InventoryCount], [Product], [Amount]) VALUES (3018, 3005, 2005, 40)
+--SET IDENTITY_INSERT [dbo].[InventoryCountProduct] OFF
 
-INSERT INTO [dbo].[InventoryCountHistory] ([Id], [Location], [CountDate]) VALUES (3005, N'Baren', N'2019-12-08 20:17:27')
+--INSERT INTO [dbo].[InventoryCountHistory] ([Id], [Location], [CountDate]) VALUES (3005, N'Baren', N'2019-12-08 20:17:27')
 
-INSERT INTO [dbo].[InventoryCountHistoryData] ([Id], [Product], [Amount], [InventoryCountHistory], [AmountPerBox]) VALUES (3016, N'Carlsberg', 53, 3005, 24)
-INSERT INTO [dbo].[InventoryCountHistoryData] ([Id], [Product], [Amount], [InventoryCountHistory], [AmountPerBox]) VALUES (3017, N'Royal Export', 22, 3005, 12)
-INSERT INTO [dbo].[InventoryCountHistoryData] ([Id], [Product], [Amount], [InventoryCountHistory], [AmountPerBox]) VALUES (3018, N'Jack Daniels', 40, 3005, 8)
+--INSERT INTO [dbo].[InventoryCountHistoryData] ([Id], [Product], [Amount], [InventoryCountHistory], [AmountPerBox]) VALUES (3016, N'Carlsberg', 53, 3005, 24)
+--INSERT INTO [dbo].[InventoryCountHistoryData] ([Id], [Product], [Amount], [InventoryCountHistory], [AmountPerBox]) VALUES (3017, N'Royal Export', 22, 3005, 12)
+--INSERT INTO [dbo].[InventoryCountHistoryData] ([Id], [Product], [Amount], [InventoryCountHistory], [AmountPerBox]) VALUES (3018, N'Jack Daniels', 40, 3005, 8)
 
-SET IDENTITY_INSERT [dbo].[Order] ON
-INSERT INTO [dbo].[Order] ([Id], [OrderDate]) VALUES (1003, N'2019-12-08 20:17:57')
-SET IDENTITY_INSERT [dbo].[Order] OFF
+--SET IDENTITY_INSERT [dbo].[Order] ON
+--INSERT INTO [dbo].[Order] ([Id], [OrderDate]) VALUES (1003, N'2019-12-08 20:17:57')
+--SET IDENTITY_INSERT [dbo].[Order] OFF
 
-SET IDENTITY_INSERT [dbo].[OrderProduct] ON
-INSERT INTO [dbo].[OrderProduct] ([Id], [Order], [Product], [OrderedAmount]) VALUES (1008, 1003, 2001, 10)
-INSERT INTO [dbo].[OrderProduct] ([Id], [Order], [Product], [OrderedAmount]) VALUES (1009, 1003, 2003, 6)
-INSERT INTO [dbo].[OrderProduct] ([Id], [Order], [Product], [OrderedAmount]) VALUES (1010, 1003, 2005, 2)
-SET IDENTITY_INSERT [dbo].[OrderProduct] OFF
+--SET IDENTITY_INSERT [dbo].[OrderProduct] ON
+--INSERT INTO [dbo].[OrderProduct] ([Id], [Order], [Product], [OrderedAmount]) VALUES (1008, 1003, 2001, 10)
+--INSERT INTO [dbo].[OrderProduct] ([Id], [Order], [Product], [OrderedAmount]) VALUES (1009, 1003, 2003, 6)
+--INSERT INTO [dbo].[OrderProduct] ([Id], [Order], [Product], [OrderedAmount]) VALUES (1010, 1003, 2005, 2)
+--SET IDENTITY_INSERT [dbo].[OrderProduct] OFF
 
-INSERT INTO [dbo].[OrderHistory] ([Id], [OrderedDate]) VALUES (1003, N'2019-12-08 20:17:57')
+--INSERT INTO [dbo].[OrderHistory] ([Id], [OrderedDate]) VALUES (1003, N'2019-12-08 20:17:57')
 
-SET IDENTITY_INSERT [dbo].[OrderHistoryData] ON
-INSERT INTO [dbo].[OrderHistoryData] ([Id], [OrderHistory], [Product], [MissingAmount], [AmountPerBox], [RecommendedAmount], [AmountOrdered], [Supplier]) VALUES (1009, 1003, N'Carlsberg', 187, 24, 8, 10, N'Carlsberg')
-INSERT INTO [dbo].[OrderHistoryData] ([Id], [OrderHistory], [Product], [MissingAmount], [AmountPerBox], [RecommendedAmount], [AmountOrdered], [Supplier]) VALUES (1010, 1003, N'Royal Export', 38, 12, 4, 6, N'Royal')
-INSERT INTO [dbo].[OrderHistoryData] ([Id], [OrderHistory], [Product], [MissingAmount], [AmountPerBox], [RecommendedAmount], [AmountOrdered], [Supplier]) VALUES (1011, 1003, N'Jack Daniels', 0, 8, 0, 2, N'')
-SET IDENTITY_INSERT [dbo].[OrderHistoryData] OFF
+--SET IDENTITY_INSERT [dbo].[OrderHistoryData] ON
+--INSERT INTO [dbo].[OrderHistoryData] ([Id], [OrderHistory], [Product], [MissingAmount], [AmountPerBox], [RecommendedAmount], [AmountOrdered], [Supplier]) VALUES (1009, 1003, N'Carlsberg', 187, 24, 8, 10, N'Carlsberg')
+--INSERT INTO [dbo].[OrderHistoryData] ([Id], [OrderHistory], [Product], [MissingAmount], [AmountPerBox], [RecommendedAmount], [AmountOrdered], [Supplier]) VALUES (1010, 1003, N'Royal Export', 38, 12, 4, 6, N'Royal')
+--INSERT INTO [dbo].[OrderHistoryData] ([Id], [OrderHistory], [Product], [MissingAmount], [AmountPerBox], [RecommendedAmount], [AmountOrdered], [Supplier]) VALUES (1011, 1003, N'Jack Daniels', 0, 8, 0, 2, N'')
+--SET IDENTITY_INSERT [dbo].[OrderHistoryData] OFF
 
 SET IDENTITY_INSERT [dbo].[PermissionGroup] ON
 INSERT INTO [dbo].[PermissionGroup] ([Id], [Name], [CanCreateProduct], [CanDeleteProduct], [CanUpdateProduct], [CanCreateSupplier], [CanDeleteSupplier], [CanUpdateSupplier], [CanCreateLocation], [CanDeleteLocation], [CanUpdateLocation], [CanCreateInventoryCount], [CanDeleteInventoryCount], [CanViewInventoryCount], [CanCreateOrder], [CanDeleteOrder], [CanViewOrder], [CanChangeStoreProduct], [CanCreateUser], [CanDeleteUser], [CanUpdateUser], [CanCreatePermissionGroup], [CanDeletePermissionGroup], [CanUpdatePermissionGroup], [CanCreateStore], [CanDeleteStore], [CanUpdateStore]) VALUES (1, N'Default', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 INSERT INTO [dbo].[PermissionGroup] ([Id], [Name], [CanCreateProduct], [CanDeleteProduct], [CanUpdateProduct], [CanCreateSupplier], [CanDeleteSupplier], [CanUpdateSupplier], [CanCreateLocation], [CanDeleteLocation], [CanUpdateLocation], [CanCreateInventoryCount], [CanDeleteInventoryCount], [CanViewInventoryCount], [CanCreateOrder], [CanDeleteOrder], [CanViewOrder], [CanChangeStoreProduct], [CanCreateUser], [CanDeleteUser], [CanUpdateUser], [CanCreatePermissionGroup], [CanDeletePermissionGroup], [CanUpdatePermissionGroup], [CanCreateStore], [CanDeleteStore], [CanUpdateStore]) VALUES (2, N'Admin', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+INSERT INTO [dbo].[PermissionGroup] ([Id], [Name], [CanCreateProduct], [CanDeleteProduct], [CanUpdateProduct], [CanCreateSupplier], [CanDeleteSupplier], [CanUpdateSupplier], [CanCreateLocation], [CanDeleteLocation], [CanUpdateLocation], [CanCreateInventoryCount], [CanDeleteInventoryCount], [CanViewInventoryCount], [CanCreateOrder], [CanDeleteOrder], [CanViewOrder], [CanChangeStoreProduct], [CanCreateUser], [CanDeleteUser], [CanUpdateUser], [CanCreatePermissionGroup], [CanDeletePermissionGroup], [CanUpdatePermissionGroup], [CanCreateStore], [CanDeleteStore], [CanUpdateStore]) VALUES (3, N'CoOwner', 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1)
 SET IDENTITY_INSERT [dbo].[PermissionGroup] OFF
 
 SET IDENTITY_INSERT [dbo].[User] ON
-INSERT INTO [dbo].[User] ([Id], [Name], [Username], [Password], [PhoneNumber], [GroupId]) VALUES (1, N'Timm', N'timm', N'timm', 252525, 1)
-INSERT INTO [dbo].[User] ([Id], [Name], [Username], [Password], [PhoneNumber], [GroupId]) VALUES (2, N'Anders Garbacz Hansen', N'anders1', N'anders1', 66666666, 2)
+INSERT INTO [dbo].[User] ([Id], [Name], [Username], [Password], [PhoneNumber], [GroupId]) VALUES (1, N'Timm', N'timm', N'timm', 25252525, 3)
+INSERT INTO [dbo].[User] ([Id], [Name], [Username], [Password], [PhoneNumber], [GroupId]) VALUES (2, N'Anders Garbacz Hansen', N'anders', N'anders', 66666666, 2)
+INSERT INTO [dbo].[User] ([Id], [Name], [Username], [Password], [PhoneNumber], [GroupId]) VALUES (3, N'Jacob B Madvig', N'jacob', N'jacob', 88888888, 1)
+INSERT INTO [dbo].[User] ([Id], [Name], [Username], [Password], [PhoneNumber], [GroupId]) VALUES (4, N'Admin', N'admin', N'admin', 11111111, 1)
 SET IDENTITY_INSERT [dbo].[User] OFF
 
 SET IDENTITY_INSERT [dbo].[UserStore] ON
 INSERT INTO [dbo].[UserStore] ([Id], [UserId], [StoreId]) VALUES (1, 1, 1)
+
 INSERT INTO [dbo].[UserStore] ([Id], [UserId], [StoreId]) VALUES (2, 2, 1)
+INSERT INTO [dbo].[UserStore] ([Id], [UserId], [StoreId]) VALUES (3, 2, 3)
+
+INSERT INTO [dbo].[UserStore] ([Id], [UserId], [StoreId]) VALUES (4, 4, 1)
+INSERT INTO [dbo].[UserStore] ([Id], [UserId], [StoreId]) VALUES (5, 4, 2)
+INSERT INTO [dbo].[UserStore] ([Id], [UserId], [StoreId]) VALUES (6, 4, 3)
 SET IDENTITY_INSERT [dbo].[UserStore] OFF
 
 

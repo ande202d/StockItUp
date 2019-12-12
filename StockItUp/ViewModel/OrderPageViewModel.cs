@@ -64,7 +64,7 @@ namespace StockItUp.ViewModel
 
                 foreach (var s in Catalog<Store>.Instance.GetList)
                 {
-                    if (s.Id == 1)
+                    if (s.Id == Controller.Instance.StoreId)
                     {
                         foreach (var sp in Catalog<StoreProduct>.Instance.GetList)
                         {

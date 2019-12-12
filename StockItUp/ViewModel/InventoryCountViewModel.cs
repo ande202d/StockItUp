@@ -70,11 +70,12 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                List<Location> ll = _locationCatalog.GetList;
-                ll.Sort(new LocationFilter());
-
-                ObservableCollection<Location> collection = new ObservableCollection<Location>(ll);
-                return collection;
+                List<Location> listToReturn = new List<Location>();
+                foreach (Location l in Catalog<Location>.Instance.GetList)
+                {
+                    if (l.Store == Controller.Instance.StoreId) listToReturn.Add(l);
+                }
+                return new ObservableCollection<Location>(listToReturn);
             }
         }
 
@@ -105,7 +106,7 @@ namespace StockItUp.ViewModel
                 {
                     foreach (var product in ProductCatalog)
                     {
-                        if (sp.Product == product.Id)
+                        if (sp.Product == product.Id && sp.Store == Controller.Instance.StoreId)
                         {
                             nlist.Add(new InventoryCountPage(product));
                         }
@@ -131,9 +132,23 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                ObservableCollection<InventoryCountHistory> collection = 
-                    new ObservableCollection<InventoryCountHistory>(Catalog<InventoryCountHistory>.Instance.GetList);
-                return collection;
+                List<InventoryCountHistory> listToReturn = new List<InventoryCountHistory>();
+
+                List<int> listOfInts = new List<int>();
+                foreach (var ic in Catalog<InventoryCount>.Instance.GetList)
+                {
+                    if (ic.MyLocation.Store == Controller.Instance.StoreId) listOfInts.Add(ic.Id);
+                }
+
+                foreach (InventoryCountHistory ich in Catalog<InventoryCountHistory>.Instance.GetList)
+                {
+                    if (listOfInts.Contains(ich.Id)) listToReturn.Add(ich);
+                }
+                return new ObservableCollection<InventoryCountHistory>(listToReturn);
+
+                //ObservableCollection<InventoryCountHistory> collection = 
+                //    new ObservableCollection<InventoryCountHistory>(Catalog<InventoryCountHistory>.Instance.GetList);
+                //return collection;
             }
         }
 

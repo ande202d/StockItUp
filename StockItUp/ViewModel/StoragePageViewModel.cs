@@ -108,7 +108,7 @@ namespace StockItUp.ViewModel
                 //first we go though each store in the database, and make sure we are working with the right store
                 foreach (var s in Catalog<Store>.Instance.GetList)
                 {
-                    if (s.Id == 1)
+                    if (s.Id == Controller.Instance.StoreId)
                     {
                         //then we go though all the wanted products and if the store wants that product, we go further
                         foreach (var sp in Catalog<StoreProduct>.Instance.GetList)
@@ -313,7 +313,7 @@ namespace StockItUp.ViewModel
             foreach (var s in Catalog<Store>.Instance.GetList)
             {
                 //we go though all the stores, and make sure we got the right store
-                if (s.Id == 1)
+                if (s.Id == Controller.Instance.StoreId)
                 {
                     foreach (var l in Catalog<Location>.Instance.GetList)
                     {
