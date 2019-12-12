@@ -26,7 +26,7 @@ namespace StockItUp.ViewModel
             CreateEmployeeCommand = new RelayCommand(CreateEmployeeMethod);
             UpdateEmployeeCommand = new RelayCommand(UpdateEmployeeMethod);
             DeleteEmployeeCommand = new RelayCommand(DeleteEmployeeMethod);
-            ResetPasswordCommand = new RelayCommand(RandomPasswordMethod);
+            ResetPasswordCommand = new RelayCommand(ResetPasswordMethod);
         }
 
 
@@ -110,6 +110,11 @@ namespace StockItUp.ViewModel
             }
 
             return newPassword;
+        }
+
+        public void ResetPasswordMethod()
+        {
+            _selectedUser.Password = RandomPasswordMethod();
         }
 
 
