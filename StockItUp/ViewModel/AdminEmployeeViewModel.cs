@@ -31,6 +31,7 @@ namespace StockItUp.ViewModel
             DeleteEmployeeCommand = new RelayCommand(DeleteEmployeeMethod);
             ResetPasswordCommand = new RelayCommand(ResetPasswordMethod);
             ShowPassword = Visibility.Collapsed;
+            ShowPasswordOnCreate = Visibility.Collapsed;
         }
 
 
@@ -59,7 +60,14 @@ namespace StockItUp.ViewModel
             set { _selectedPermissionGroup = value; OnPropertyChanged(); }
         }
 
+        public string SelectedSort
+        {
+            get { return _selectedSort; }
+            set { _selectedSort = value; OnPropertyChanged(); OnPropertyChanged(nameof(UserCatalog)); OnPropertyChanged(nameof(PermissionGroupCatalog)); }
+        }
+
         public Visibility ShowPassword { get; set; }
+        public Visibility ShowPasswordOnCreate { get; set; }
 
         public ObservableCollection<User> UserCatalog
         {
@@ -102,12 +110,7 @@ namespace StockItUp.ViewModel
             }
         }
 
-        public string SelectedSort
-        {
-            get { return _selectedSort; }
-            set { _selectedSort = value; OnPropertyChanged(); OnPropertyChanged(nameof(UserCatalog)); OnPropertyChanged(nameof(PermissionGroupCatalog)); }
-        }
-
+        
         #endregion
 
         #region Methods
@@ -120,9 +123,13 @@ namespace StockItUp.ViewModel
                 _selectedUser.GroupId = SelectedPermissionGroup.Id;
                 _selectedUser.Password = RandomPasswordMethod();
                 _selectedUser.Username = RandomUserName();
+
                 await Catalog<User>.Instance.Create(SelectedUser);
+                ShowPasswordOnCreate = Visibility.Visible;
+
                 OnPropertyChanged(nameof(UserCatalog));
                 OnPropertyChanged(nameof(SelectedUser));
+                OnPropertyChanged(nameof(ShowPasswordOnCreate));
             }
         }
 
