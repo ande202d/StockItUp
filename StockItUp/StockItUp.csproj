@@ -131,6 +131,7 @@
     <Compile Include="Connections\InventoryCountProduct.cs" />
     <Compile Include="Connections\StoreProduct.cs" />
     <Compile Include="Connections\UserStore.cs" />
+    <Compile Include="Filter\UserFilterByName.cs" />
     <Compile Include="Filter\InventoryCountPageFilter.cs" />
     <Compile Include="Filter\LocationFilter.cs" />
     <Compile Include="Filter\OrderHistoryDataFilterBySupplier.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Filter\StoragePageProductDataFilter.cs" />
     <Compile Include="Filter\StoragePageProductFilter.cs" />
     <Compile Include="Filter\SupplierFilter.cs" />
+    <Compile Include="Filter\UserFilterByRole.cs" />
     <Compile Include="Model\GroupPagePermissionSet.cs" />
     <Compile Include="Model\InventoryCount.cs" />
     <Compile Include="Model\InventoryCountHistory.cs" />
