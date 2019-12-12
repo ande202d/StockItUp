@@ -24,8 +24,8 @@ namespace StockItUp.Model
             _name = name;
             _groupId = groupId;
             _phoneNumber = 0;
-            RandomUsername();
-            _password = _username;
+            //RandomUsername();
+            //_password = _username;
         }
 
         public User()
