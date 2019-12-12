@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,6 @@ namespace StockItUp.Model
     {
         private int _id;
         private static int _idCounter = 1;
-
         private string _name;
 
         public PermissionGroup(string name)
@@ -21,6 +21,10 @@ namespace StockItUp.Model
             _name = name;
         }
 
+        public PermissionGroup()
+        {
+            
+        }
 
         public int Id
         {
@@ -32,6 +36,43 @@ namespace StockItUp.Model
         {
             get { return _name; }
             set { _name = value; }
+        }
+
+        public List<KeyValuePair<string, bool>> GetPermissions
+        {
+            get
+            {
+                List<KeyValuePair<string, bool>> listToReturn = new List<KeyValuePair<string, bool>>()
+                {
+                    new KeyValuePair<string, bool>("Kan oprette produkt", CanCreateProduct),
+                    new KeyValuePair<string, bool>("Kan slette produkt", CanDeleteProduct),
+                    new KeyValuePair<string, bool>("Kan redigere produkt", CanUpdateProduct),
+                    new KeyValuePair<string, bool>("Kan oprette leverandør", CanCreateSupplier),
+                    new KeyValuePair<string, bool>("Kan slette leverandør", CanDeleteSupplier),
+                    new KeyValuePair<string, bool>("Kan redigere leverandør", CanUpdateSupplier),
+                    new KeyValuePair<string, bool>("Kan oprette lokation", CanCreateLocation),
+                    new KeyValuePair<string, bool>("Kan slette lokation", CanDeleteLocation),
+                    new KeyValuePair<string, bool>("Kan redigere lokation", CanUpdateLocation),
+                    new KeyValuePair<string, bool>("Kan oprette optælling", CanCreateInventoryCount),
+                    new KeyValuePair<string, bool>("kan slette optælling", CanDeleteInventoryCount),
+                    new KeyValuePair<string, bool>("Kan se optælling", CanViewInventoryCount),
+                    new KeyValuePair<string, bool>("Kan oprette bestilling", CanCreateOrder),
+                    new KeyValuePair<string, bool>("Kan slette bestilling", CanDeleteOrder),
+                    new KeyValuePair<string, bool>("Kan se bestilling", CanViewOrder),
+                    new KeyValuePair<string, bool>("Kan ændre ønsket lager", CanChangeStoreProduct),
+                    new KeyValuePair<string, bool>("Kan oprette bruger", CanCreateUser),
+                    new KeyValuePair<string, bool>("Kan slette bruger", CanDeleteUser),
+                    new KeyValuePair<string, bool>("Kan redigere bruger", CanUpdateUser),
+                    new KeyValuePair<string, bool>("Kan oprette brugerolle", CanCreatePermissionGroup),
+                    new KeyValuePair<string, bool>("Kan slette brugerrolle", CanDeletePermissionGroup),
+                    new KeyValuePair<string, bool>("Kan redigere brugerrolle", CanUpdatePermissionGroup),
+                    new KeyValuePair<string, bool>("Kan oprette butik", CanCreateStore),
+                    new KeyValuePair<string, bool>("Kan slette butik", CanDeleteStore),
+                    new KeyValuePair<string, bool>("Kan redigere butik", CanUpdateStore)
+                };
+                return listToReturn;
+            }
+
         }
 
         #region Permissions
