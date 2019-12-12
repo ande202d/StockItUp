@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Calls;
+using StockItUp.Persistency;
 
 namespace StockItUp.Model
 {
@@ -24,8 +25,8 @@ namespace StockItUp.Model
             _name = name;
             _groupId = groupId;
             _phoneNumber = 0;
-            RandomUsername();
-            _password = _username;
+            //RandomUsername();
+            //_password = _username;
         }
 
         public User()
@@ -86,6 +87,11 @@ namespace StockItUp.Model
         {
             get { return _groupId; }
             set { _groupId = value; }
+        }
+
+        public string GroupName
+        {
+            get { return Catalog<PermissionGroup>.Instance.Read(GroupId).Result.Name; }
         }
 
         // Random username method 

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using Windows.UI.Xaml;
 using RVG.Common;
 using StockItUp.Annotations;
 using StockItUp.Model;
@@ -15,7 +16,7 @@ namespace StockItUp.ViewModel
     {
         #region Instance fields
         private User _selectedUser = new User(default(string), default(int));
-
+        private PermissionGroup _selectedPermissionGroup = new PermissionGroup(default(string));
 
         #endregion
 
@@ -27,6 +28,7 @@ namespace StockItUp.ViewModel
             UpdateEmployeeCommand = new RelayCommand(UpdateEmployeeMethod);
             DeleteEmployeeCommand = new RelayCommand(DeleteEmployeeMethod);
             ResetPasswordCommand = new RelayCommand(ResetPasswordMethod);
+            ShowPassword = Visibility.Collapsed;
         }
 
 
@@ -48,6 +50,14 @@ namespace StockItUp.ViewModel
             get { return _selectedUser; }
             set { _selectedUser = value; OnPropertyChanged(); }
         }
+
+        public PermissionGroup SelectedPermissionGroup
+        {
+            get { return _selectedPermissionGroup; }
+            set { _selectedPermissionGroup = value; OnPropertyChanged(); }
+        }
+
+        public Visibility ShowPassword { get; set; }
 
         public ObservableCollection<User> UserCatalog
         {
@@ -74,17 +84,25 @@ namespace StockItUp.ViewModel
 
         #region Methods
 
+        //Methods for CRUD Employees
         private async void CreateEmployeeMethod()
         {
-            _selectedUser.Password = RandomPasswordMethod();
-            await Catalog<User>.Instance.Create(SelectedUser);
-            OnPropertyChanged(nameof(UserCatalog));
+            if(String.IsNullOrEmpty(SelectedUser.Name))
+            {
+                _selectedUser.GroupId = SelectedPermissionGroup.Id;
+                _selectedUser.Password = RandomPasswordMethod();
+                _selectedUser.Username = RandomUserName();
+                await Catalog<User>.Instance.Create(SelectedUser);
+                OnPropertyChanged(nameof(UserCatalog));
+                OnPropertyChanged(nameof(SelectedUser));
+            }
         }
 
         private async void UpdateEmployeeMethod()
         {
             if (SelectedUser != null)
             {
+                _selectedUser.GroupId = SelectedPermissionGroup.Id;
                 await Catalog<User>.Instance.Update(SelectedUser.Id, SelectedUser);
                 OnPropertyChanged(nameof(UserCatalog));
             }
@@ -97,6 +115,7 @@ namespace StockItUp.ViewModel
 
         }
 
+        //Methods for generating random Passwords and Usernames
         public string RandomPasswordMethod()
         {
             Random ran = new Random();
@@ -106,7 +125,7 @@ namespace StockItUp.ViewModel
             for (int i = 0; i < 6; i++)
             {
                 string temp = ran.Next(1, 9).ToString();
-                newPassword = newPassword + temp;
+                newPassword += temp;
             }
 
             return newPassword;
@@ -114,7 +133,30 @@ namespace StockItUp.ViewModel
 
         public void ResetPasswordMethod()
         {
-            _selectedUser.Password = RandomPasswordMethod();
+            _selectedUser.Password = RandomPasswordMethod(); OnPropertyChanged(nameof(SelectedUser));
+            ShowPassword = Visibility.Visible; OnPropertyChanged(nameof(ShowPassword));
+        }
+
+        public string RandomUserName()
+        {
+            Random ran = new Random();
+            string s = "";
+
+            foreach (Char c in _selectedUser.Name)
+            {
+                if (Char.IsUpper(c))
+                {
+                    s += c;
+                }
+
+                for (int i = 0; i < 2; i++)
+                {
+                    s += ran.Next(1, 10);
+                }
+            }
+
+            return s;
+            
         }
 
 
