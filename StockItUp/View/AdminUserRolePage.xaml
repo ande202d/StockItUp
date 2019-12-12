@@ -86,6 +86,7 @@
 
                     <!--Group LIST-->
             <StackPanel Grid.Column="1">
+                <AppBarButton Style="{StaticResource Button}" Content="Lav en ny gruppe" Command="{Binding ShowCreateGroupCommand}"></AppBarButton>
                 <ListView ItemsSource="{Binding GroupCatalog}" SelectedItem="{Binding SelectedGroup, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -93,18 +94,26 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <AppBarButton Style="{StaticResource Button}" Content="Slet gruppe" Command="{Binding DeleteGroupCommand}"></AppBarButton>
             </StackPanel>
             
                     <!--Create group list-->
+            
             <StackPanel Grid.Column="2" Visibility="{Binding DataVisibility}">
-                <ListView ItemsSource="{Binding GetPermissionCatalog}" Height="550" >
+                <ListView ItemsSource="{Binding GetPermissionCatalog2}" Height="550" SelectionMode="None">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Key}"></TextBlock>
-                                <TextBlock Text="{Binding Value}"></TextBlock>
-                            </StackPanel>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="{Binding Name}"></TextBlock>
+                                <CheckBox Grid.Column="1" IsChecked="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                          Margin="30,0,0,0" IsEnabled="False"></CheckBox>
+                            </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -114,7 +123,7 @@
                     <!--Group Permission History List-->
             <StackPanel Grid.Column="2" Visibility="{Binding CreateVisibility}">
                 <TextBox PlaceholderText="Indsæt gruppens navn" Text="{Binding SelectedGroup.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                        <ListView ItemsSource="{Binding GetPermissionCatalog}" Height="550">
+                        <ListView ItemsSource="{Binding GetPermissionCatalog2}" Height="550" SelectionMode="None">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                             <Grid>
@@ -123,9 +132,9 @@
                                     <ColumnDefinition Width="200"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                             
-                                        <TextBlock Grid.Column="0" Text="{Binding Key}"></TextBlock>
+                                        <TextBlock Grid.Column="0" Text="{Binding Name}"></TextBlock>
                                         <!--<TextBlock Text="{Binding Value}"></TextBlock>-->
-                                <CheckBox Grid.Column="1" IsChecked="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="30,0,0,0" ></CheckBox>
+                                <CheckBox Grid.Column="1" IsChecked="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="30,0,0,0" ></CheckBox>
                             </Grid>
                         </DataTemplate>
                             </ListView.ItemTemplate>
