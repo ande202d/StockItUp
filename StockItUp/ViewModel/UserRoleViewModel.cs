@@ -24,6 +24,7 @@ namespace StockItUp.ViewModel
         private Visibility _createVisibility = Visibility.Visible;
         private Visibility _dataVisibility = Visibility.Collapsed;
         private PermissionGroup _selectedGroup;
+        private List<GroupPagePermissionSet> _listOfPermissions;
         #endregion
 
 
@@ -75,15 +76,32 @@ namespace StockItUp.ViewModel
                 DataVisibility = Visibility.Visible; 
                 OnPropertyChanged(nameof(CreateVisibility));
                 OnPropertyChanged(nameof(DataVisibility));
-                OnPropertyChanged(nameof(GetPermissionCatalog));
+                //OnPropertyChanged(nameof(GetPermissionCatalog));
+                OnPropertyChanged(nameof(GetPermissionCatalog2));
             }
         }
 
-        public ObservableCollection<KeyValuePair<string, bool>> GetPermissionCatalog
+        //public ObservableCollection<KeyValuePair<string, bool>> GetPermissionCatalog
+        //{
+        //    get
+        //    {
+        //        return new ObservableCollection<KeyValuePair<string, bool>>(SelectedGroup.GetPermissions);
+        //    }
+        //}
+
+        public ObservableCollection<GroupPagePermissionSet> GetPermissionCatalog2
         {
             get
             {
-                return new ObservableCollection<KeyValuePair<string, bool>>(SelectedGroup.GetPermissions);
+                List<GroupPagePermissionSet> listToReturn = new List<GroupPagePermissionSet>();
+
+                foreach (var v in SelectedGroup.GetPermissions)
+                {
+                    listToReturn.Add(new GroupPagePermissionSet(v.Key, v.Value));
+                }
+
+                _listOfPermissions = listToReturn;
+                return new ObservableCollection<GroupPagePermissionSet>(listToReturn);
             }
         }
 
@@ -92,10 +110,40 @@ namespace StockItUp.ViewModel
 
         public async void CreateGroupMethod()
         {
-            SelectedGroup.CanCreateProduct = GetPermissionCatalog[0].Value;
-            SelectedGroup.CanDeleteProduct = GetPermissionCatalog[1].Value;
-            SelectedGroup.CanUpdateProduct = GetPermissionCatalog[2].Value;
+            SelectedGroup.CanCreateProduct = _listOfPermissions[0].State;
+            SelectedGroup.CanDeleteProduct = _listOfPermissions[1].State;
+            SelectedGroup.CanUpdateProduct = _listOfPermissions[2].State;
             
+            SelectedGroup.CanCreateSupplier = _listOfPermissions[3].State;
+            SelectedGroup.CanDeleteSupplier = _listOfPermissions[4].State;
+            SelectedGroup.CanUpdateSupplier = _listOfPermissions[5].State;
+
+            SelectedGroup.CanCreateLocation = _listOfPermissions[6].State;
+            SelectedGroup.CanDeleteLocation = _listOfPermissions[7].State;
+            SelectedGroup.CanUpdateLocation = _listOfPermissions[8].State;
+
+            SelectedGroup.CanCreateInventoryCount = _listOfPermissions[9].State;
+            SelectedGroup.CanDeleteInventoryCount = _listOfPermissions[10].State;
+            SelectedGroup.CanViewInventoryCount = _listOfPermissions[11].State;
+
+            SelectedGroup.CanCreateOrder = _listOfPermissions[12].State;
+            SelectedGroup.CanDeleteOrder = _listOfPermissions[13].State;
+            SelectedGroup.CanViewOrder = _listOfPermissions[14].State;
+
+            SelectedGroup.CanChangeStoreProduct = _listOfPermissions[15].State;
+
+            SelectedGroup.CanCreateUser = _listOfPermissions[16].State;
+            SelectedGroup.CanDeleteUser = _listOfPermissions[17].State;
+            SelectedGroup.CanUpdateUser = _listOfPermissions[18].State;
+
+            SelectedGroup.CanCreatePermissionGroup = _listOfPermissions[19].State;
+            SelectedGroup.CanDeletePermissionGroup = _listOfPermissions[20].State;
+            SelectedGroup.CanUpdatePermissionGroup = _listOfPermissions[21].State;
+
+            SelectedGroup.CanCreateStore = _listOfPermissions[22].State;
+            SelectedGroup.CanDeleteStore = _listOfPermissions[23].State;
+            SelectedGroup.CanUpdateStore = _listOfPermissions[24].State;
+
             await Catalog<PermissionGroup>.Instance.Create(SelectedGroup);
             OnPropertyChanged(nameof(GroupCatalog));
 
