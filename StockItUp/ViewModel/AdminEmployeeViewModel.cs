@@ -26,7 +26,7 @@ namespace StockItUp.ViewModel
             CreateEmployeeCommand = new RelayCommand(CreateEmployeeMethod);
             UpdateEmployeeCommand = new RelayCommand(UpdateEmployeeMethod);
             DeleteEmployeeCommand = new RelayCommand(DeleteEmployeeMethod);
-            ResetPasswordCommand = new RelayCommand(RandomPasswordMethod);
+            ResetPasswordCommand = new RelayCommand(ResetPasswordMethod);
         }
 
 
@@ -76,6 +76,7 @@ namespace StockItUp.ViewModel
 
         private async void CreateEmployeeMethod()
         {
+            _selectedUser.Password = RandomPasswordMethod();
             await Catalog<User>.Instance.Create(SelectedUser);
             OnPropertyChanged(nameof(UserCatalog));
         }
@@ -96,11 +97,24 @@ namespace StockItUp.ViewModel
 
         }
 
-        public void RandomPasswordMethod()
+        public string RandomPasswordMethod()
         {
             Random ran = new Random();
-            
-            
+
+            string newPassword = "";
+
+            for (int i = 0; i < 6; i++)
+            {
+                string temp = ran.Next(1, 9).ToString();
+                newPassword = newPassword + temp;
+            }
+
+            return newPassword;
+        }
+
+        public void ResetPasswordMethod()
+        {
+            _selectedUser.Password = RandomPasswordMethod();
         }
 
 
