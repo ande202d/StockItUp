@@ -44,7 +44,7 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <!--Navigation Buttons-->
-            <AppBarButton Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List" >
+            <AppBarButton IsEnabled="{Binding Permission.CanViewInventoryCount}" Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List" >
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
                         <core:NavigateToPageAction TargetPage="StockItUp.View.Optaellinger"/>
@@ -58,7 +58,7 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
-            <AppBarButton Style="{StaticResource Button}" Grid.Column="2" Label="Bestillinger" Icon="Bullets" BorderBrush="WhiteSmoke" BorderThickness="0,0,0,3">
+            <AppBarButton IsEnabled="{Binding Permission.CanViewOrder}" Style="{StaticResource Button}" Grid.Column="2" Label="Bestillinger" Icon="Bullets" BorderBrush="WhiteSmoke" BorderThickness="0,0,0,3">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
                         <core:NavigateToPageAction TargetPage="StockItUp.View.Bestillinger"/>
@@ -242,10 +242,10 @@
 
             </StackPanel>
 
-            <AppBarButton Grid.Column="1" Style="{StaticResource Button}" Content="Lav bestilling" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+            <AppBarButton IsEnabled="{Binding Permission.CanCreateOrder}" Grid.Column="1" Style="{StaticResource Button}" Content="Lav bestilling" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                           Margin="0,0,25,25" Command="{Binding CreateOrderCommand}">
             </AppBarButton>
-            <AppBarButton Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0,0,0,0" Content="Fjern optælling" Style="{StaticResource Button}" Command="{Binding DeleteOrderCommand}"></AppBarButton>
+            <AppBarButton IsEnabled="{Binding Permission.CanDeleteOrder}" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0,0,0,0" Content="Fjern optælling" Style="{StaticResource Button}" Command="{Binding DeleteOrderCommand}"></AppBarButton>
 
 </Grid>
 

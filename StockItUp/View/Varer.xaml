@@ -45,7 +45,7 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <!--Navigation Buttons-->
-            <AppBarButton Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List">
+            <AppBarButton IsEnabled="{Binding Permission.CanViewInventoryCount}" Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List">
                 <custom:Interaction.Behaviors>
                     <custom1:EventTriggerBehavior EventName="Click">
                         <custom1:NavigateToPageAction TargetPage="StockItUp.View.Optaellinger"/>
@@ -59,7 +59,7 @@
                     </custom1:EventTriggerBehavior>
                 </custom:Interaction.Behaviors>
             </AppBarButton>
-            <AppBarButton Style="{StaticResource Button}" Grid.Column="2" Label="Bestillinger" Icon="Bullets">
+            <AppBarButton IsEnabled="{Binding Permission.CanViewOrder}" Style="{StaticResource Button}" Grid.Column="2" Label="Bestillinger" Icon="Bullets">
                 <custom:Interaction.Behaviors>
                     <custom1:EventTriggerBehavior EventName="Click">
                         <custom1:NavigateToPageAction TargetPage="StockItUp.View.Bestillinger"/>
@@ -101,9 +101,9 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
-                    <AppBarButton Content="Tilføj vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding CreateProductCommand}"></AppBarButton>
-                    <AppBarButton Content="Rediger vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding UpdateProductCommand}"></AppBarButton>
-                    <AppBarButton Content="Fjern vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding DeleteProductCommand}"></AppBarButton>
+                    <AppBarButton IsEnabled="{Binding Permission.CanCreateProduct}" Content="Tilføj vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding CreateProductCommand}"></AppBarButton>
+                    <AppBarButton IsEnabled="{Binding Permission.CanUpdateProduct}" Content="Rediger vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding UpdateProductCommand}"></AppBarButton>
+                    <AppBarButton IsEnabled="{Binding Permission.CanDeleteProduct}" Content="Fjern vare" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding DeleteProductCommand}"></AppBarButton>
                 </StackPanel>
                 <!--Handling of providers-->
                 <StackPanel  Height="400" VerticalAlignment="Bottom" Margin="0,30,0,0" Orientation="Vertical">
@@ -120,9 +120,9 @@
                     <TextBox PlaceholderText="Email på leverandør.." Foreground="DarkGray" Width="200" Margin="10" Text="{Binding SelectedSupplier.Website, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Email:"></TextBox>
 
                     <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
-                        <AppBarButton Content="Tilføj leverandør"  Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding CreateSupplierCommand}"></AppBarButton>
-                        <AppBarButton Content="Rediger leverandør"  Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding UpdateSupplierCommand}"></AppBarButton>
-                        <AppBarButton Content="Fjern leverandør"  Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding DeleteSupplierCommand}"></AppBarButton>
+                        <AppBarButton Content="Tilføj leverandør" IsEnabled="{Binding Permission.CanCreateSupplier}" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding CreateSupplierCommand}"></AppBarButton>
+                        <AppBarButton Content="Rediger leverandør" IsEnabled="{Binding Permission.CanUpdateSupplier}" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding UpdateSupplierCommand}"></AppBarButton>
+                        <AppBarButton Content="Fjern leverandør" IsEnabled="{Binding Permission.CanDeleteSupplier}" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding DeleteSupplierCommand}"></AppBarButton>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -143,7 +143,7 @@
                         <TextBlock Text="{Binding SelectedProduct.Name}" Margin="5,0,5,0" VerticalAlignment="Center"></TextBlock>
                         <TextBlock Text="til ønsket lager" VerticalAlignment="Center"></TextBlock>
                         <TextBox Text="{Binding WantedAmount, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                        <Button Content="Tilføj" Background="#d0662f" Foreground="GhostWhite" Command="{Binding AddToWantedListCommand}" Margin="5,0,0,0"></Button>
+                        <Button IsEnabled="{Binding Permission.CanChangeStoreProduct}" Content="Tilføj" Background="#d0662f" Foreground="GhostWhite" Command="{Binding AddToWantedListCommand}" Margin="5,0,0,0"></Button>
                         <TextBlock Text="{Binding AddToWantedResponse}" Margin="5,0,0,0" VerticalAlignment="Bottom" FontSize="10"></TextBlock>
                     </StackPanel>
                 </StackPanel>
