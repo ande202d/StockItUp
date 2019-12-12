@@ -97,7 +97,7 @@
             
                     <!--Create group list-->
             <StackPanel Grid.Column="2" Visibility="{Binding DataVisibility}">
-                <ListView ItemsSource="{Binding GetPermissionCatalog}" >
+                <ListView ItemsSource="{Binding GetPermissionCatalog}" Height="550" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             
@@ -112,22 +112,26 @@
 
 
                     <!--Group Permission History List-->
-                    <StackPanel Grid.Column="2" Visibility="{Binding CreateVisibility}">
-                        <TextBox PlaceholderText="Indsæt gruppens navn" Text="{Binding SelectedGroup.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                        <ListView ItemsSource="{Binding GetPermissionCatalog}" Height="500">
+            <StackPanel Grid.Column="2" Visibility="{Binding CreateVisibility}">
+                <TextBox PlaceholderText="Indsæt gruppens navn" Text="{Binding SelectedGroup.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        <ListView ItemsSource="{Binding GetPermissionCatalog}" Height="550">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Key}"></TextBlock>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                            
+                                        <TextBlock Grid.Column="0" Text="{Binding Key}"></TextBlock>
                                         <!--<TextBlock Text="{Binding Value}"></TextBlock>-->
-                                        <CheckBox IsChecked="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></CheckBox>
-                                    </StackPanel>
-                                </DataTemplate>
+                                <CheckBox Grid.Column="1" IsChecked="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="30,0,0,0" ></CheckBox>
+                            </Grid>
+                        </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                        <AppBarButton Style="{StaticResource Button}" Content="Opret gruppe" Command="{Binding CreateGroupCommand}"></AppBarButton>
-                    </StackPanel>
+                <AppBarButton Style="{StaticResource Button}" Content="Opret gruppe" Command="{Binding CreateGroupCommand}" Margin="0,0,0,0"></AppBarButton>
+            </StackPanel>
 
         </Grid>
     </Grid>
