@@ -227,14 +227,11 @@ namespace StockItUp.ViewModel
             get
             {
                 List<Supplier> sl = new List<Supplier>();
-                foreach (var supplier in Catalog<Supplier>.Instance.GetList)
+                foreach (var orderPage in CreateOrderCatalog)
                 {
-                    foreach (var orderPage in CreateOrderCatalog)
+                    if (orderPage.Supplier != null)
                     {
-                        if (orderPage.SupplierName==supplier.Name)
-                        {
-                            sl.Add(supplier);
-                        }
+                        sl.Add(orderPage.Supplier);
                     }
                 }
                 
