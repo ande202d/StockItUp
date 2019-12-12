@@ -141,6 +141,7 @@
     <Compile Include="Filter\StoragePageProductDataFilter.cs" />
     <Compile Include="Filter\StoragePageProductFilter.cs" />
     <Compile Include="Filter\SupplierFilter.cs" />
+    <Compile Include="Model\GroupPagePermissionSet.cs" />
     <Compile Include="Model\InventoryCount.cs" />
     <Compile Include="Model\InventoryCountHistory.cs" />
     <Compile Include="Model\InventoryCountHistoryData.cs" />

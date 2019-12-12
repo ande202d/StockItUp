@@ -19,33 +19,49 @@ delete from [dbo].[Store];
 
 SET IDENTITY_INSERT [dbo].[Store] ON
 INSERT INTO [dbo].[Store] ([Id], [Name], [Address]) VALUES (1, N'Club Retro', N'Bjergegade 1, 3000 Helsingør')
+INSERT INTO [dbo].[Store] ([Id], [Name], [Address]) VALUES (2, N'Club Fancy', N'Rainbowroad 5, 1212 MarioCart')
+INSERT INTO [dbo].[Store] ([Id], [Name], [Address]) VALUES (3, N'Club Wonder', N'Villavej 1, 1515 PowerpuffGirls')
 SET IDENTITY_INSERT [dbo].[Store] OFF
 
 SET IDENTITY_INSERT [dbo].[Location] ON
-INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (1001, N'Baren', 1)
-INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (1002, N'Lageret', 1)
-INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (1003, N'Baglokalet', 1)
+INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (1, N'Baren', 1)
+INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (2, N'Lageret', 1)
+INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (3, N'Baglokalet', 1)
+INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (4, N'Hylderne', 2)
+INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (5, N'Under disken', 2)
+INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (6, N'Kælderen', 2)
+INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (7, N'Bilen', 3)
+INSERT INTO [dbo].[Location] ([Id], [Name], [Store]) VALUES (8, N'På ladet', 3)
 SET IDENTITY_INSERT [dbo].[Location] OFF
 
 SET IDENTITY_INSERT [dbo].[Supplier] ON
-INSERT INTO [dbo].[Supplier] ([Id], [Name], [Website]) VALUES (1001, N'Carlsberg', N'Carlsberg@beer.dk')
-INSERT INTO [dbo].[Supplier] ([Id], [Name], [Website]) VALUES (1002, N'Tuborg', N'Tuborg@beer.dk')
-INSERT INTO [dbo].[Supplier] ([Id], [Name], [Website]) VALUES (1003, N'Royal', N'Royal@beer.dk')
-INSERT INTO [dbo].[Supplier] ([Id], [Name], [Website]) VALUES (1004, N'Smirnoff', N'Smirnoff@sprut.dk')
+INSERT INTO [dbo].[Supplier] ([Id], [Name], [Website]) VALUES (1, N'Carlsberg', N'Carlsberg@beer.dk')
+INSERT INTO [dbo].[Supplier] ([Id], [Name], [Website]) VALUES (2, N'Tuborg', N'Tuborg@beer.dk')
+INSERT INTO [dbo].[Supplier] ([Id], [Name], [Website]) VALUES (3, N'Royal', N'Royal@beer.dk')
+INSERT INTO [dbo].[Supplier] ([Id], [Name], [Website]) VALUES (4, N'Smirnoff', N'Smirnoff@sprut.dk')
+INSERT INTO [dbo].[Supplier] ([Id], [Name], [Website]) VALUES (5, N'Bacardi', N'bacardi@sprut.dk')
+INSERT INTO [dbo].[Supplier] ([Id], [Name], [Website]) VALUES (6, N'Netto', N'netto@netto.dk')
 SET IDENTITY_INSERT [dbo].[Supplier] OFF
 
 SET IDENTITY_INSERT [dbo].[Product] ON
-INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (2001, N'Carlsberg', 24, 1001)
-INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (2002, N'Tuborg Classic', 24, 1002)
-INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (2003, N'Royal Export', 12, 1003)
-INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (2004, N'Smirnoff', 6, 1004)
-INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (2005, N'Jack Daniels', 8, NULL)
+INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (1, N'Carlsberg', 24, 1)
+INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (2, N'Tuborg Classic', 24, 2)
+INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (3, N'Royal Export', 12, 3)
+INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (4, N'Smirnoff', 6, 4)
+INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (5, N'Jack Daniels', 8, NULL)
+INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (6, N'Toilet papir', 12, 6)
+INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (7, N'Sølv papir', 2, 6)
+INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (8, N'Instant kaffe', 12, 6)
+INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (9, N'Bacardi', 6, 5)
+INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (10, N'Vodstock Vodka', 8, null)
+INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (11, N'Smirnoff Ice', 24, 4)
+INSERT INTO [dbo].[Product] ([Id], [Name], [AmountPerBox], [Supplier]) VALUES (12, N'Captain Morgan', 6, null)
 SET IDENTITY_INSERT [dbo].[Product] OFF
 
 SET IDENTITY_INSERT [dbo].[StoreProduct] ON
-INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (2001, 1, 2001, 240)
-INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (2002, 1, 2003, 60)
-INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (2003, 1, 2005, 36)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (1, 1, 1, 240)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (2, 1, 3, 60)
+INSERT INTO [dbo].[StoreProduct] ([Id], [Store], [Product], [Amount]) VALUES (3, 1, 5, 36)
 SET IDENTITY_INSERT [dbo].[StoreProduct] OFF
 
 SET IDENTITY_INSERT [dbo].[InventoryCount] ON
