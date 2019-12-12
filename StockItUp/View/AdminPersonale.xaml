@@ -119,10 +119,10 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <TextBlock Text="Overskrift" FontSize="50" Margin="0,20,0,50"></TextBlock>
-                <TextBox Header="Fulde Navn" Text="{Binding SelectedUser.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <TextBox Header="Telefon nr." Text="{Binding SelectedUser.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,0"></TextBox>
-                <TextBox Header="Brugernavn" Text="{Binding SelectedUser.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,0"></TextBox>
+                <TextBlock Text="Overskrift" FontSize="50" Margin="0,20,0,50" HorizontalAlignment="Center"></TextBlock>
+                <TextBox Header="Fulde Navn" Width="300" HorizontalAlignment="Left" Text="{Binding SelectedUser.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0"></TextBox>
+                <TextBox Header="Telefon nr." Width="300" HorizontalAlignment="Left" Text="{Binding SelectedUser.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,0"></TextBox>
+                <TextBox Header="Brugernavn" Width="300" HorizontalAlignment="Left" Text="{Binding SelectedUser.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,0"></TextBox>
                 <ComboBox Margin="5,5,0,0" Header="gruppe" PlaceholderText="Vælg en gruppe" ItemsSource="{Binding PermissionGroupCatalog}" SelectedItem="{Binding SelectedPermissionGroup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -142,7 +142,7 @@
             </StackPanel>
             <StackPanel Grid.Column="2">
                 <TextBlock Text="Tilføj medarbejder" FontSize="50" Margin="0,20,0,50"></TextBlock>
-                <TextBox Header="Fulde Navn" Text="{Binding SelectedUser.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Header="Fulde Navn" HorizontalAlignment="Left" Width="300" Text="{Binding SelectedUser.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <ComboBox Margin="5,5,0,0" Header="gruppe" PlaceholderText="Vælg en gruppe" ItemsSource="{Binding PermissionGroupCatalog}" SelectedItem="{Binding SelectedPermissionGroup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
