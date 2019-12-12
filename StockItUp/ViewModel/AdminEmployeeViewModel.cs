@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Windows.UI.Xaml;
 using RVG.Common;
 using StockItUp.Annotations;
+using StockItUp.Filter;
 using StockItUp.Model;
 using StockItUp.Persistency;
 
@@ -17,6 +18,7 @@ namespace StockItUp.ViewModel
         #region Instance fields
         private User _selectedUser = new User(default(string), default(int));
         private PermissionGroup _selectedPermissionGroup = new PermissionGroup(default(string));
+        private string _selectedSort;
 
         #endregion
 
@@ -29,6 +31,7 @@ namespace StockItUp.ViewModel
             DeleteEmployeeCommand = new RelayCommand(DeleteEmployeeMethod);
             ResetPasswordCommand = new RelayCommand(ResetPasswordMethod);
             ShowPassword = Visibility.Collapsed;
+            ShowPasswordOnCreate = Visibility.Collapsed;
         }
 
 
@@ -57,14 +60,32 @@ namespace StockItUp.ViewModel
             set { _selectedPermissionGroup = value; OnPropertyChanged(); }
         }
 
+        public string SelectedSort
+        {
+            get { return _selectedSort; }
+            set { _selectedSort = value; OnPropertyChanged(); OnPropertyChanged(nameof(UserCatalog)); OnPropertyChanged(nameof(PermissionGroupCatalog)); }
+        }
+
         public Visibility ShowPassword { get; set; }
+        public Visibility ShowPasswordOnCreate { get; set; }
 
         public ObservableCollection<User> UserCatalog
         {
             get
             {
-               ObservableCollection<User> collection = new ObservableCollection<User>(Catalog<User>.Instance.GetList);
+               List<User> listToReturn = new List<User>(Catalog<User>.Instance.GetList);
 
+               if (SelectedSort == "Navn")
+               {
+                   listToReturn.Sort(new UserFilterByName());
+               }
+
+               if (SelectedSort == "Rolle")
+               {
+                   listToReturn.Sort(new UserFilterByRole());
+               }
+
+               ObservableCollection<User>collection =new ObservableCollection<User>(listToReturn);
                return collection;
 
             }
@@ -80,6 +101,16 @@ namespace StockItUp.ViewModel
             }
         }
 
+        public ObservableCollection<string> SortingCollection
+        {
+            get
+            {
+                List<string> sortList = new List<string>() { "Navn", "Rolle" };
+                return new ObservableCollection<string>(sortList);
+            }
+        }
+
+        
         #endregion
 
         #region Methods
@@ -87,14 +118,18 @@ namespace StockItUp.ViewModel
         //Methods for CRUD Employees
         private async void CreateEmployeeMethod()
         {
-            if(String.IsNullOrEmpty(SelectedUser.Name))
+            if(!String.IsNullOrEmpty(SelectedUser.Name))
             {
                 _selectedUser.GroupId = SelectedPermissionGroup.Id;
                 _selectedUser.Password = RandomPasswordMethod();
                 _selectedUser.Username = RandomUserName();
+
                 await Catalog<User>.Instance.Create(SelectedUser);
+                ShowPasswordOnCreate = Visibility.Visible;
+
                 OnPropertyChanged(nameof(UserCatalog));
                 OnPropertyChanged(nameof(SelectedUser));
+                OnPropertyChanged(nameof(ShowPasswordOnCreate));
             }
         }
 
@@ -147,12 +182,12 @@ namespace StockItUp.ViewModel
                 if (Char.IsUpper(c))
                 {
                     s += c;
-                }
+                }   
+            }
 
-                for (int i = 0; i < 2; i++)
-                {
-                    s += ran.Next(1, 10);
-                }
+            for (int i = 0; i < 2; i++)
+            {
+                s += ran.Next(1, 10);
             }
 
             return s;
