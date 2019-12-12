@@ -13,9 +13,7 @@ namespace StockItUp.ViewModel
     public class AdminEmployeeViewModel : INotifyPropertyChanged
     {
         #region Instance fields
-
-        private Catalog<User> _userCatalog;
-        private User _selectedUser;
+        private User _selectedUser = new User(default(string), default(int));
 
 
         #endregion
@@ -52,7 +50,7 @@ namespace StockItUp.ViewModel
         {
             get
             {
-               ObservableCollection<User> collection = new ObservableCollection<User>(_userCatalog.GetList);
+               ObservableCollection<User> collection = new ObservableCollection<User>(Catalog<User>.Instance.GetList);
 
                return collection;
 
@@ -65,17 +63,22 @@ namespace StockItUp.ViewModel
 
         private async void CreateEmployeeMethod()
         {
-            //
+            await Catalog<User>.Instance.Create(SelectedUser);
+            OnPropertyChanged(nameof(UserCatalog));
         }
 
         private async void UpdateEmployeeMethod()
         {
-            //
+            if (SelectedUser != null)
+            {
+                await Catalog<User>.Instance.Update(SelectedUser.Id, SelectedUser);
+                OnPropertyChanged(nameof(UserCatalog));
+            }
         }
 
         private async void DeleteEmployeeMethod()
         {
-            await _userCatalog.Delete(SelectedUser.Id);
+            await Catalog<User>.Instance.Delete(SelectedUser.Id);
             OnPropertyChanged(nameof(UserCatalog));
 
         }
