@@ -3,13 +3,16 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:StockItUp.View"
+    xmlns:model="using:StockItUp.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.DataContext>
+        <model:AdminEmployeeViewModel></model:AdminEmployeeViewModel>
+    </Page.DataContext>
 
     <Page.Resources>
         <Style  x:Key="Button"  TargetType="AppBarButton">
@@ -80,22 +83,29 @@
             </Grid.ColumnDefinitions>
             
             <StackPanel Grid.Column="0" Height="700">
+                <StackPanel>
+                    <TextBlock FontSize="50" Text="Medarbejderer"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,50">
+                    <TextBlock Text="Navn" Margin="13,0,0,0"></TextBlock>
+                    <TextBlock Text="Initialer" Margin="170,0,0,0"></TextBlock>
+                    <TextBlock Text="Adgangsgrupper" Margin="50,0,0,0"></TextBlock>
+                </StackPanel>
                 <ScrollViewer Height="700">
-                    <ListView ItemsSource="{Binding }">
+                    <ListView ItemsSource="{Binding UserCatalog}"> <!--bind til personale list-->
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100"></ColumnDefinition>
-                                        <ColumnDefinition Width="100"></ColumnDefinition>
-                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition Width="200"></ColumnDefinition>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition Width="200"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
 
-                                    <TextBlock  Grid.Column="0" Text="{Binding }" ></TextBlock>
-                                    <TextBox Grid.Column="1" Text="{Binding }" ></TextBox>
-                                    <TextBox Grid.Column="2" Text="{Binding }" ></TextBox>
-
+                                    <TextBlock  Grid.Column="0" Text="{Binding Name}" ></TextBlock>
+                                    <TextBlock Grid.Column="1" Text="{Binding Initials}" ></TextBlock>
+                                    <!--<TextBlock Grid.Column="2" Text="{Binding }" ></TextBlock>  bind til permissiongroup-->
 
 
                                 </Grid>
@@ -105,6 +115,25 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </ScrollViewer>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Height="700">
+                <TextBlock Text="Overskrift" FontSize="50" Margin="0,20,0,50"></TextBlock>
+                <TextBox Header="Fulde Navn" Margin="5,5,0,0"></TextBox>
+                <TextBox Header="Telefon nr." Margin="5,5,0,0"></TextBox>
+                <TextBox Header="Brugernavn" Margin="5,5,0,0"></TextBox>
+                <ComboBox Margin="5,5,0,0" Header="gruppe" PlaceholderText="Vælg en gruppe" ItemsSource="{Binding PermissionGroupCatalog}">     <!--bind til liste af permission groups-->
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <AppBarButton Style="{StaticResource Button}" Command="{Binding ResetPasswordCommand}" Margin="0,50,0,0" Height="40" Width="120" Content="Nulstil Password"></AppBarButton>
+                <StackPanel Margin="0,20,0,0" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Nyt kodeord: " Margin="0,0,10,0"></TextBlock>
+                    <TextBlock Text="her kommer den nye kode"></TextBlock>
+                </StackPanel>
             </StackPanel>
 
         </Grid>
