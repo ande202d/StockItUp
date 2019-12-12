@@ -32,12 +32,16 @@ namespace StockItUp.ViewModel
         public UserRoleViewModel()
         {
             CreateGroupCommand = new RelayCommand(CreateGroupMethod);
+            ShowCreateGroupCommand = new RelayCommand(ShowCreateGroupMethod);
+            DeleteGroupCommand = new RelayCommand(DeleteGroupMethod);
         }
         #endregion
 
         #region Properties
 
         public ICommand CreateGroupCommand { get; set; }
+        public ICommand ShowCreateGroupCommand { get; set; }
+        public ICommand DeleteGroupCommand { get; set; }
 
         public ObservableCollection<PermissionGroup> GroupCatalog
         {
@@ -147,6 +151,24 @@ namespace StockItUp.ViewModel
             await Catalog<PermissionGroup>.Instance.Create(SelectedGroup);
             OnPropertyChanged(nameof(GroupCatalog));
 
+        }
+
+        public void ShowCreateGroupMethod()
+        {
+            OnPropertyChanged(nameof(GroupCatalog));
+            OnPropertyChanged(nameof(SelectedGroup));
+            
+            DataVisibility = Visibility.Collapsed;
+            CreateVisibility = Visibility.Visible;
+
+            OnPropertyChanged(nameof(DataVisibility));
+            OnPropertyChanged(nameof(CreateVisibility));
+        }
+
+        public async void DeleteGroupMethod()
+        {
+            await Catalog<PermissionGroup>.Instance.Delete(SelectedGroup.Id);
+            OnPropertyChanged(nameof(GroupCatalog));
         }
 
 
