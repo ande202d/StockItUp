@@ -159,6 +159,7 @@
     <Compile Include="Persistency\Catalog.cs" />
     <Compile Include="Persistency\Controller.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModel\AdminEmployeeViewModel.cs" />
     <Compile Include="ViewModel\InventoryCountViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\OrderPageViewModel.cs" />

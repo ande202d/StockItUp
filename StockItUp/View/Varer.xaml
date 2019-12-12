@@ -139,11 +139,11 @@
                 <StackPanel VerticalAlignment="Bottom" Margin="0,5,0,20" Orientation="Vertical">
                     <TextBox Text="{Binding Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="søg efter varer" ></TextBox>
                     <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                        <TextBlock Text="tilføj"></TextBlock>
-                        <TextBlock Text="{Binding SelectedProduct.Name}" Margin="5,0,5,0"></TextBlock>
-                        <TextBlock Text="til ønsket lager"></TextBlock>
+                        <TextBlock Text="Tilføj" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{Binding SelectedProduct.Name}" Margin="5,0,5,0" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="til ønsket lager" VerticalAlignment="Center"></TextBlock>
                         <TextBox Text="{Binding WantedAmount, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                        <Button Content="tilføj" Background="#d0662f" Foreground="GhostWhite" Command="{Binding AddToWantedListCommand}" Margin="5,0,0,0"></Button>
+                        <Button Content="Tilføj" Background="#d0662f" Foreground="GhostWhite" Command="{Binding AddToWantedListCommand}" Margin="5,0,0,0"></Button>
                         <TextBlock Text="{Binding AddToWantedResponse}" Margin="5,0,0,0" VerticalAlignment="Bottom" FontSize="10"></TextBlock>
                     </StackPanel>
                 </StackPanel>

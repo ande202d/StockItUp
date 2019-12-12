@@ -43,6 +43,8 @@ namespace StockItUp.ViewModel
             _inventoryCountProductCatalog = Catalog<InventoryCountProduct>.Instance;
             _inventoryCountCatalog = Catalog<InventoryCount>.Instance;
             CreateInventoryCountCommand = new RelayCommand(CreateInventoryCountMethod);
+            DeleteInventoryCountCommand = new RelayCommand(DeleteInventoryCountMethod);
+
         }
 
         #endregion
@@ -50,7 +52,9 @@ namespace StockItUp.ViewModel
         #region Commands
 
         public ICommand CreateInventoryCountCommand { get; set; }
-        
+        public ICommand DeleteInventoryCountCommand { get; set; }
+
+
 
         #endregion
 
@@ -226,6 +230,15 @@ namespace StockItUp.ViewModel
             }
         }
 
+        public async void DeleteInventoryCountMethod()
+        {
+
+            if (SelectedInventoryCountHistory!=null)
+            {
+                await Catalog<InventoryCountHistory>.Instance.Delete(SelectedInventoryCountHistory.Id);      
+                OnPropertyChanged(nameof(InventoryCountHistoriesCatalog));
+            }
+        }
 
         #endregion
 

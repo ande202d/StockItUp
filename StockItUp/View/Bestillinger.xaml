@@ -243,9 +243,11 @@
             </StackPanel>
 
             <AppBarButton Grid.Column="1" Style="{StaticResource Button}" Content="Lav bestilling" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                          Margin="0,0,25,25" Command="{Binding CreateOrderCommand}"></AppBarButton>
+                          Margin="0,0,25,25" Command="{Binding CreateOrderCommand}">
+            </AppBarButton>
+            <AppBarButton Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0,0,0,0" Content="Fjern optælling" Style="{StaticResource Button}" Command="{Binding DeleteOrderCommand}"></AppBarButton>
 
-        </Grid>
+</Grid>
 
 
 

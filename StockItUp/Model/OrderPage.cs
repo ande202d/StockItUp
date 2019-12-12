@@ -82,7 +82,7 @@ namespace StockItUp.Model
         {
             get
             {
-                if (Supplier == null) return null;
+                if (Supplier == null) return "Ingen leverandør";
                 return Supplier.Name;
             }
         }

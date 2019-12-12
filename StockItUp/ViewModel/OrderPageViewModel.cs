@@ -36,6 +36,7 @@ namespace StockItUp.ViewModel
         public OrderPageViewModel()
         {
             CreateOrderCommand = new RelayCommand(CreateOrderMethod);
+            DeleteOrderCommand = new RelayCommand(DeleteOrderMethod);
             ResetSelectedSupplierCommand = new RelayCommand(ResetSelectedSupplierMethod);
         }
 
@@ -47,6 +48,7 @@ namespace StockItUp.ViewModel
         #region Properties
         
         public ICommand CreateOrderCommand { get; set; }
+        public ICommand DeleteOrderCommand { get; set; }
         public ICommand ResetSelectedSupplierCommand { get; set; }
 
         public ObservableCollection<OrderPage> CreateOrderCatalog
@@ -224,7 +226,16 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                return new ObservableCollection<Supplier>(Catalog<Supplier>.Instance.GetList);
+                List<Supplier> sl = new List<Supplier>();
+                foreach (var orderPage in CreateOrderCatalog)
+                {
+                    if (orderPage.Supplier != null)
+                    {
+                        sl.Add(orderPage.Supplier);
+                    }
+                }
+                
+                return new ObservableCollection<Supplier>(sl);
             }
         }
         #endregion
@@ -286,6 +297,14 @@ namespace StockItUp.ViewModel
             SelectedSupplier = null;OnPropertyChanged(nameof(SelectedSupplier));
         }
 
+        public async void DeleteOrderMethod()
+        {
+            if (SelectedOrderHistory != null)
+            {
+                await Catalog<OrderHistory>.Instance.Delete(SelectedOrderHistory.Id);
+                OnPropertyChanged(nameof(OrderHistoryCatalog));
+            }
+        }
         #endregion
 
 
