@@ -17,7 +17,7 @@ namespace StockItUp.ViewModel
     {
         #region Instance fields
         private User _selectedUser = new User(default(string), default(int));
-        private PermissionGroup _selectedPermissionGroup = new PermissionGroup(default(string));
+        private PermissionGroup _selectedPermissionGroup = null;
         private string _selectedSort;
 
         #endregion
@@ -51,7 +51,12 @@ namespace StockItUp.ViewModel
         public User SelectedUser
         {
             get { return _selectedUser; }
-            set { _selectedUser = value; OnPropertyChanged(); }
+            set
+            {
+                ShowPasswordOnCreate = Visibility.Collapsed; OnPropertyChanged(nameof(ShowPasswordOnCreate));
+                ShowPassword = Visibility.Collapsed; OnPropertyChanged(nameof(ShowPassword));
+                _selectedUser = value; OnPropertyChanged();
+            }
         }
 
         public PermissionGroup SelectedPermissionGroup
@@ -118,7 +123,7 @@ namespace StockItUp.ViewModel
         //Methods for CRUD Employees
         private async void CreateEmployeeMethod()
         {
-            if(!String.IsNullOrEmpty(SelectedUser.Name))
+            if(!String.IsNullOrEmpty(SelectedUser.Name) && SelectedPermissionGroup != null)
             {
                 _selectedUser.GroupId = SelectedPermissionGroup.Id;
                 _selectedUser.Password = RandomPasswordMethod();
@@ -137,7 +142,11 @@ namespace StockItUp.ViewModel
         {
             if (SelectedUser != null)
             {
-                _selectedUser.GroupId = SelectedPermissionGroup.Id;
+                if (SelectedPermissionGroup!=null)
+                {
+                    _selectedUser.GroupId = SelectedPermissionGroup.Id;
+                }
+                
                 await Catalog<User>.Instance.Update(SelectedUser.Id, SelectedUser);
                 OnPropertyChanged(nameof(UserCatalog));
             }

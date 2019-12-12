@@ -83,9 +83,10 @@
             </Grid.ColumnDefinitions>
             
             <StackPanel Grid.Column="0" Height="700">
-                <StackPanel Margin="0,20,0,50">
+                <StackPanel Margin="0,20,0,30">
                     <TextBlock FontSize="50" Text="Medarbejderer"></TextBlock>
                 </StackPanel>
+                <ComboBox Header="sorter efter" ItemsSource="{Binding SortingCollection}" SelectedItem="{Binding SelectedSort, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Navn" Margin="13,0,0,0"></TextBlock>
                     <TextBlock Text="Initialer" Margin="170,0,0,0"></TextBlock>
@@ -119,10 +120,10 @@
 
             <StackPanel Grid.Column="1">
                 <TextBlock Text="Overskrift" FontSize="50" Margin="0,20,0,50"></TextBlock>
-                <TextBox Header="Fulde Navn" Text="{Binding SelectedUser.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,0"></TextBox>
+                <TextBox Header="Fulde Navn" Text="{Binding SelectedUser.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBox Header="Telefon nr." Text="{Binding SelectedUser.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,0"></TextBox>
                 <TextBox Header="Brugernavn" Text="{Binding SelectedUser.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,0"></TextBox>
-                <ComboBox Margin="5,5,0,0" Header="gruppe" PlaceholderText="Vælg en gruppe" ItemsSource="{Binding PermissionGroupCatalog}" SelectedItem="{Binding SelectedPermissionGroup}">     <!--bind til liste af permission groups-->
+                <ComboBox Margin="5,5,0,0" Header="gruppe" PlaceholderText="Vælg en gruppe" ItemsSource="{Binding PermissionGroupCatalog}" SelectedItem="{Binding SelectedPermissionGroup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"></TextBlock>
@@ -152,11 +153,11 @@
                 <AppBarButton Style="{StaticResource Button}" Content="opret ny" Command="{Binding CreateEmployeeCommand}" Margin="0,10,0,10"></AppBarButton>
                 <StackPanel Orientation="Horizontal" Margin="5,10,5,0">
                     <TextBlock Text="Brugernavn: " Margin="10,0,0,0"></TextBlock>
-                    <TextBlock Text="{Binding SelectedUser.Username}"></TextBlock>
+                    <TextBlock Text="{Binding SelectedUser.Username}" Visibility="{Binding ShowPasswordOnCreate}"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="5,10,5,0">
                     <TextBlock Text="Password: " Margin="10,0,0,0" ></TextBlock>
-                    <TextBlock Text="{Binding SelectedUser.Password}"></TextBlock>
+                    <TextBlock Text="{Binding SelectedUser.Password}" Visibility="{Binding ShowPasswordOnCreate}"></TextBlock>
                 </StackPanel>
 
             </StackPanel>
