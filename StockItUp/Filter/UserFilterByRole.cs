@@ -16,7 +16,7 @@ namespace StockItUp.Filter
                 return 0;
             }
 
-            return x.GroupId.CompareTo(y.GroupId);
+            return x.GroupName.CompareTo(y.GroupName);
         }
     }
 }
