@@ -31,6 +31,12 @@ namespace StockItUp.ViewModel
         #endregion
 
         #region Properties
+
+        public PermissionGroup Permission
+        {
+            get { return Catalog<PermissionGroup>.Instance.Read(Controller.Instance.GetUser.GroupId).Result; }
+        }
+
         public string OldPassword { get; set; }
         public string NewPassword { get; set; }
 

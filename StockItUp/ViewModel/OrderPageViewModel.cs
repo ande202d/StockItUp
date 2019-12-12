@@ -51,6 +51,11 @@ namespace StockItUp.ViewModel
         public ICommand DeleteOrderCommand { get; set; }
         public ICommand ResetSelectedSupplierCommand { get; set; }
 
+        public PermissionGroup Permission
+        {
+            get { return Catalog<PermissionGroup>.Instance.Read(Controller.Instance.GetUser.GroupId).Result; }
+        }
+
         public ObservableCollection<OrderPage> CreateOrderCatalog
         {
             get

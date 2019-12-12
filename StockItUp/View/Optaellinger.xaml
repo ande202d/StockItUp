@@ -49,7 +49,7 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <!--Navigation Buttons-->
-            <AppBarButton Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List" BorderBrush="WhiteSmoke" BorderThickness="0,0,0,3">
+            <AppBarButton IsEnabled="{Binding Permission.CanViewInventoryCount}" Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List" BorderBrush="WhiteSmoke" BorderThickness="0,0,0,3">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
                         <core:NavigateToPageAction TargetPage="StockItUp.View.Optaellinger"/>
@@ -63,7 +63,7 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
-            <AppBarButton Style="{StaticResource Button}" Grid.Column="2" Label="Bestillinger" Icon="Bullets">
+            <AppBarButton IsEnabled="{Binding Permission.CanViewOrder}" Style="{StaticResource Button}" Grid.Column="2" Label="Bestillinger" Icon="Bullets">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
                         <core:NavigateToPageAction TargetPage="StockItUp.View.Bestillinger"/>
@@ -106,7 +106,7 @@
                 <TextBlock Text="kasser" Width="100" FontSize="20"></TextBlock>
                 <TextBlock Text="løse" Width="100" FontSize="20"></TextBlock>
             </StackPanel>
-            <AppBarButton Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Padding="0,0,0,0" Content="Lav optælling" Style="{StaticResource Button}" Command="{Binding CreateInventoryCountCommand}"></AppBarButton>
+            <AppBarButton IsEnabled="{Binding Permission.CanCreateInventoryCount}" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Padding="0,0,0,0" Content="Lav optælling" Style="{StaticResource Button}" Command="{Binding CreateInventoryCountCommand}"></AppBarButton>
             <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="0,110,0,0" Height="490">
                 <ScrollViewer Height="490">
                 <ListView ItemsSource="{Binding ListForProducts}" SelectionMode="None">
@@ -196,7 +196,7 @@
             </ListView>
             </ScrollViewer>
             </StackPanel>
-            <AppBarButton Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0,0,0,0" Content="Fjern optælling" Style="{StaticResource Button}" Command="{Binding DeleteInventoryCountCommand}"></AppBarButton>
+            <AppBarButton IsEnabled="{Binding Permission.CanDeleteInventoryCount}" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="0,0,0,0" Content="Fjern optælling" Style="{StaticResource Button}" Command="{Binding DeleteInventoryCountCommand}"></AppBarButton>
         </Grid>
     </Grid>
 </Page>

@@ -49,7 +49,7 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <!--Navigation Buttons-->
-            <AppBarButton Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List">
+            <AppBarButton IsEnabled="{Binding Permission.CanViewInventoryCount}" Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
                         <core:NavigateToPageAction TargetPage="StockItUp.View.Optaellinger"/>
@@ -63,7 +63,7 @@
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
-            <AppBarButton Style="{StaticResource Button}" Grid.Column="2" Label="Bestillinger" Icon="Bullets">
+            <AppBarButton IsEnabled="{Binding Permission.CanViewOrder}"  Style="{StaticResource Button}" Grid.Column="2" Label="Bestillinger" Icon="Bullets">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
                         <core:NavigateToPageAction TargetPage="StockItUp.View.Bestillinger"/>
@@ -109,7 +109,7 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,40,0,0">
                 <TextBlock Text="Ønsket lager: " Margin="10,0,0,0"></TextBlock>
                 <TextBox Margin="20,0,0,0" Text="{Binding SelectedProduct.Wanted, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                <Button Margin="10,0,0,0" Content="Gem" Background="#d0662f" Foreground="GhostWhite" Command="{Binding ChangeWantedAmountCommand}"></Button>
+                <Button IsEnabled="{Binding Permission.CanChangeStoreProduct}" Margin="10,0,0,0" Content="Gem" Background="#d0662f" Foreground="GhostWhite" Command="{Binding ChangeWantedAmountCommand}"></Button>
                 <TextBlock Text="{Binding ChangeWantedAmountResponse}" VerticalAlignment="Bottom" FontSize="10" Margin="5,0,0,0" TextWrapping="Wrap" Width="180"></TextBlock>
             </StackPanel> 
             <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,80,0,0" >
@@ -156,9 +156,9 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
-                    <AppBarButton Content="Tilføj placering" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding CreateLocationCommand}"></AppBarButton>
-                    <AppBarButton Content="Rediger placering" Command="{Binding UpdateLocationCommand}" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
-                    <AppBarButton Content="Fjern placering" Command="{Binding DeleteLocationCommand}" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
+                    <AppBarButton IsEnabled="{Binding Permission.CanCreateLocation}" Content="Tilføj placering" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125" Command="{Binding CreateLocationCommand}"></AppBarButton>
+                    <AppBarButton IsEnabled="{Binding Permission.CanUpdateLocation}" Content="Rediger placering" Command="{Binding UpdateLocationCommand}" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
+                    <AppBarButton IsEnabled="{Binding Permission.CanDeleteLocation}" Content="Fjern placering" Command="{Binding DeleteLocationCommand}" Style="{StaticResource Button}" HorizontalContentAlignment="Center" Width="125"></AppBarButton>
                 </StackPanel>
                 <!--Handling of providers-->
                 
@@ -182,7 +182,7 @@
                 </StackPanel>
                 <StackPanel Height="600" VerticalAlignment="Top">
                     <ScrollViewer Height="600">
-                        <ListView Margin="0,30,0,0" Padding="0" x:Name ="vareListView" ItemsSource="{Binding ProductCatalog}" SelectedItem="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ListView  Margin="0,30,0,0" Padding="0" x:Name ="vareListView" ItemsSource="{Binding ProductCatalog}" SelectedItem="{Binding SelectedProduct, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
