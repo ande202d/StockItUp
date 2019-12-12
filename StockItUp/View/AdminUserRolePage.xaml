@@ -7,8 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:viewModel="using:StockItUp.ViewModel"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <viewModel:UserRoleViewModel></viewModel:UserRoleViewModel>
+    </Page.DataContext>
 
     <Page.Resources>
         <Style  x:Key="Button"  TargetType="AppBarButton">
@@ -71,7 +76,58 @@
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  HERE WE START THE CODE THAT IS UNIQUE FOR THIS PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
-        <Grid>
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+                    <!--Group LIST-->
+            <StackPanel Grid.Column="1">
+                <ListView ItemsSource="{Binding GroupCatalog}" SelectedItem="{Binding SelectedGroup, Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+            
+                    <!--Create group list-->
+            <StackPanel Grid.Column="2" Visibility="{Binding DataVisibility}">
+                <ListView ItemsSource="{Binding GetPermissionCatalog}" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Key}"></TextBlock>
+                                <TextBlock Text="{Binding Value}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+
+
+                    <!--Group Permission History List-->
+                    <StackPanel Grid.Column="2" Visibility="{Binding CreateVisibility}">
+                        <TextBox PlaceholderText="Indsæt gruppens navn" Text="{Binding SelectedGroup.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        <ListView ItemsSource="{Binding GetPermissionCatalog}" Height="500">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Key}"></TextBlock>
+                                        <!--<TextBlock Text="{Binding Value}"></TextBlock>-->
+                                        <CheckBox IsChecked="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></CheckBox>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <AppBarButton Style="{StaticResource Button}" Content="Opret gruppe" Command="{Binding CreateGroupCommand}"></AppBarButton>
+                    </StackPanel>
 
         </Grid>
     </Grid>
