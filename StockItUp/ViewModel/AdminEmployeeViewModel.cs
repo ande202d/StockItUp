@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -25,6 +26,7 @@ namespace StockItUp.ViewModel
             CreateEmployeeCommand = new RelayCommand(CreateEmployeeMethod);
             UpdateEmployeeCommand = new RelayCommand(UpdateEmployeeMethod);
             DeleteEmployeeCommand = new RelayCommand(DeleteEmployeeMethod);
+            ResetPasswordCommand = new RelayCommand(RandomPasswordMethod);
         }
 
 
@@ -35,6 +37,7 @@ namespace StockItUp.ViewModel
         public ICommand CreateEmployeeCommand { get; set; }
         public ICommand UpdateEmployeeCommand { get; set; }
         public ICommand DeleteEmployeeCommand { get; set; }
+        public ICommand ResetPasswordCommand { get; set; }
 
         #endregion
 
@@ -54,6 +57,16 @@ namespace StockItUp.ViewModel
 
                return collection;
 
+            }
+        }
+
+        public ObservableCollection<PermissionGroup> PermissionGroupCatalog
+        {
+            get
+            {
+                ObservableCollection<PermissionGroup> collection = new ObservableCollection<PermissionGroup>(Catalog<PermissionGroup>.Instance.GetList);
+
+                return collection;
             }
         }
 
@@ -83,9 +96,11 @@ namespace StockItUp.ViewModel
 
         }
 
-        public void ResetPassword()
+        public void RandomPasswordMethod()
         {
-            //
+            Random ran = new Random();
+            
+            
         }
 
 
