@@ -84,14 +84,17 @@ namespace StockItUp.ViewModel
 
         #region Methods
 
+        //Methods for CRUD Employees
         private async void CreateEmployeeMethod()
         {
             if(String.IsNullOrEmpty(SelectedUser.Name))
-            { 
+            {
+                _selectedUser.GroupId = SelectedPermissionGroup.Id;
                 _selectedUser.Password = RandomPasswordMethod();
                 _selectedUser.Username = RandomUserName();
                 await Catalog<User>.Instance.Create(SelectedUser);
                 OnPropertyChanged(nameof(UserCatalog));
+                OnPropertyChanged(nameof(SelectedUser));
             }
         }
 
@@ -99,7 +102,7 @@ namespace StockItUp.ViewModel
         {
             if (SelectedUser != null)
             {
-                SelectedPermissionGroup.Id = 1;
+                _selectedUser.GroupId = SelectedPermissionGroup.Id;
                 await Catalog<User>.Instance.Update(SelectedUser.Id, SelectedUser);
                 OnPropertyChanged(nameof(UserCatalog));
             }
@@ -112,6 +115,7 @@ namespace StockItUp.ViewModel
 
         }
 
+        //Methods for generating random Passwords and Usernames
         public string RandomPasswordMethod()
         {
             Random ran = new Random();
