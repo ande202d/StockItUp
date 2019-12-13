@@ -277,7 +277,7 @@ namespace StockItUp.ViewModel
         {
             if (SelectedProduct!=null)
             {
-                int storeId = 1;
+                int storeId = Controller.Instance.StoreId;
                 int id = SelectedProduct.ProductId;
                 int wanted = SelectedProduct.Wanted;
                 StoreProduct tempStoreProduct = new StoreProduct(storeId, id, wanted);
