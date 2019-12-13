@@ -132,6 +132,10 @@ namespace StockItUp.ViewModel
             set { _newEmployeePassword = value; OnPropertyChanged(); }
         }
 
+        public Controller Controller
+        {
+            get { return Controller.Instance; }
+        }
         #endregion
 
         #region Methods

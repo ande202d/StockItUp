@@ -109,6 +109,11 @@ namespace StockItUp.ViewModel
             }
         }
 
+        public Controller Controller
+        {
+            get { return Controller.Instance; }
+        }
+
         #endregion
 
 

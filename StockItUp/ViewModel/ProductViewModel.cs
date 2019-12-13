@@ -154,6 +154,7 @@ namespace StockItUp.ViewModel
         public string AddToWantedResponse { get; set; }
 
 
+
         #endregion
 
         #region Methods

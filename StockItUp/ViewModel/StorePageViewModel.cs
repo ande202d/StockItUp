@@ -86,7 +86,10 @@ namespace StockItUp.ViewModel
             //set { _storePageUsers = value.ToList(); }
         }
 
-
+        public Controller Controller
+        {
+            get { return Controller.Instance; }
+        }
 
         public async void SaveChangesMethod()
         {

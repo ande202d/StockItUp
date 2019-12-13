@@ -247,6 +247,10 @@ namespace StockItUp.ViewModel
                 return new ObservableCollection<Supplier>(sl);
             }
         }
+        public Controller Controller
+        {
+            get { return Controller.Instance; }
+        }
         #endregion
 
         #region Methods
