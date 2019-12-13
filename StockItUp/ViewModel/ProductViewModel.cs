@@ -227,7 +227,7 @@ namespace StockItUp.ViewModel
 
         private async void AddToWantedListMethod()
         {
-            int storeId = 1;
+            int storeId = Controller.Instance.StoreId;
             bool isOnList = false;
             foreach (var storeProduct in Catalog<StoreProduct>.Instance.GetList)
             {

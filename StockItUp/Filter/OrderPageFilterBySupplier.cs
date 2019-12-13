@@ -11,7 +11,7 @@ namespace StockItUp.Filter
     {
         public int Compare(OrderPage x, OrderPage y)
         {
-            if (x == null || y == null)
+            if (x == null || y == null || x.Supplier==null || y.Supplier==null)
             {
                 return 0;
             }

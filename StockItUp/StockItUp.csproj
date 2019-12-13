@@ -181,28 +181,28 @@
     <Compile Include="View\AdminUserRolePage.xaml.cs">
       <DependentUpon>AdminUserRolePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Bestillinger.xaml.cs">
-      <DependentUpon>Bestillinger.xaml</DependentUpon>
+    <Compile Include="View\OrderPage.xaml.cs">
+      <DependentUpon>OrderPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Lager.xaml.cs">
-      <DependentUpon>Lager.xaml</DependentUpon>
+    <Compile Include="View\StoragePage.xaml.cs">
+      <DependentUpon>StoragePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="FirstTestClass.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
+    <Compile Include="View\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Optaellinger.xaml.cs">
-      <DependentUpon>Optaellinger.xaml</DependentUpon>
+    <Compile Include="View\InventoryCountPage.xaml.cs">
+      <DependentUpon>InventoryCountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Personale.xaml.cs">
-      <DependentUpon>Personale.xaml</DependentUpon>
+    <Compile Include="View\EmployeePage.xaml.cs">
+      <DependentUpon>EmployeePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Varer.xaml.cs">
-      <DependentUpon>Varer.xaml</DependentUpon>
+    <Compile Include="View\ProductPage.xaml.cs">
+      <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Supplier.cs" />
   </ItemGroup>
@@ -239,11 +239,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Bestillinger.xaml">
+    <Page Include="View\OrderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Lager.xaml">
+    <Page Include="View\StoragePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -251,19 +251,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Login.xaml">
+    <Page Include="View\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Optaellinger.xaml">
+    <Page Include="View\InventoryCountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Personale.xaml">
+    <Page Include="View\EmployeePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Varer.xaml">
+    <Page Include="View\ProductPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

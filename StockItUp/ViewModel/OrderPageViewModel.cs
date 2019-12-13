@@ -113,7 +113,11 @@ namespace StockItUp.ViewModel
                     {
                         if (data.SupplierName == SelectedSupplier.Name)
                         {
-                            templist.Add(data);
+                            if (!templist.Contains(data))
+                            {
+                                templist.Add(data);
+                            }
+                            
                         }
                     }
                     listToReturn = templist;
