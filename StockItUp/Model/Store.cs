@@ -42,7 +42,7 @@ namespace StockItUp.Model
             set { _id = value; }
         }
 
-        public string Adress
+        public string Address
         {
             get { return _address; }
             set { _address = value; }
