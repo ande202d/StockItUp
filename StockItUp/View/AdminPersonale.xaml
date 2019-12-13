@@ -82,7 +82,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             
-            <StackPanel Grid.Column="0" Height="700">
+            <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,66" VerticalAlignment="Stretch">
                 <StackPanel Margin="0,20,0,30">
                     <TextBlock FontSize="50" Text="Medarbejderer"></TextBlock>
                 </StackPanel>
@@ -92,6 +92,7 @@
                     <TextBlock Text="Initialer" Margin="170,0,0,0"></TextBlock>
                     <TextBlock Text="Adgangsgrupper" Margin="50,0,0,0"></TextBlock>
                 </StackPanel>
+                <StackPanel Height="700">
                 <ScrollViewer Height="700">
                     <ListView ItemsSource="{Binding UserCatalog}" SelectedItem="{Binding SelectedUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"> <!--bind til personale list-->
                         <ListView.ItemTemplate>
@@ -116,6 +117,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </ScrollViewer>
+                </StackPanel>
             </StackPanel>
 
             <StackPanel Grid.Column="1">

@@ -62,7 +62,7 @@ namespace StockItUp.ViewModel
         public PermissionGroup SelectedPermissionGroup
         {
             get { return _selectedPermissionGroup; }
-            set { _selectedPermissionGroup = value; OnPropertyChanged(); }
+            set { _selectedPermissionGroup = value; OnPropertyChanged();}
         }
 
         public string SelectedSort
@@ -156,7 +156,8 @@ namespace StockItUp.ViewModel
         {
             await Catalog<User>.Instance.Delete(SelectedUser.Id);
             OnPropertyChanged(nameof(UserCatalog));
-
+            _selectedUser = new User(default(string), default(int));
+            _selectedPermissionGroup = null;
         }
 
         //Methods for generating random Passwords and Usernames
