@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using RVG.Common;
 using StockItUp.Annotations;
+using StockItUp.Connections;
 using StockItUp.Model;
 using StockItUp.Persistency;
 
@@ -82,10 +83,16 @@ namespace StockItUp.ViewModel
                     {
                         if (u.Password == Password)
                         {
-                            Controller.Instance.UserId = u.Id;
+                            foreach (UserStore us in Catalog<UserStore>.Instance.GetList)
+                            {
+                                if (us.UserId == u.Id && us.StoreId == SelectedStore.Id)
+                                {
+                                    Controller.Instance.UserId = u.Id;
 
-                            Controller.Instance.StoreId = SelectedStore.Id;
-                            return true;
+                                    Controller.Instance.StoreId = SelectedStore.Id;
+                                    return true;
+                                }
+                            }
                         }
                     }
                 }

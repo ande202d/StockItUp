@@ -76,9 +76,16 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                List<Location> ll = _locationCatalog.GetList;
-                ll.Sort(new LocationFilter());
-                ObservableCollection<Location> collection = new ObservableCollection<Location>(ll);
+                List<Location> l1 = _locationCatalog.GetList;
+                List<Location> l2 = new List<Location>();
+
+                foreach (Location l in l1)
+                {
+                    if (l.Store == Controller.Instance.StoreId) l2.Add(l);
+                }
+
+                l2.Sort(new LocationFilter());
+                ObservableCollection<Location> collection = new ObservableCollection<Location>(l2);
 
 
                 return collection;
@@ -250,7 +257,7 @@ namespace StockItUp.ViewModel
 
         private async void CreateLocationMethod()
         {
-           SelectedLocation.Store = SelectedLocation.MyStore.Id;
+           SelectedLocation.Store = Controller.Instance.StoreId;
            await _locationCatalog.Create(SelectedLocation);
            OnPropertyChanged(nameof(LocationCatalog));
         }
