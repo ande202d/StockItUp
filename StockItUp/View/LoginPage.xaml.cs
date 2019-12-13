@@ -21,11 +21,11 @@ namespace StockItUp.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Login : Page
+    public sealed partial class LoginPage : Page
     {
         private LoginViewModel _lvm;
 
-        public Login()
+        public LoginPage()
         {
             this.InitializeComponent();
             _lvm = new LoginViewModel();
@@ -34,7 +34,7 @@ namespace StockItUp.View
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_lvm.LoginMethod()) Frame.Navigate(typeof(Lager));
+            if (_lvm.LoginMethod()) Frame.Navigate(typeof(StoragePage));
         }
     }
 }

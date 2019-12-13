@@ -20,9 +20,9 @@ namespace StockItUp.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Personale : Page
+    public sealed partial class EmployeePage : Page
     {
-        public Personale()
+        public EmployeePage()
         {
             this.InitializeComponent();
         }

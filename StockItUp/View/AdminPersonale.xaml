@@ -44,7 +44,7 @@
             <AppBarButton Style="{StaticResource Button}" Grid.Column="0" Label="Tilbage" Icon="Back" >
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
-                        <core:NavigateToPageAction TargetPage="StockItUp.View.Personale"/>
+                        <core:NavigateToPageAction TargetPage="StockItUp.View.EmployeePage"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
