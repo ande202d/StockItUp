@@ -37,6 +37,8 @@
 
         <!--Top bar-->
         <Grid Row="0" Background="#2d9ed2" BorderBrush="#d0662f" BorderThickness="0,0,0,5" >
+
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -44,8 +46,13 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <TextBlock Text="{Binding Controller.GetStore.Name}" Foreground="GhostWhite" Margin="5,5,0,0"></TextBlock>
+                <TextBlock Text="-" Foreground="GhostWhite" Margin="5,5,5,0"></TextBlock>
+                <TextBlock Text="{Binding Controller.GetUser.Name}" Foreground="GhostWhite" Margin="0,5,0,0"></TextBlock>
+            </StackPanel>
             <!--Navigation Buttons-->
-            <AppBarButton IsEnabled="{Binding Permission.CanViewInventoryCount}" Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List" BorderBrush="WhiteSmoke" BorderThickness="0,0,0,3">
+            <AppBarButton IsEnabled="{Binding Permission.CanViewInventoryCount}" Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List" >
                 <custom:Interaction.Behaviors>
                     <custom1:EventTriggerBehavior EventName="Click">
                         <custom1:NavigateToPageAction TargetPage="StockItUp.View.InventoryCountPage"/>
@@ -66,7 +73,7 @@
                     </custom1:EventTriggerBehavior>
                 </custom:Interaction.Behaviors>
             </AppBarButton>
-            <AppBarButton Style="{StaticResource Button}" Grid.Column="3" Label="Varer" Icon="Library">
+            <AppBarButton Style="{StaticResource Button}" Grid.Column="3" Label="Varer" Icon="Library" BorderBrush="WhiteSmoke" BorderThickness="0,0,0,3">
                 <custom:Interaction.Behaviors>
                     <custom1:EventTriggerBehavior EventName="Click">
                         <custom1:NavigateToPageAction TargetPage="StockItUp.View.ProductPage"/>

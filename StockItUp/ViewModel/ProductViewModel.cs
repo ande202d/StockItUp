@@ -62,6 +62,11 @@ namespace StockItUp.ViewModel
 
         #region Porperties
 
+        public Controller Controller
+        {
+            get { return Controller.Instance; }
+        }
+
         public PermissionGroup Permission
         {
             get { return Catalog<PermissionGroup>.Instance.Read(Controller.Instance.GetUser.GroupId).Result; }
