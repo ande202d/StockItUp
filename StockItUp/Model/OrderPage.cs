@@ -82,8 +82,18 @@ namespace StockItUp.Model
         {
             get
             {
-                if (Supplier == null) return "Ingen leverandør";
+                if (Supplier == null) return "N/A";
                 return Supplier.Name;
+            }
+        }
+
+
+        public string SupplierEmail
+        {
+            get
+            {
+                if (Supplier == null) return "N/A";
+                return Supplier.Website;
             }
         }
 

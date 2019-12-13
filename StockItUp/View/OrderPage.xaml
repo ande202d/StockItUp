@@ -174,8 +174,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="{Binding Product.Name}" TextAlignment="Left"></TextBlock>
-                                <TextBlock Grid.Column="1" Text="{Binding Supplier.Name}" TextAlignment="Left"></TextBlock>
-                                <TextBlock Grid.Column="2" Text="{Binding Supplier.Website}" TextAlignment="Left"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding SupplierName}" TextAlignment="Left"></TextBlock>
+                                <TextBlock Grid.Column="2" Text="{Binding SupplierEmail}" TextAlignment="Left"></TextBlock>
                                 <TextBlock Grid.Column="3" TextAlignment="Center" Text="{Binding AmountInStorage}"></TextBlock>
                                 <TextBlock Grid.Column="4" TextAlignment="Center" Text="{Binding Missing}"></TextBlock>
                                 <TextBlock Grid.Column="5" TextAlignment="Center" Text="{Binding SuggestedAmount}"></TextBlock>
