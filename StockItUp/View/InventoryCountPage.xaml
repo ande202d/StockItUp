@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="StockItUp.View.Optaellinger"
+    x:Class="StockItUp.View.InventoryCountPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:StockItUp"
@@ -52,35 +52,35 @@
             <AppBarButton IsEnabled="{Binding Permission.CanViewInventoryCount}" Style="{StaticResource Button}" Grid.Column="0" Label="Optællinger" Icon="List" BorderBrush="WhiteSmoke" BorderThickness="0,0,0,3">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
-                        <core:NavigateToPageAction TargetPage="StockItUp.View.Optaellinger"/>
+                        <core:NavigateToPageAction TargetPage="StockItUp.View.InventoryCountPage"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
             <AppBarButton Style="{StaticResource Button}" Grid.Column="1" Label="Lager" Icon="Home">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
-                        <core:NavigateToPageAction TargetPage="StockItUp.View.Lager"/>
+                        <core:NavigateToPageAction TargetPage="StockItUp.View.StoragePage"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
             <AppBarButton IsEnabled="{Binding Permission.CanViewOrder}" Style="{StaticResource Button}" Grid.Column="2" Label="Bestillinger" Icon="Bullets">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
-                        <core:NavigateToPageAction TargetPage="StockItUp.View.Bestillinger"/>
+                        <core:NavigateToPageAction TargetPage="StockItUp.View.OrderPage"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
             <AppBarButton Style="{StaticResource Button}" Grid.Column="3" Label="Varer" Icon="Library">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
-                        <core:NavigateToPageAction TargetPage="StockItUp.View.Varer"/>
+                        <core:NavigateToPageAction TargetPage="StockItUp.View.ProductPage"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
             <AppBarButton Style="{StaticResource Button}" Grid.Column="4" Label="Personale" Icon="People">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
-                        <core:NavigateToPageAction TargetPage="StockItUp.View.Personale"/>
+                        <core:NavigateToPageAction TargetPage="StockItUp.View.EmployeePage"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
