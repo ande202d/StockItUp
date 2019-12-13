@@ -88,7 +88,7 @@
         <Grid Grid.Row="1" Background="WhiteSmoke">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
@@ -107,7 +107,7 @@
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
                                     <ColumnDefinition Width="200"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="{Binding Id}"></TextBlock>
@@ -130,7 +130,7 @@
                 <TextBlock Text="Leverandør" FontSize="15" TextAlignment="Left"        Width="150"></TextBlock>
                 <TextBlock Text="Email" FontSize="15" TextAlignment="Left"             Width="150"></TextBlock>
                 <TextBlock Text="Whats in stock?" FontSize="15" TextAlignment="Center"   Width="150"></TextBlock>
-                <TextBlock Text="Mangler" FontSize="15" TextAlignment="Center"           Width="100"></TextBlock>
+                <TextBlock Text="Mangler" FontSize="15" TextAlignment="Center"           Width="150"></TextBlock>
                 <TextBlock Text="Anbefalede kasser" FontSize="15" TextAlignment="Center" Width="150"></TextBlock>
                 <TextBlock Text="Bestilte kasser" FontSize="15" TextAlignment="Center"   Width="150"></TextBlock>
 
@@ -168,7 +168,7 @@
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
@@ -218,20 +218,22 @@
                             <Grid>
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="200"></ColumnDefinition>
-                                    <ColumnDefinition Width="200"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="{Binding Product}"></TextBlock>
                                 <TextBlock Grid.Column="1" Text="{Binding Supplier}"></TextBlock>
-                                <TextBlock Grid.Column="2" TextAlignment="Center" Text="{Binding AmountPerBox}"></TextBlock>
-                                <TextBlock Grid.Column="3" TextAlignment="Center" Text="{Binding MissingAmount}"></TextBlock>
-                                <TextBlock Grid.Column="4" TextAlignment="Center" Text="{Binding RecommendedAmount}"></TextBlock>
-                                <TextBlock Grid.Column="5" TextAlignment="Center" Text="{Binding AmountOrdered}"></TextBlock>
+                                <TextBlock Grid.Column="2" Text="{Binding Email}"></TextBlock>
+                                <TextBlock Grid.Column="3" TextAlignment="Center" Text="{Binding AmountPerBox}"></TextBlock>
+                                <TextBlock Grid.Column="4" TextAlignment="Center" Text="{Binding MissingAmount}"></TextBlock>
+                                <TextBlock Grid.Column="5" TextAlignment="Center" Text="{Binding RecommendedAmount}"></TextBlock>
+                                <TextBlock Grid.Column="6" TextAlignment="Center" Text="{Binding AmountOrdered}"></TextBlock>
 
                             </Grid>
                         </DataTemplate>

@@ -158,6 +158,7 @@
     <Compile Include="Model\StoragePageProduct.cs" />
     <Compile Include="Model\StoragePageProductData.cs" />
     <Compile Include="Model\Store.cs" />
+    <Compile Include="Model\StorePageUser.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Persistency\Catalog.cs" />
     <Compile Include="Persistency\Controller.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="ViewModel\OrderPageViewModel.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="ViewModel\StoragePageViewModel.cs" />
+    <Compile Include="ViewModel\StorePageViewModel.cs" />
     <Compile Include="ViewModel\UserRoleViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="View\AdminPersonale.xaml.cs">
