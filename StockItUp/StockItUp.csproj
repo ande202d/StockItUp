@@ -172,8 +172,8 @@
     <Compile Include="ViewModel\StorePageViewModel.cs" />
     <Compile Include="ViewModel\UserRoleViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
-    <Compile Include="View\AdminPersonale.xaml.cs">
-      <DependentUpon>AdminPersonale.xaml</DependentUpon>
+    <Compile Include="View\AdminEmployeePage.xaml.cs">
+      <DependentUpon>AdminEmployeePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AdminStorePage.xaml.cs">
       <DependentUpon>AdminStorePage.xaml</DependentUpon>
@@ -227,7 +227,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\AdminPersonale.xaml">
+    <Page Include="View\AdminEmployeePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

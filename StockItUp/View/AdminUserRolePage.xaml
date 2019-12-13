@@ -52,7 +52,7 @@
             <AppBarButton Style="{StaticResource Button}" Grid.Column="1" Label="Brugere" Icon="People" >
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
-                        <core:NavigateToPageAction TargetPage="StockItUp.View.AdminPersonale"/>
+                        <core:NavigateToPageAction TargetPage="StockItUp.View.AdminEmployeePage"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>

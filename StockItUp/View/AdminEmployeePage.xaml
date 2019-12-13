@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="StockItUp.View.AdminPersonale"
+    x:Class="StockItUp.View.AdminEmployeePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:StockItUp.View"
@@ -51,7 +51,7 @@
             <AppBarButton Style="{StaticResource Button}" Grid.Column="1" Label="Brugere" Icon="People" BorderBrush="WhiteSmoke" BorderThickness="0,0,0,3">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
-                        <core:NavigateToPageAction TargetPage="StockItUp.View.AdminPersonale"/>
+                        <core:NavigateToPageAction TargetPage="StockItUp.View.AdminEmployeePage"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>

@@ -82,7 +82,7 @@
                 <AppBarButton Content="ADMIN" Style="{StaticResource Button}" FontWeight="ExtraBold" FontSize="18" Width="150" Margin="50" HorizontalAlignment="Right">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Click">
-                            <core:NavigateToPageAction TargetPage="StockItUp.View.AdminPersonale"/>
+                            <core:NavigateToPageAction TargetPage="StockItUp.View.AdminEmployeePage"/>
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </AppBarButton>
@@ -123,7 +123,7 @@
                 <AppBarButton Grid.Column="1" Grid.Row="8" Style="{StaticResource Button}" Content="Log ud">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Click">
-                            <core:NavigateToPageAction TargetPage="StockItUp.View.Login"/>
+                            <core:NavigateToPageAction TargetPage="StockItUp.View.LoginPage"/>
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </AppBarButton>
