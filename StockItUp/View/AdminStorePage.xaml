@@ -7,8 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:viewModel="using:StockItUp.ViewModel"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <viewModel:StorePageViewModel></viewModel:StorePageViewModel>
+    </Page.DataContext>
+
 
     <Page.Resources>
         <Style  x:Key="Button"  TargetType="AppBarButton">
@@ -27,6 +33,7 @@
             <RowDefinition Height="5*"></RowDefinition>
             <!--This is the working area, which is 5/6 parts of the page-->
         </Grid.RowDefinitions>
+
 
         <!--Top bar-->
         <Grid Row="0" Background="#2d9ed2" BorderBrush="#d0662f" BorderThickness="0,0,0,5" >
@@ -71,7 +78,51 @@
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  HERE WE START THE CODE THAT IS UNIQUE FOR THIS PAGE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
         <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
 
-        <Grid>
+        <Grid Grid.Row="1" Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Butikker" TextAlignment="Center" HorizontalAlignment="Center" FontSize="30"></TextBlock>
+                <ListView ItemsSource="{Binding StoreCatalog}" SelectedItem="{Binding SelectedStore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="400">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                                <TextBlock Text="{Binding Address}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackPanel>
+                    <TextBlock Text="Administrer butikker" FontSize="30" Margin="0,20,0,0" TextAlignment="Center"></TextBlock>
+                    <TextBox PlaceholderText="Butikkens navn" Text="{Binding SelectedStore.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150" Margin="0,20,0,20"></TextBox>
+                    <TextBox PlaceholderText="Butikkens adresse" Text="{Binding SelectedStore.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <AppBarButton Content="Tilføj butik" Style="{StaticResource Button}" Command="{Binding CreateStoreCommand}" Width="150"></AppBarButton>
+                        <AppBarButton Content="Rediger butik" Style="{StaticResource Button}" Width="150" Command="{Binding EditStoreCommand}"></AppBarButton>
+                        <AppBarButton Content="Fjern butik" Style="{StaticResource Button}" Command="{Binding DeleteStoreCommand}" Width="150"></AppBarButton>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <TextBlock FontSize="30" Text="{Binding SelectedStore.Name}"></TextBlock>
+                <ListView ItemsSource="{Binding StorePageUserCatalog, Mode=TwoWay}" Height="500">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                                <CheckBox IsChecked="{Binding WorksAtStore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <AppBarButton Content="Gem!" Command="{Binding SaveChangesCommand}" Style="{StaticResource Button}"></AppBarButton>
+            </StackPanel>
+
 
         </Grid>
     </Grid>
