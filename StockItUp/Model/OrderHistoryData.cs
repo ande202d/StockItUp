@@ -17,8 +17,9 @@ namespace StockItUp.Model
         private int _amountPerBox;
         private int _recommendedAmount;
         private int _amountOrdered;
+        private string _email;
 
-        public OrderHistoryData(int orderHistoryId, string product, string supplier, int missingAmount, int amountPerBox, int recommendedAmount, int amountOrdered)
+        public OrderHistoryData(int orderHistoryId, string product, string supplier, string email, int missingAmount, int amountPerBox, int recommendedAmount, int amountOrdered)
         {
             _id = _idCounter;
             _idCounter++;
@@ -28,6 +29,7 @@ namespace StockItUp.Model
             if (supplier == null) _supplier = "";
             else _supplier = supplier;
 
+            _email = email;
             _missingAmount = missingAmount;
             _amountPerBox = amountPerBox;
             _recommendedAmount = recommendedAmount;
@@ -85,6 +87,12 @@ namespace StockItUp.Model
         {
             get { return _supplier; }
             set { _supplier = value; }
+        }
+
+        public string Email
+        {
+            get { return _email; }
+            set { _email = value; }
         }
 
         #endregion

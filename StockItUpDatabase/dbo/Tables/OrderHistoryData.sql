@@ -7,6 +7,7 @@
     [RecommendedAmount] INT          NOT NULL,
     [AmountOrdered]     INT          NOT NULL,
     [Supplier]			VARCHAR(50)	 NOT NULL, 
+    [Email] VARCHAR(50) NOT NULL, 
     PRIMARY KEY CLUSTERED ([Id]),
     CONSTRAINT [FK_OrderHistoryData_ToTable] FOREIGN KEY ([OrderHistory]) REFERENCES [dbo].[OrderHistory] ([Id]) ON DELETE CASCADE
 );

@@ -28,6 +28,7 @@ namespace WebService
         [Required]
         [StringLength(50)]
         public string Supplier { get; set; }
+        public string Email { get; set; }
 
         public virtual OrderHistory OrderHistory1 { get; set; }
     }

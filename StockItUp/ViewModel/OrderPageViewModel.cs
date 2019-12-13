@@ -273,7 +273,7 @@ namespace StockItUp.ViewModel
                         OrderProduct op = new OrderProduct(latestOrder.Id, i.Product.Id, i.ActualAmount);
                         await Catalog<OrderProduct>.Instance.Create(op);
 
-                        OrderHistoryData ohd = new OrderHistoryData(orderHistory.Id, i.Product.Name, i.SupplierName,
+                        OrderHistoryData ohd = new OrderHistoryData(orderHistory.Id, i.Product.Name, i.SupplierName, i.Supplier.Website,
                             i.Missing, i.Product.AmountPerBox, i.SuggestedAmount, i.ActualAmount);
                         await Catalog<OrderHistoryData>.Instance.Create(ohd);
 
