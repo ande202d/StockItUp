@@ -131,6 +131,8 @@
     <Compile Include="Connections\InventoryCountProduct.cs" />
     <Compile Include="Connections\StoreProduct.cs" />
     <Compile Include="Connections\UserStore.cs" />
+    <Compile Include="Filter\ProductFilterByProductId.cs" />
+    <Compile Include="Filter\ProductFilterBySupplier.cs" />
     <Compile Include="Filter\UserFilterByName.cs" />
     <Compile Include="Filter\InventoryCountPageFilter.cs" />
     <Compile Include="Filter\LocationFilter.cs" />

@@ -27,6 +27,7 @@ namespace StockItUp.ViewModel
         private Supplier _selectedSupplier = new Supplier(default(string),"");
         private Supplier _selectedSupplierForCreationOfProduct;
         private string _filter = "";
+        private string _selectedSort;
 
         #endregion
 
@@ -87,6 +88,20 @@ namespace StockItUp.ViewModel
                 pl.Sort(new ProductFilter());
                 //ObservableCollection<Product> collection = new ObservableCollection<Product>(_productCatalog.ReadAll().Result);
                 ObservableCollection<Product> collection = new ObservableCollection<Product>();
+
+                if (SelectedSort == "Leverandør")
+                {
+                    pl.Sort(new ProductFilterBySupplier());
+                }
+
+                if (SelectedSort == "Vare navn")
+                {
+                    pl.Sort(new ProductFilter());
+                }
+                if (SelectedSort == "Vare ID")
+                {
+                    pl.Sort(new ProductFilterByProductId());
+                }
                 if (Filter == "")
                 {
                     collection = new ObservableCollection<Product>(pl);
@@ -153,8 +168,13 @@ namespace StockItUp.ViewModel
 
         public string AddToWantedResponse { get; set; }
 
+        public List<String> SortingCollection { get { return  new List<string>(){"Vare ID", "Vare navn", "Leverandør"};} }
 
-
+        public string SelectedSort
+        {
+            get { return _selectedSort; }
+            set { _selectedSort = value;OnPropertyChanged();OnPropertyChanged(nameof(ProductCatalog)); }
+        }
         #endregion
 
         #region Methods
