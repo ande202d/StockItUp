@@ -14,7 +14,7 @@ using StockItUp.Persistency;
 
 namespace StockItUp.ViewModel
 {
-    public class AdminEmployeeViewModel : INotifyPropertyChanged
+    public class AdminEmployeeViewModel : BaseViewModel
     {
         #region Instance fields
         private User _selectedUser = new User(default(string), default(int));
@@ -229,18 +229,6 @@ namespace StockItUp.ViewModel
             
         }
 
-
-        #endregion
-
-        #region OnPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         #endregion
 

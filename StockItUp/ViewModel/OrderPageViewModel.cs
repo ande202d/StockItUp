@@ -17,7 +17,7 @@ using StockItUp.Persistency;
 
 namespace StockItUp.ViewModel
 {
-    public class OrderPageViewModel : INotifyPropertyChanged
+    public class OrderPageViewModel : BaseViewModel
     {
 
         #region Instance field
@@ -320,16 +320,6 @@ namespace StockItUp.ViewModel
         }
         #endregion
 
-
-        #region IPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
+        
     }
 }

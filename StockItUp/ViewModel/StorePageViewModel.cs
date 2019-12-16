@@ -15,7 +15,7 @@ using StockItUp.Persistency;
 
 namespace StockItUp.ViewModel
 {
-    public class StorePageViewModel : INotifyPropertyChanged
+    public class StorePageViewModel : BaseViewModel
     {
 
         private Store _selectedStore;
@@ -127,14 +127,6 @@ namespace StockItUp.ViewModel
         {
            await Catalog<Store>.Instance.Delete(SelectedStore.Id);
            OnPropertyChanged(nameof(StoreCatalog));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -13,7 +13,7 @@ using StockItUp.Persistency;
 
 namespace StockItUp.ViewModel
 {
-    public class UserViewModel : INotifyPropertyChanged
+    public class UserViewModel : BaseViewModel
     {
 
         private User _dummyUser;
@@ -82,15 +82,6 @@ namespace StockItUp.ViewModel
 
 
 
-        #region OnPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
 
     }
 }

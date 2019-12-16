@@ -16,7 +16,7 @@ using StockItUp.Persistency;
 
 namespace StockItUp.ViewModel
 {
-    public class InventoryCountViewModel: INotifyPropertyChanged
+    public class InventoryCountViewModel: BaseViewModel
     {
         #region Instance fields
 
@@ -268,18 +268,6 @@ namespace StockItUp.ViewModel
 
         #endregion
 
-
-        #region On Property Changed
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
        
     }
 }

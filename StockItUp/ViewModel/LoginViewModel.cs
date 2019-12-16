@@ -15,7 +15,7 @@ using StockItUp.Persistency;
 
 namespace StockItUp.ViewModel
 {
-    class LoginViewModel : INotifyPropertyChanged
+    class LoginViewModel : BaseViewModel
     {
 
         #region Instance field
