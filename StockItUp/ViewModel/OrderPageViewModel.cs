@@ -134,11 +134,14 @@ namespace StockItUp.ViewModel
             get
             {
                 List<OrderHistory> listToReturn = new List<OrderHistory>();
-                foreach (var oh in Catalog<OrderHistory>.Instance.GetList)
-                {
-                    if (oh.StoreId==Controller.StoreId)
+                if (Catalog<OrderHistory>.Instance.GetList != null)
+                { 
+                    foreach (var oh in Catalog<OrderHistory>.Instance.GetList)
                     {
-                     listToReturn.Add(oh);
+                        if (oh.StoreId==Controller.StoreId)
+                        {
+                         listToReturn.Add(oh);
+                        }
                     }
                 }
                 ObservableCollection<OrderHistory> collection = new ObservableCollection<OrderHistory>(listToReturn);
