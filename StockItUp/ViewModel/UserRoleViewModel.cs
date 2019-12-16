@@ -174,7 +174,7 @@ namespace StockItUp.ViewModel
         {
             await Catalog<PermissionGroup>.Instance.Delete(SelectedGroup.Id);
             OnPropertyChanged(nameof(GroupCatalog));
-            Catalog<User>.Instance.ReadAll();
+            await Catalog<User>.Instance.ReadAll();
         }
 
 
