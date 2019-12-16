@@ -10,6 +10,7 @@ namespace StockItUp.Model
     {
         private int _id;
         private DateTime _orderedDate;
+        private int _storeId;
 
         //same comment as the one in inventoryCountHistory
         public OrderHistory()
@@ -39,6 +40,12 @@ namespace StockItUp.Model
         public string DateFormatted
         {
             get { return OrderedDate.ToString("dd / MM / yyyy HH:mm"); }
+        } 
+
+        public int StoreId
+        {
+            get { return _storeId };
+            set { _storeId = value; }
         }
         #endregion
 

@@ -20,6 +20,8 @@ namespace WebService
 
         public DateTime OrderedDate { get; set; }
 
+        public int StoreId { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderHistoryData> OrderHistoryDatas { get; set; }
     }
