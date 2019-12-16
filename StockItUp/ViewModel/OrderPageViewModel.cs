@@ -103,7 +103,7 @@ namespace StockItUp.ViewModel
                     listToReturn.Sort(new OrderPageFilterBySupplier());
                 }
 
-                if (SelectedSort == "Varer")
+                if (SelectedSort == "Vare")
                 {
                     listToReturn.Sort(new OrderPageFilterByVarer());
                 }
@@ -183,7 +183,7 @@ namespace StockItUp.ViewModel
                     listToReturn.Sort(new OrderHistoryDataFilterBySupplier());
                 }
 
-                if (SelectedSort == "Varer")
+                if (SelectedSort == "Vare")
                 {
                     listToReturn.Sort(new OrderHistoryDataFilterByVarer());
                 }
