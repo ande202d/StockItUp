@@ -133,8 +133,15 @@ namespace StockItUp.ViewModel
         {
             get
             {
-                ObservableCollection<OrderHistory> collection = 
-                    new ObservableCollection<OrderHistory>(Catalog<OrderHistory>.Instance.GetList);
+                List<OrderHistory> listToReturn = new List<OrderHistory>();
+                foreach (var oh in Catalog<OrderHistory>.Instance.GetList)
+                {
+                    if (oh.StoreId==Controller.StoreId)
+                    {
+                     listToReturn.Add(oh);
+                    }
+                }
+                ObservableCollection<OrderHistory> collection = new ObservableCollection<OrderHistory>(listToReturn);
                 return collection;
             }
         }
@@ -165,7 +172,7 @@ namespace StockItUp.ViewModel
 
                 foreach (var i in Catalog<OrderHistoryData>.Instance.GetList)
                 {
-                    if (i.OrderHistory == SelectedOrderHistory.Id)
+                    if (i.OrderHistory == SelectedOrderHistory.Id&&Catalog<OrderHistory>.Instance.GetList.Find(x=>x.Id==i.OrderHistory).StoreId==Controller.StoreId)//&&i.OrderHistory.Store==Controller.StoreId
                     {
                         listToReturn.Add(i);
                     }
@@ -269,7 +276,7 @@ namespace StockItUp.ViewModel
                 Order latestOrder =
                     Catalog<Order>.Instance.GetList.Find(x => x.OrderDate >= DateTime.Now.Subtract(TimeSpan.FromSeconds(5)));
 
-                OrderHistory orderHistory = new OrderHistory(latestOrder);
+                OrderHistory orderHistory = new OrderHistory(latestOrder, Controller.StoreId);
                 await Catalog<OrderHistory>.Instance.Create(orderHistory);
 
                 bool gotData = false;

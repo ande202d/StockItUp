@@ -18,10 +18,11 @@ namespace StockItUp.Model
             
         }
 
-        public OrderHistory(Order o)
+        public OrderHistory(Order o, int storeId)
         {
             _id = o.Id;
             _orderedDate = o.OrderDate;
+            _storeId = storeId;
         }
 
         #region properties
@@ -44,7 +45,7 @@ namespace StockItUp.Model
 
         public int StoreId
         {
-            get { return _storeId };
+            get { return _storeId;}
             set { _storeId = value; }
         }
         #endregion
