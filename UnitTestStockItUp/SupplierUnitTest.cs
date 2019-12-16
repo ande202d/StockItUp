@@ -34,11 +34,11 @@ namespace UnitTestStockItUp
             Supplier s5;
 
             //Act
-            s1 = new Supplier("Supplier1", "www.1");
-            s2 = new Supplier("Supplier2", "www.2");
-            s3 = new Supplier("Supplier3", "www.3");
-            s4 = new Supplier("Supplier4", "www.4");
-            s5 = new Supplier("Supplier5", "www.5");
+            s1 = new Supplier("Supplier1", "kontakt@1");
+            s2 = new Supplier("Supplier2", "kontakt@2");
+            s3 = new Supplier("Supplier3", "kontakt@3");
+            s4 = new Supplier("Supplier4", "kontakt@4");
+            s5 = new Supplier("Supplier5", "kontakt@5");
 
             //Assert
             Assert.AreEqual(s2.Id+1, s3.Id, "Id dosent add up automaticly");

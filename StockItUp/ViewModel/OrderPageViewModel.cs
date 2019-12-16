@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -240,7 +241,10 @@ namespace StockItUp.ViewModel
                 {
                     if (orderPage.Supplier != null)
                     {
-                        sl.Add(orderPage.Supplier);
+                        if (!sl.Contains(orderPage.Supplier))
+                        {
+                            sl.Add(orderPage.Supplier);                            
+                        }
                     }
                 }
                 
