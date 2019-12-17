@@ -96,7 +96,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Name}"></TextBlock>
-                                <TextBlock Text="{Binding Address}"></TextBlock>
+                                <TextBlock Margin="10,0,0,0" Text="{Binding Address}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -104,7 +104,7 @@
                 <StackPanel>
                     <TextBlock Text="Administrer butikker" FontSize="30" Margin="0,20,0,0" TextAlignment="Center"></TextBlock>
                     <TextBox PlaceholderText="Butikkens navn" Text="{Binding SelectedStore.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150" Margin="0,20,0,20"></TextBox>
-                    <TextBox PlaceholderText="Butikkens adresse" Text="{Binding SelectedStore.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBox PlaceholderText="Butikkens adresse" Text="{Binding SelectedStore.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" ></TextBox>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <AppBarButton IsEnabled="{Binding Permission.CanCreateStore}" Content="Tilføj butik" Style="{StaticResource Button}" Command="{Binding CreateStoreCommand}" Width="150"></AppBarButton>
                         <AppBarButton IsEnabled="{Binding Permission.CanUpdateStore}" Content="Rediger butik" Style="{StaticResource Button}" Width="150" Command="{Binding EditStoreCommand}"></AppBarButton>
@@ -118,10 +118,16 @@
                 <ListView ItemsSource="{Binding StorePageUserCatalog, Mode=TwoWay}" Height="500">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Name}"></TextBlock>
-                                <CheckBox IsChecked="{Binding WorksAtStore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
-                            </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="350"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                            
+                                <TextBlock Grid.Column="0" Text="{Binding Name}"></TextBlock>
+                                <CheckBox Grid.Column="1" Margin="30,0,0,0" IsChecked="{Binding WorksAtStore, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+
+                            </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
