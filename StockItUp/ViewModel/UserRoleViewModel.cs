@@ -51,7 +51,10 @@ namespace StockItUp.ViewModel
             }
         }
 
-        
+        public PermissionGroup Permission
+        {
+            get { return Catalog<PermissionGroup>.Instance.Read(Controller.Instance.GetUser.GroupId).Result; }
+        }
 
         public Visibility CreateVisibility
         {

@@ -106,9 +106,9 @@
                     <TextBox PlaceholderText="Butikkens navn" Text="{Binding SelectedStore.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150" Margin="0,20,0,20"></TextBox>
                     <TextBox PlaceholderText="Butikkens adresse" Text="{Binding SelectedStore.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <AppBarButton Content="Tilføj butik" Style="{StaticResource Button}" Command="{Binding CreateStoreCommand}" Width="150"></AppBarButton>
-                        <AppBarButton Content="Rediger butik" Style="{StaticResource Button}" Width="150" Command="{Binding EditStoreCommand}"></AppBarButton>
-                        <AppBarButton Content="Fjern butik" Style="{StaticResource Button}" Command="{Binding DeleteStoreCommand}" Width="150"></AppBarButton>
+                        <AppBarButton IsEnabled="{Binding Permission.CanCreateStore}" Content="Tilføj butik" Style="{StaticResource Button}" Command="{Binding CreateStoreCommand}" Width="150"></AppBarButton>
+                        <AppBarButton IsEnabled="{Binding Permission.CanUpdateStore}" Content="Rediger butik" Style="{StaticResource Button}" Width="150" Command="{Binding EditStoreCommand}"></AppBarButton>
+                        <AppBarButton IsEnabled="{Binding Permission.CanDeleteStore}" Content="Fjern butik" Style="{StaticResource Button}" Command="{Binding DeleteStoreCommand}" Width="150"></AppBarButton>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -125,7 +125,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <AppBarButton Content="Gem!" Command="{Binding SaveChangesCommand}" Style="{StaticResource Button}"></AppBarButton>
+                <AppBarButton IsEnabled="{Binding Permission.CanUpdateStore}" Content="Gem!" Command="{Binding SaveChangesCommand}" Style="{StaticResource Button}"></AppBarButton>
             </StackPanel>
 
 
