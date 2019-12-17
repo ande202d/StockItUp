@@ -1,4 +1,461 @@
-﻿USE [StockItUpDB]
+﻿USE [master]
+GO
+/****** Object:  Database [StockItUpDB]    Script Date: 17-12-2019 14:59:28 ******/
+CREATE DATABASE [StockItUpDB]
+GO
+ALTER DATABASE [StockItUpDB] SET COMPATIBILITY_LEVEL = 130
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [StockItUpDB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [StockItUpDB] SET ANSI_NULL_DEFAULT ON 
+GO
+ALTER DATABASE [StockItUpDB] SET ANSI_NULLS ON 
+GO
+ALTER DATABASE [StockItUpDB] SET ANSI_PADDING ON 
+GO
+ALTER DATABASE [StockItUpDB] SET ANSI_WARNINGS ON 
+GO
+ALTER DATABASE [StockItUpDB] SET ARITHABORT ON 
+GO
+ALTER DATABASE [StockItUpDB] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [StockItUpDB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [StockItUpDB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [StockItUpDB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [StockItUpDB] SET CURSOR_DEFAULT  LOCAL 
+GO
+ALTER DATABASE [StockItUpDB] SET CONCAT_NULL_YIELDS_NULL ON 
+GO
+ALTER DATABASE [StockItUpDB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [StockItUpDB] SET QUOTED_IDENTIFIER ON 
+GO
+ALTER DATABASE [StockItUpDB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [StockItUpDB] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [StockItUpDB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [StockItUpDB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [StockItUpDB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [StockItUpDB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [StockItUpDB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [StockItUpDB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [StockItUpDB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [StockItUpDB] SET RECOVERY FULL 
+GO
+ALTER DATABASE [StockItUpDB] SET  MULTI_USER 
+GO
+ALTER DATABASE [StockItUpDB] SET PAGE_VERIFY NONE  
+GO
+ALTER DATABASE [StockItUpDB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [StockItUpDB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [StockItUpDB] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+ALTER DATABASE [StockItUpDB] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [StockItUpDB] SET QUERY_STORE = OFF
+GO
+USE [StockItUpDB]
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET LEGACY_CARDINALITY_ESTIMATION = OFF;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 0;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET PARAMETER_SNIFFING = ON;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET QUERY_OPTIMIZER_HOTFIXES = OFF;
+GO
+USE [StockItUpDB]
+GO
+/****** Object:  Table [dbo].[InventoryCount]    Script Date: 17-12-2019 14:59:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[InventoryCount](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Location] [int] NOT NULL,
+	[DateCounted] [datetime] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[InventoryCountHistory]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[InventoryCountHistory](
+	[Id] [int] NOT NULL,
+	[Location] [varchar](50) NOT NULL,
+	[CountDate] [datetime] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[InventoryCountHistoryData]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[InventoryCountHistoryData](
+	[Id] [int] NOT NULL,
+	[Product] [varchar](50) NOT NULL,
+	[Amount] [int] NOT NULL,
+	[InventoryCountHistory] [int] NOT NULL,
+	[AmountPerBox] [int] NOT NULL,
+ CONSTRAINT [PK_InventoryCountHistoryData] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[InventoryCountProduct]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[InventoryCountProduct](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[InventoryCount] [int] NOT NULL,
+	[Product] [int] NOT NULL,
+	[Amount] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Location]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Location](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Store] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Order]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Order](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[OrderDate] [datetime] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OrderHistory]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OrderHistory](
+	[Id] [int] NOT NULL,
+	[OrderedDate] [datetime] NOT NULL,
+	[StoreId] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OrderHistoryData]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OrderHistoryData](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[OrderHistory] [int] NOT NULL,
+	[Product] [varchar](50) NOT NULL,
+	[MissingAmount] [int] NOT NULL,
+	[AmountPerBox] [int] NOT NULL,
+	[RecommendedAmount] [int] NOT NULL,
+	[AmountOrdered] [int] NOT NULL,
+	[Supplier] [varchar](50) NOT NULL,
+	[Email] [varchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OrderProduct]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OrderProduct](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Order] [int] NOT NULL,
+	[Product] [int] NOT NULL,
+	[OrderedAmount] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PermissionGroup]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PermissionGroup](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[CanCreateProduct] [bit] NOT NULL,
+	[CanDeleteProduct] [bit] NOT NULL,
+	[CanUpdateProduct] [bit] NOT NULL,
+	[CanCreateSupplier] [bit] NOT NULL,
+	[CanDeleteSupplier] [bit] NOT NULL,
+	[CanUpdateSupplier] [bit] NOT NULL,
+	[CanCreateLocation] [bit] NOT NULL,
+	[CanDeleteLocation] [bit] NOT NULL,
+	[CanUpdateLocation] [bit] NOT NULL,
+	[CanCreateInventoryCount] [bit] NOT NULL,
+	[CanDeleteInventoryCount] [bit] NOT NULL,
+	[CanViewInventoryCount] [bit] NOT NULL,
+	[CanCreateOrder] [bit] NOT NULL,
+	[CanDeleteOrder] [bit] NOT NULL,
+	[CanViewOrder] [bit] NOT NULL,
+	[CanChangeStoreProduct] [bit] NOT NULL,
+	[CanCreateUser] [bit] NOT NULL,
+	[CanDeleteUser] [bit] NOT NULL,
+	[CanUpdateUser] [bit] NOT NULL,
+	[CanCreatePermissionGroup] [bit] NOT NULL,
+	[CanDeletePermissionGroup] [bit] NOT NULL,
+	[CanUpdatePermissionGroup] [bit] NOT NULL,
+	[CanCreateStore] [bit] NOT NULL,
+	[CanDeleteStore] [bit] NOT NULL,
+	[CanUpdateStore] [bit] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Product]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Product](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[AmountPerBox] [int] NOT NULL,
+	[Supplier] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Store]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Store](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Address] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[StoreProduct]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[StoreProduct](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Store] [int] NOT NULL,
+	[Product] [int] NOT NULL,
+	[Amount] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Supplier]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Supplier](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Website] [varchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[User]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[User](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Username] [varchar](50) NOT NULL,
+	[Password] [varchar](50) NOT NULL,
+	[PhoneNumber] [int] NOT NULL,
+	[GroupId] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserStore]    Script Date: 17-12-2019 14:59:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserStore](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[StoreId] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[User] ADD  DEFAULT ((1)) FOR [GroupId]
+GO
+ALTER TABLE [dbo].[InventoryCount]  WITH CHECK ADD  CONSTRAINT [FK_InventoryCount_Location] FOREIGN KEY([Location])
+REFERENCES [dbo].[Location] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[InventoryCount] CHECK CONSTRAINT [FK_InventoryCount_Location]
+GO
+ALTER TABLE [dbo].[InventoryCountHistoryData]  WITH CHECK ADD  CONSTRAINT [FK_InventoryCountHistoryData_ToTable] FOREIGN KEY([InventoryCountHistory])
+REFERENCES [dbo].[InventoryCountHistory] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[InventoryCountHistoryData] CHECK CONSTRAINT [FK_InventoryCountHistoryData_ToTable]
+GO
+ALTER TABLE [dbo].[InventoryCountProduct]  WITH CHECK ADD  CONSTRAINT [FK_InventoryCountProduct_InventoryCount] FOREIGN KEY([InventoryCount])
+REFERENCES [dbo].[InventoryCount] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[InventoryCountProduct] CHECK CONSTRAINT [FK_InventoryCountProduct_InventoryCount]
+GO
+ALTER TABLE [dbo].[InventoryCountProduct]  WITH CHECK ADD  CONSTRAINT [FK_InventoryCountProduct_Product] FOREIGN KEY([Product])
+REFERENCES [dbo].[Product] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[InventoryCountProduct] CHECK CONSTRAINT [FK_InventoryCountProduct_Product]
+GO
+ALTER TABLE [dbo].[Location]  WITH CHECK ADD  CONSTRAINT [FK_Location_ToTable] FOREIGN KEY([Store])
+REFERENCES [dbo].[Store] ([Id])
+GO
+ALTER TABLE [dbo].[Location] CHECK CONSTRAINT [FK_Location_ToTable]
+GO
+ALTER TABLE [dbo].[OrderHistory]  WITH CHECK ADD  CONSTRAINT [FK_OrderHistory_Store] FOREIGN KEY([StoreId])
+REFERENCES [dbo].[Store] ([Id])
+GO
+ALTER TABLE [dbo].[OrderHistory] CHECK CONSTRAINT [FK_OrderHistory_Store]
+GO
+ALTER TABLE [dbo].[OrderHistoryData]  WITH CHECK ADD  CONSTRAINT [FK_OrderHistoryData_ToTable] FOREIGN KEY([OrderHistory])
+REFERENCES [dbo].[OrderHistory] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[OrderHistoryData] CHECK CONSTRAINT [FK_OrderHistoryData_ToTable]
+GO
+ALTER TABLE [dbo].[OrderProduct]  WITH CHECK ADD  CONSTRAINT [FK_OrderProduct_Order] FOREIGN KEY([Order])
+REFERENCES [dbo].[Order] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[OrderProduct] CHECK CONSTRAINT [FK_OrderProduct_Order]
+GO
+ALTER TABLE [dbo].[OrderProduct]  WITH CHECK ADD  CONSTRAINT [FK_OrderProduct_Product] FOREIGN KEY([Product])
+REFERENCES [dbo].[Product] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[OrderProduct] CHECK CONSTRAINT [FK_OrderProduct_Product]
+GO
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [FK_Product_ToTable] FOREIGN KEY([Supplier])
+REFERENCES [dbo].[Supplier] ([Id])
+ON DELETE SET NULL
+GO
+ALTER TABLE [dbo].[Product] CHECK CONSTRAINT [FK_Product_ToTable]
+GO
+ALTER TABLE [dbo].[StoreProduct]  WITH CHECK ADD  CONSTRAINT [FK_StoreProduct_Procut] FOREIGN KEY([Product])
+REFERENCES [dbo].[Product] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[StoreProduct] CHECK CONSTRAINT [FK_StoreProduct_Procut]
+GO
+ALTER TABLE [dbo].[StoreProduct]  WITH CHECK ADD  CONSTRAINT [FK_StoreProduct_ToTable] FOREIGN KEY([Store])
+REFERENCES [dbo].[Store] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[StoreProduct] CHECK CONSTRAINT [FK_StoreProduct_ToTable]
+GO
+ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_Group] FOREIGN KEY([GroupId])
+REFERENCES [dbo].[PermissionGroup] ([Id])
+ON DELETE SET DEFAULT
+GO
+ALTER TABLE [dbo].[User] CHECK CONSTRAINT [FK_User_Group]
+GO
+ALTER TABLE [dbo].[UserStore]  WITH CHECK ADD  CONSTRAINT [FK_UserStore_Store] FOREIGN KEY([StoreId])
+REFERENCES [dbo].[Store] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[UserStore] CHECK CONSTRAINT [FK_UserStore_Store]
+GO
+ALTER TABLE [dbo].[UserStore]  WITH CHECK ADD  CONSTRAINT [FK_UserStore_User] FOREIGN KEY([UserId])
+REFERENCES [dbo].[User] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[UserStore] CHECK CONSTRAINT [FK_UserStore_User]
+GO
+USE [master]
+GO
+ALTER DATABASE [StockItUpDB] SET  READ_WRITE 
+GO
+
+USE [StockItUpDB]
 GO
 delete from [dbo].[UserStore];
 delete from [dbo].[User];
