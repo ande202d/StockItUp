@@ -41,9 +41,6 @@ namespace StockItUp.ViewModel
             DeleteLocationCommand = new RelayCommand(DeleteLocationMethod);
             UpdateLocationCommand = new RelayCommand(UpdateLocationMethod);
             ChangeWantedAmountCommand = new RelayCommand(ChangeWantedAmountMethod);
-            //Product tempProduct = new Product();
-            //SelectedProduct = new StoragePageProduct(tempProduct.Id, default(int), default(int), default(int));
-
         }
 
         #endregion
@@ -57,9 +54,7 @@ namespace StockItUp.ViewModel
 
         #endregion
 
-
-
-        #region Porperties
+        #region Properties
 
         public Controller Controller
         {
@@ -76,6 +71,7 @@ namespace StockItUp.ViewModel
             get { return _filter; }
             set { _filter = value; OnPropertyChanged(nameof(ProductCatalog)); }
         }
+
         //returns an observable of products collection based on what the catalog pulls from the database
         public ObservableCollection<Location> LocationCatalog
         {
@@ -113,9 +109,6 @@ namespace StockItUp.ViewModel
             {
                 //first we create a list that in the end is converted to a observable collection
                 List<StoragePageProduct> listToReturn = new List<StoragePageProduct>();
-                
-                //Here magic happens... just kidding, notes inside
-                #region Magic *puff*
 
                 //first we go though each store in the database, and make sure we are working with the right store
                 foreach (var s in Catalog<Store>.Instance.GetList)
@@ -166,9 +159,6 @@ namespace StockItUp.ViewModel
                         }
                     }
                 }
-
-                #endregion
-
 
                 listToReturn.Sort(new StoragePageProductFilter());
                 //then we make the observable collection...
@@ -293,9 +283,7 @@ namespace StockItUp.ViewModel
                 int id = SelectedProduct.ProductId;
                 int wanted = SelectedProduct.Wanted;
                 StoreProduct tempStoreProduct = new StoreProduct(storeId, id, wanted);
-                //    int key = Catalog<StoreProduct>.Instance.GetList.Find(x =>
-                //        x.Store == storeId && x.Product == id).Id;
-                //    await Catalog<StoreProduct>.Instance.Update(key, tempStoreProduct); 
+                
                 // update doesnt work because of a badrequest(400), i cant fix i so we decided to just delete the old one and create a new one with the values given
                 int key = Catalog<StoreProduct>.Instance.GetList.Find(x =>
                             x.Store == storeId && x.Product == id).Id;

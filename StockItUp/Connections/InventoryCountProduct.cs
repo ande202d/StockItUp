@@ -8,12 +8,17 @@ namespace StockItUp.Connections
 {
     public class InventoryCountProduct
     {
+        #region Instance fields
+
         private int _inventoryCountId;
         private int _productId;
         private int _amount;
         private int _id;
         private static int _idCounter = 1;
 
+        #endregion
+
+        #region Constructor
         public InventoryCountProduct(int inventoryCountId, int productId, int amount)
         {
             _inventoryCountId = inventoryCountId;
@@ -27,19 +32,13 @@ namespace StockItUp.Connections
             Id = _idCounter;
             _idCounter++;
         }
-
         public InventoryCountProduct()
         {
         }
+        #endregion
 
-        //public int Id { get; set; }
 
-        //public int InventoryCount { get; set; }
-
-        //public int Product { get; set; }
-
-        //public int Amount { get; set; }
-
+        #region Properties
         public int InventoryCount
         {
             get { return _inventoryCountId; }
@@ -60,6 +59,7 @@ namespace StockItUp.Connections
         {
             get { return _id; }
             set { _id = value; }
-        }
+        } 
+        #endregion
     }
 }

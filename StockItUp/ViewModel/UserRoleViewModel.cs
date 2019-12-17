@@ -27,7 +27,6 @@ namespace StockItUp.ViewModel
         private List<GroupPagePermissionSet> _listOfPermissions;
         #endregion
 
-
         #region Constructor
         public UserRoleViewModel()
         {
@@ -119,13 +118,13 @@ namespace StockItUp.ViewModel
 
         #endregion
 
-
+        #region Methods
         public async void CreateGroupMethod()
         {
             SelectedGroup.CanCreateProduct = _listOfPermissions[0].State;
             SelectedGroup.CanDeleteProduct = _listOfPermissions[1].State;
             SelectedGroup.CanUpdateProduct = _listOfPermissions[2].State;
-            
+
             SelectedGroup.CanCreateSupplier = _listOfPermissions[3].State;
             SelectedGroup.CanDeleteSupplier = _listOfPermissions[4].State;
             SelectedGroup.CanUpdateSupplier = _listOfPermissions[5].State;
@@ -165,7 +164,7 @@ namespace StockItUp.ViewModel
         {
             OnPropertyChanged(nameof(GroupCatalog));
             OnPropertyChanged(nameof(SelectedGroup));
-            
+
             DataVisibility = Visibility.Collapsed;
             CreateVisibility = Visibility.Visible;
 
@@ -178,7 +177,8 @@ namespace StockItUp.ViewModel
             await Catalog<PermissionGroup>.Instance.Delete(SelectedGroup.Id);
             OnPropertyChanged(nameof(GroupCatalog));
             await Catalog<User>.Instance.ReadAll();
-        }
+        } 
+        #endregion
 
 
     }

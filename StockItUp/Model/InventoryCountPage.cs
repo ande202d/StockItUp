@@ -9,15 +9,21 @@ namespace StockItUp.Model
     public class InventoryCountPage
     {
 
+        #region Instance fields
         private Product _product;
         private int _amount = 0;
         private int _boxAmount = 0;
+        #endregion
 
+        #region Constructor
         public InventoryCountPage(Product product)
         {
             _product = product;
         }
 
+        #endregion
+
+        #region Properties
         public Product Product
         {
             get { return _product; }
@@ -34,6 +40,7 @@ namespace StockItUp.Model
         {
             get { return _boxAmount; }
             set { _boxAmount = value; }
-        }
+        } 
+        #endregion
     }
 }

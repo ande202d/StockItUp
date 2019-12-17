@@ -61,7 +61,7 @@ namespace StockItUp.ViewModel
 
         #endregion
 
-        #region Porperties
+        #region Properties
 
         public Controller Controller
         {
@@ -86,7 +86,6 @@ namespace StockItUp.ViewModel
             {
                 List<Product> pl = _productCatalog.GetList;
                 pl.Sort(new ProductFilter());
-                //ObservableCollection<Product> collection = new ObservableCollection<Product>(_productCatalog.ReadAll().Result);
                 ObservableCollection<Product> collection = new ObservableCollection<Product>();
 
                 if (SelectedSort == "Leverandør")

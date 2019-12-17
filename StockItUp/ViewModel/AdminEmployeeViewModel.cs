@@ -37,7 +37,6 @@ namespace StockItUp.ViewModel
             ShowPasswordOnCreate = Visibility.Collapsed;
         }
 
-
         #endregion
 
         #region Commands
@@ -161,7 +160,6 @@ namespace StockItUp.ViewModel
 
                 OnPropertyChanged(nameof(UserCatalog)); 
                ShowPasswordOnCreate = Visibility.Visible;
-                //OnPropertyChanged(nameof(SelectedUser));
                 OnPropertyChanged(nameof(ShowPasswordOnCreate));
                 NewEmployeeName = "";
                 OnPropertyChanged(nameof(NewEmployeeName));
@@ -187,7 +185,6 @@ namespace StockItUp.ViewModel
             await Catalog<User>.Instance.Delete(SelectedUser.Id);
             OnPropertyChanged(nameof(UserCatalog));
             _selectedUser = new User(default(string), default(int));
-            //_selectedPermissionGroup = null;
         }
 
         //Methods for generating random Passwords and Usernames

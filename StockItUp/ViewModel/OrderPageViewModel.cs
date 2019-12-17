@@ -44,8 +44,6 @@ namespace StockItUp.ViewModel
 
         #endregion
 
-        
-
         #region Properties
         
         public ICommand CreateOrderCommand { get; set; }
@@ -57,6 +55,8 @@ namespace StockItUp.ViewModel
             get { return Catalog<PermissionGroup>.Instance.Read(Controller.Instance.GetUser.GroupId).Result; }
         }
 
+
+        //Calculates suggested amount to buy
         public ObservableCollection<OrderPage> CreateOrderCatalog
         {
             get
@@ -167,6 +167,7 @@ namespace StockItUp.ViewModel
             }
         }
 
+        //Finds the orderhistory that matches the store id
         public ObservableCollection<OrderHistoryData> OrderHistoryDataCatalog
         {
             get
@@ -175,7 +176,7 @@ namespace StockItUp.ViewModel
 
                 foreach (var i in Catalog<OrderHistoryData>.Instance.GetList)
                 {
-                    if (i.OrderHistory == SelectedOrderHistory.Id&&Catalog<OrderHistory>.Instance.GetList.Find(x=>x.Id==i.OrderHistory).StoreId==Controller.StoreId)//&&i.OrderHistory.Store==Controller.StoreId
+                    if (i.OrderHistory == SelectedOrderHistory.Id&&Catalog<OrderHistory>.Instance.GetList.Find(x=>x.Id==i.OrderHistory).StoreId==Controller.StoreId)
                     {
                         listToReturn.Add(i);
                     }

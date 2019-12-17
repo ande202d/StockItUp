@@ -8,14 +8,16 @@ namespace StockItUp.Model
 {
     public class OrderHistory
     {
+        #region Instance fields
         private int _id;
         private DateTime _orderedDate;
         private int _storeId;
+        #endregion
 
-        //same comment as the one in inventoryCountHistory
+        #region Constructors
         public OrderHistory()
         {
-            
+
         }
 
         public OrderHistory(Order o, int storeId)
@@ -23,7 +25,8 @@ namespace StockItUp.Model
             _id = o.Id;
             _orderedDate = o.OrderDate;
             _storeId = storeId;
-        }
+        } 
+        #endregion
 
         #region properties
         public int Id

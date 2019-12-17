@@ -9,36 +9,26 @@ namespace StockItUp.Model
 {
     public class StoragePageProduct
     {
+        #region Instance fields
         private Product _Product;
         private int _total;
         private string _totalv2;
         private int _wanted;
         private int _missing;
+        #endregion
 
+        #region Constructors
         public StoragePageProduct(int product, int total, int wanted, int missing, string totalv2)
         {
-            //_Product = product;
             ProductId = product;
             _total = total;
             _wanted = wanted;
             _missing = missing;
             _totalv2 = totalv2;
         }
+        #endregion
 
-
-        //public string Name
-        //{
-        //    get
-        //    {
-        //        if (ProductId!=0)
-        //        {
-        //            return MyProduct.Name;
-        //        }
-
-        //        return "";
-        //    }
-        //}
-
+        #region Properties
         public int ProductId { get; }
 
         public Product MyProduct
@@ -69,6 +59,7 @@ namespace StockItUp.Model
         {
             get { return _totalv2; }
             set { _totalv2 = value; }
-        }
+        } 
+        #endregion
     }
 }

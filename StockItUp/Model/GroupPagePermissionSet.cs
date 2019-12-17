@@ -8,15 +8,22 @@ namespace StockItUp.Model
 {
     public class GroupPagePermissionSet
     {
+        #region Instance fields
+
         private string _name;
         private bool _state;
 
+        #endregion
+
+        #region Constructor
         public GroupPagePermissionSet(string name, bool state)
         {
             _name = name;
             _state = state;
         }
+        #endregion
 
+        #region Properties
         public string Name
         {
             get { return _name; }
@@ -27,6 +34,7 @@ namespace StockItUp.Model
         {
             get { return _state; }
             set { _state = value; }
-        }
+        } 
+        #endregion
     }
 }

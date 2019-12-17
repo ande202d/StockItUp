@@ -8,19 +8,21 @@ namespace StockItUp.Model
 {
     public class Store
     {
+        #region Instance fields
         private int _id;
         private static int _idCounter = 1;
         private string _name;
-        private string _address;
+        private string _address; 
+        #endregion
 
         #region Constructor
-        public Store(string name, string adress)
+        public Store(string name, string address)
         {
             _id = _idCounter;
             _idCounter++;
 
             _name = name;
-            _address = adress;
+            _address = address;
         }
 
         public Store()

@@ -8,10 +8,12 @@ namespace StockItUp.Model
 {
     public class Location
     {
+        #region Instance Fields
         private int _id;
         private static int _idCounter = 1;
         private string _name;
-        private Store _myStore;
+        private Store _myStore; 
+        #endregion
 
         #region Constructor
         public Location(Store store, string name)

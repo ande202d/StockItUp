@@ -8,10 +8,12 @@ namespace StockItUp
 {
     public class Supplier: IComparable<Supplier>
     {
+        #region Instance fields
         private int _id;
         private static int _idCounter = 1;
         private string _name;
-        private string _website;
+        private string _website; 
+        #endregion
 
         #region Constructor
         public Supplier(string name, string website)
@@ -53,13 +55,13 @@ namespace StockItUp
         public bool CheckWebsite(string s)
         {
             return s.Contains("@");
-        } 
-        #endregion
+        }
 
         public int CompareTo(Supplier other)
         {
             if (other == null) return 1;
             return string.Compare(Name, other.Name, StringComparison.Ordinal);
-        }
+        } 
+        #endregion
     }
 }

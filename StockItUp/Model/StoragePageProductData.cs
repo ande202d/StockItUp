@@ -8,17 +8,22 @@ namespace StockItUp.Model
 {
     public class StoragePageProductData
     {
+        #region Instance fields
         private string _locationName;
         private DateTime _lastCounted;
         private int _amount;
+        #endregion
 
+        #region Constructors
         public StoragePageProductData(string locationName, DateTime lastCounted, int amount)
         {
             _locationName = locationName;
             _lastCounted = lastCounted;
             _amount = amount;
         }
+        #endregion
 
+        #region Properties
         public string LocationName
         {
             get { return _locationName; }
@@ -40,6 +45,7 @@ namespace StockItUp.Model
         {
             get { return _amount; }
             set { _amount = value; }
-        }
+        } 
+        #endregion
     }
 }
