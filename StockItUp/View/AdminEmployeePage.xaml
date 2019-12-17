@@ -126,7 +126,7 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <TextBlock Text="Overskrift" FontSize="50" Margin="0,20,0,50" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Text="Ret medarbejder" FontSize="50" Margin="0,20,0,50" HorizontalAlignment="Center"></TextBlock>
                 <TextBox Header="Fulde Navn" Width="300" HorizontalAlignment="Left" Text="{Binding SelectedUser.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0"></TextBox>
                 <TextBox Header="Telefon nr." Width="300" HorizontalAlignment="Left" Text="{Binding SelectedUser.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,0"></TextBox>
                 <TextBox Header="Brugernavn" Width="300" HorizontalAlignment="Left" Text="{Binding SelectedUser.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,0"></TextBox>
