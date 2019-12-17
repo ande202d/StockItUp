@@ -46,6 +46,22 @@ namespace StockItUp.ViewModel
             set { _dummyUser.Name = value; }
         }
 
+        public bool CanAccessAdminPage
+        {
+            get
+            {
+                if (Permission.CanCreateUser || Permission.CanDeleteUser || Permission.CanUpdateUser ||
+                    Permission.CanCreatePermissionGroup || Permission.CanDeletePermissionGroup ||
+                    Permission.CanUpdatePermissionGroup || Permission.CanCreateStore || Permission.CanUpdateStore ||
+                    Permission.CanDeleteStore)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
         public int UserPhoneNumber
         {
             get { return _dummyUser.PhoneNumber; }

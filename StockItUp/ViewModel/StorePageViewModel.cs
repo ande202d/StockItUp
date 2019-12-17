@@ -34,6 +34,11 @@ namespace StockItUp.ViewModel
         public ICommand DeleteStoreCommand { get; set; }
         public ICommand EditStoreCommand { get; set; }
 
+        public PermissionGroup Permission
+        {
+            get { return Catalog<PermissionGroup>.Instance.Read(Controller.Instance.GetUser.GroupId).Result; }
+        }
+
         public ObservableCollection<Store> StoreCatalog
         {
             get { return new ObservableCollection<Store>(Catalog<Store>.Instance.GetList);}

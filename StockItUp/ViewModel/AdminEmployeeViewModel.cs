@@ -51,6 +51,11 @@ namespace StockItUp.ViewModel
 
         #region Properties
 
+        public PermissionGroup Permission
+        {
+            get { return Catalog<PermissionGroup>.Instance.Read(Controller.Instance.GetUser.GroupId).Result; }
+        }
+
         public User SelectedUser
         {
             get { return _selectedUser; }
