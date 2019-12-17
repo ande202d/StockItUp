@@ -12,7 +12,7 @@ using StockItUp;
 namespace UnitTestStockItUp
 {
     [TestClass]
-    class CatalogTest
+    public class CatalogTest
     {
         [TestMethod]
         public void CatalogRead()
@@ -22,10 +22,10 @@ namespace UnitTestStockItUp
 
 
             //Act
-
+            List<Product> TheList = Catalog<Product>.Instance.GetList;
 
             //Assert
-            Assert.AreEqual(productlist.Count, Catalog<Product>.Instance.GetList.Count);
+            Assert.AreEqual(productlist.Count, TheList.Count);
         }
 
         [TestMethod]
@@ -39,10 +39,13 @@ namespace UnitTestStockItUp
 
             //Act
             await Catalog<Product>.Instance.Create(temProduct);
+            
             List<Product> productlist2 = Catalog<Product>.Instance.ReadAll().Result;
+
             //Assert
             Assert.AreEqual(productlist1.Count+1, productlist2.Count);
         }
+
         [TestMethod]
         public async void CatalogUpdate()
         {
