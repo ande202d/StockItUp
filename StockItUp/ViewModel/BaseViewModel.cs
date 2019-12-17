@@ -16,7 +16,7 @@ namespace StockItUp.ViewModel
             
         }
 
-        #region MyRegion
+        #region OnPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

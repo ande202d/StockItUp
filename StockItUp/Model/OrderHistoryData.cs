@@ -8,6 +8,7 @@ namespace StockItUp.Model
 {
     public class OrderHistoryData
     {
+        #region Instance fields
         private int _id;
         private static int _idCounter = 1;
         private int _orderHistoryId;
@@ -18,7 +19,9 @@ namespace StockItUp.Model
         private int _recommendedAmount;
         private int _amountOrdered;
         private string _email;
+        #endregion
 
+        #region Constructors
         public OrderHistoryData(int orderHistoryId, string product, string supplier, string email, int missingAmount, int amountPerBox, int recommendedAmount, int amountOrdered)
         {
             _id = _idCounter;
@@ -38,7 +41,8 @@ namespace StockItUp.Model
 
         public OrderHistoryData()
         {
-        }
+        } 
+        #endregion
 
         #region Properties
         public int Id

@@ -9,10 +9,12 @@ namespace StockItUp.Model
 {
     public class InventoryCount
     {
+        #region Instance fields
         private int _id;
         private static int _idCounter = 1;
         private DateTime _dateTime;
-        private Location _location;
+        private Location _location; 
+        #endregion
 
         #region Constructor
         public InventoryCount(Location location)

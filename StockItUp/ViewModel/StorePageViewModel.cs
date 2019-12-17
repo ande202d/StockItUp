@@ -18,9 +18,12 @@ namespace StockItUp.ViewModel
     public class StorePageViewModel : BaseViewModel
     {
 
+        #region Instance fields
         private Store _selectedStore;
         private List<StorePageUser> _storePageUsers;
+        #endregion
 
+        #region Constructors
         public StorePageViewModel()
         {
             SaveChangesCommand = new RelayCommand(SaveChangesMethod);
@@ -28,15 +31,24 @@ namespace StockItUp.ViewModel
             DeleteStoreCommand = new RelayCommand(DeleteStoreMethod);
             EditStoreCommand = new RelayCommand(EditStoreMethod);
         }
+        #endregion
 
+        #region Commands
         public ICommand SaveChangesCommand { get; set; }
         public ICommand CreateStoreCommand { get; set; }
         public ICommand DeleteStoreCommand { get; set; }
         public ICommand EditStoreCommand { get; set; }
+        #endregion
+
+        #region Properties
+        public PermissionGroup Permission
+        {
+            get { return Catalog<PermissionGroup>.Instance.Read(Controller.Instance.GetUser.GroupId).Result; }
+        }
 
         public ObservableCollection<Store> StoreCatalog
         {
-            get { return new ObservableCollection<Store>(Catalog<Store>.Instance.GetList);}
+            get { return new ObservableCollection<Store>(Catalog<Store>.Instance.GetList); }
         }
 
         public Store SelectedStore
@@ -83,14 +95,15 @@ namespace StockItUp.ViewModel
                 _storePageUsers = listToReturn;
                 return new ObservableCollection<StorePageUser>(listToReturn);
             }
-            //set { _storePageUsers = value.ToList(); }
         }
 
         public Controller Controller
         {
             get { return Controller.Instance; }
-        }
+        } 
+        #endregion
 
+        #region Methods
         public async void SaveChangesMethod()
         {
             foreach (UserStore us in Catalog<UserStore>.Instance.GetList)
@@ -125,8 +138,9 @@ namespace StockItUp.ViewModel
 
         public async void DeleteStoreMethod()
         {
-           await Catalog<Store>.Instance.Delete(SelectedStore.Id);
-           OnPropertyChanged(nameof(StoreCatalog));
-        }
+            await Catalog<Store>.Instance.Delete(SelectedStore.Id);
+            OnPropertyChanged(nameof(StoreCatalog));
+        } 
+        #endregion
     }
 }

@@ -44,8 +44,6 @@ namespace StockItUp.ViewModel
 
         #endregion
 
-        
-
         #region Properties
         
         public ICommand CreateOrderCommand { get; set; }
@@ -57,6 +55,8 @@ namespace StockItUp.ViewModel
             get { return Catalog<PermissionGroup>.Instance.Read(Controller.Instance.GetUser.GroupId).Result; }
         }
 
+
+        //Calculates suggested amount to buy
         public ObservableCollection<OrderPage> CreateOrderCatalog
         {
             get
@@ -134,11 +134,14 @@ namespace StockItUp.ViewModel
             get
             {
                 List<OrderHistory> listToReturn = new List<OrderHistory>();
-                foreach (var oh in Catalog<OrderHistory>.Instance.GetList)
-                {
-                    if (oh.StoreId==Controller.StoreId)
+                if (Catalog<OrderHistory>.Instance.GetList != null)
+                { 
+                    foreach (var oh in Catalog<OrderHistory>.Instance.GetList)
                     {
-                     listToReturn.Add(oh);
+                        if (oh.StoreId==Controller.StoreId)
+                        {
+                         listToReturn.Add(oh);
+                        }
                     }
                 }
                 ObservableCollection<OrderHistory> collection = new ObservableCollection<OrderHistory>(listToReturn);
@@ -164,6 +167,7 @@ namespace StockItUp.ViewModel
             }
         }
 
+        //Finds the orderhistory that matches the store id
         public ObservableCollection<OrderHistoryData> OrderHistoryDataCatalog
         {
             get
@@ -172,7 +176,7 @@ namespace StockItUp.ViewModel
 
                 foreach (var i in Catalog<OrderHistoryData>.Instance.GetList)
                 {
-                    if (i.OrderHistory == SelectedOrderHistory.Id&&Catalog<OrderHistory>.Instance.GetList.Find(x=>x.Id==i.OrderHistory).StoreId==Controller.StoreId)//&&i.OrderHistory.Store==Controller.StoreId
+                    if (i.OrderHistory == SelectedOrderHistory.Id&&Catalog<OrderHistory>.Instance.GetList.Find(x=>x.Id==i.OrderHistory).StoreId==Controller.StoreId)
                     {
                         listToReturn.Add(i);
                     }

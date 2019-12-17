@@ -29,15 +29,8 @@ namespace StockItUp.ViewModel
 
         public LoginViewModel()
         {
-            //LoginCommand = new RelayCommand(LoginMethod);
         }
 
-
-        #endregion
-
-        #region Commands
-
-        //public ICommand LoginCommand { get; set; }
 
         #endregion
 
@@ -73,6 +66,7 @@ namespace StockItUp.ViewModel
 
         #region Methods
 
+        //Used for login to a selected store
         public bool LoginMethod()
         {
             if (SelectedStore != null)
@@ -97,25 +91,10 @@ namespace StockItUp.ViewModel
                     }
                 }
             }
-
             return false;
         }
 
         #endregion
-
-        #region OnPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-
-        #endregion
-
-
     }
 
 }

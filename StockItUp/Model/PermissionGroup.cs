@@ -9,10 +9,13 @@ namespace StockItUp.Model
 {
     public class PermissionGroup
     {
+        #region Instance fields
         private int _id;
         private static int _idCounter = 1;
         private string _name;
+        #endregion
 
+        #region Constructors
         public PermissionGroup(string name)
         {
             _id = _idCounter;
@@ -23,9 +26,11 @@ namespace StockItUp.Model
 
         public PermissionGroup()
         {
-            
-        }
 
+        }
+        #endregion
+
+        #region Properties
         public int Id
         {
             get { return _id; }
@@ -38,6 +43,7 @@ namespace StockItUp.Model
             set { _name = value; }
         }
 
+        //We relate a string to a bool
         public List<KeyValuePair<string, bool>> GetPermissions
         {
             get
@@ -71,9 +77,11 @@ namespace StockItUp.Model
                     new KeyValuePair<string, bool>("Kan redigere butik", CanUpdateStore)
                 };
                 return listToReturn;
-            }
+            } 
+            
 
         }
+        #endregion
 
         #region Permissions
         //Products

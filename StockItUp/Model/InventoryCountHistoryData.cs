@@ -8,16 +8,17 @@ namespace StockItUp.Model
 {
     public class InventoryCountHistoryData
     {
+        #region Instance fields
         private int _id;
         private static int _idCounter = 1;
         private string _product;
         private int _amount;
         private int _inventoryCountHistoryId;
         private int _amountPerBox;
+        #endregion
 
 
-        //Something simular the inventoryCountHistory
-        //where it takes a InventoryCount, and then finds the matching inventoryCountProducts
+        #region Constructors
         public InventoryCountHistoryData(int inventoryCountHistoryId, string product, int amount, int amountPerBox)
         {
             _id = _idCounter;
@@ -31,7 +32,8 @@ namespace StockItUp.Model
 
         public InventoryCountHistoryData()
         {
-        }
+        } 
+        #endregion
 
         #region Properties
         public int Id
@@ -67,13 +69,11 @@ namespace StockItUp.Model
         public int NumberOfBoxes
         {
             get { return (int)Math.Floor((double)Amount / AmountPerBox); }
-            // get { return Amount / AmountPerBox; }        Jacobs version
         }
 
         public int NumberOfLoose
         {
             get { return Amount - (NumberOfBoxes*AmountPerBox);}
-            // get { return Amount % AmountPerBox; }        Jacobs version
         }
 
         #endregion

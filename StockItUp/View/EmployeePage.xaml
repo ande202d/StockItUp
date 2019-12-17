@@ -84,7 +84,7 @@
 
         <Grid Grid.Row="1">
             <StackPanel>
-                <AppBarButton Content="ADMIN" Style="{StaticResource Button}" FontWeight="ExtraBold" FontSize="18" Width="150" Margin="50" HorizontalAlignment="Right">
+                <AppBarButton IsEnabled="{Binding CanAccessAdminPage}" Content="ADMIN" Style="{StaticResource Button}" FontWeight="ExtraBold" FontSize="18" Width="150" Margin="50" HorizontalAlignment="Right">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Click">
                             <core:NavigateToPageAction TargetPage="StockItUp.View.AdminEmployeePage"/>

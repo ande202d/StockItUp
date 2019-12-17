@@ -9,8 +9,10 @@ namespace StockItUp.Persistency
 {
     public class Controller
     {
+        #region Instance fields
         private int? _userId;
-        private int _storeId;
+        private int _storeId; 
+        #endregion
 
         #region Singleton
         private static Controller _instance;
@@ -28,6 +30,7 @@ namespace StockItUp.Persistency
         }
         #endregion
 
+        #region Properties
         public int? UserId
         {
             get { return _userId; }
@@ -52,7 +55,8 @@ namespace StockItUp.Persistency
         public Store GetStore
         {
             get { return Catalog<Store>.Instance.Read(StoreId).Result; }
-        }
+        } 
+        #endregion
 
     }
 }

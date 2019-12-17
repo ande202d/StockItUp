@@ -8,12 +8,15 @@ namespace StockItUp.Connections
 {
     public class OrderProduct
     {
+        #region Instance fields
         private int _orderId;
         private int _productId;
         private int _orderedAmount;
         private int _id;
         private static int _idCounter = 1;
+        #endregion
 
+        #region Constructors
         public OrderProduct(int orderId, int productId, int orderedAmount)
         {
             _orderId = orderId;
@@ -26,7 +29,9 @@ namespace StockItUp.Connections
         public OrderProduct()
         {
         }
+        #endregion
 
+        #region Properties
         public int Order
         {
             get { return _orderId; }
@@ -47,6 +52,7 @@ namespace StockItUp.Connections
         {
             get { return _id; }
             set { _id = value; }
-        }
+        } 
+        #endregion
     }
 }

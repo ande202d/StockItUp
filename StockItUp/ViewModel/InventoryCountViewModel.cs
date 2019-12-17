@@ -97,6 +97,7 @@ namespace StockItUp.ViewModel
             }
         }
 
+        //List for only showing products that the store desires to have.
         public List<InventoryCountPage> ListForProducts
         {
             get
@@ -145,10 +146,6 @@ namespace StockItUp.ViewModel
                     if (listOfInts.Contains(ich.Id)) listToReturn.Add(ich);
                 }
                 return new ObservableCollection<InventoryCountHistory>(listToReturn);
-
-                //ObservableCollection<InventoryCountHistory> collection = 
-                //    new ObservableCollection<InventoryCountHistory>(Catalog<InventoryCountHistory>.Instance.GetList);
-                //return collection;
             }
         }
 
@@ -200,25 +197,16 @@ namespace StockItUp.ViewModel
             //we make sure that we have selected a location to count
             if (SelectedLocation != null)
             {
-                //now we make a new inventoryCount from that location and we then put it in the database FINT
+                //now we make a new inventoryCount from that location and we then put it in the database
                 InventoryCount ic = new InventoryCount(SelectedLocation);
                 await _inventoryCountCatalog.Create(ic);
 
-                //now we take that IC out again, to make sure we are working with the right id's FINT
+                //now we take that IC out again, to make sure we are working with the right id's 
                 InventoryCount ic2 = Catalog<InventoryCount>.Instance.GetList.FindLast(x =>
                     x.Location == SelectedLocation.Id &&
                     x.DateCounted >= DateTime.Now.Subtract(TimeSpan.FromSeconds(10)));
 
-                #region Test Area
-                ////Hvis den crasher her, så sig det lige, ved godt hvad der går galt, ved bare ikke hvorfor :/
-                //int q1 = ic2.Id;
-                //int q2 = ic2.Location;
-                //Location q3 = ic2.MyLocation;
-                //DateTime q4 = ic2.DateCounted;
-
-                #endregion
-
-                //here we freeze that inventoryCount in our history class FINT
+                //here we freeze that inventoryCount in our history class 
                 InventoryCountHistory ich = new InventoryCountHistory(ic2);
                 await Catalog<InventoryCountHistory>.Instance.Create(ich);
 
@@ -239,7 +227,6 @@ namespace StockItUp.ViewModel
                         InventoryCountHistoryData ichd = new InventoryCountHistoryData(ich.Id, i.Product.Name, icp.Amount, i.Product.AmountPerBox);
                         ichd.Id = Catalog<InventoryCountProduct>.Instance.GetList.
                             Find(x=> x.InventoryCount==ic2.Id && x.Product == icp.Product).Id;
-                        //InventoryCountHistoryData ichd = new InventoryCountHistoryData(ic2.Id, i.Product.Name, i.Amount);
                         await Catalog<InventoryCountHistoryData>.Instance.Create(ichd);
 
                         gotData = true;

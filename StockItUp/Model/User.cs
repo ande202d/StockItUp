@@ -10,6 +10,7 @@ namespace StockItUp.Model
 {
     public class User
     {
+        #region Instance fields
         private int _id;
         private static int _idCounter = 1;
         private string _name;
@@ -17,7 +18,9 @@ namespace StockItUp.Model
         private string _password;
         private int _phoneNumber;
         private int _groupId;
+        #endregion
 
+        #region Constructors
         public User(string name, int groupId)
         {
             _id = _idCounter;
@@ -25,15 +28,15 @@ namespace StockItUp.Model
             _name = name;
             _groupId = groupId;
             _phoneNumber = 0;
-            //RandomUsername();
-            //_password = _username;
         }
 
         public User()
         {
-            
-        }
 
+        }
+        #endregion
+
+        #region Properties
         public int Id
         {
             get { return _id; }
@@ -48,7 +51,7 @@ namespace StockItUp.Model
 
         public string Initials
         {
-            //Name initials
+            //Name initials from uppercase letters
             get
             {
                 string s = "";
@@ -58,7 +61,7 @@ namespace StockItUp.Model
                     {
                         s += c;
                     }
-                   
+
                 }
 
                 return s;
@@ -92,21 +95,8 @@ namespace StockItUp.Model
         public string GroupName
         {
             get { return Catalog<PermissionGroup>.Instance.Read(GroupId).Result.Name; }
-        }
-
-        // Random username method 
-        public void RandomUsername()
-        {
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var stringChars = new char[5];
-            var random = new Random();
-
-            for (int i = 0; i < stringChars.Length; i++)
-            {
-                stringChars[i] = chars[random.Next(chars.Length)];
-            }
-            _username = new string(stringChars);
-        }
+        } 
+        #endregion
 
     }
 }

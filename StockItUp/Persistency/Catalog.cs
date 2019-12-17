@@ -15,7 +15,7 @@ namespace StockItUp.Persistency
     {
         #region Instance fields
 
-        private string _serverURL = "http://localhost:64064";                 //INSERT SERVER URL
+        private string _serverURL = "http://localhost:64064";
         private string _apiPrefix = "api";
         private string _apiID;
         private HttpClient _httpClient;
@@ -106,7 +106,6 @@ namespace StockItUp.Persistency
             return default(T);
         }
 
-        //takes a key and an object
         //updates the old object from the key position to the new object you assigned
         public async Task Update(int key, T obj)
         {

@@ -9,11 +9,13 @@ namespace StockItUp.Model
 {
     public class Product:IComparable<Product>
     {
+        #region Instance fields
         private int _id;
         private static int _idCounter = 1;
         private string _name;
         private int _amountPerBox;
-        private Supplier _mySupplier;
+        private Supplier _mySupplier; 
+        #endregion
 
         #region Constructors
         public Product(string name, int amountPerBox, Supplier supplier)
