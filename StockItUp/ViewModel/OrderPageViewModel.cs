@@ -252,10 +252,14 @@ namespace StockItUp.ViewModel
                 {
                     if (orderPage.Supplier != null)
                     {
-                        if (!sl.Contains(orderPage.Supplier))
+                        if (sl.Find(x=>x.Name==orderPage.Supplier.Name)==null)
                         {
-                            sl.Add(orderPage.Supplier);                            
+                            sl.Add(orderPage.Supplier);
                         }
+                        //if (!sl.Contains(orderPage.Supplier))
+                        //{
+                        //    sl.Add(orderPage.Supplier);                            
+                        //}
                     }
                 }
                 
